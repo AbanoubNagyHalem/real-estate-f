@@ -50,7 +50,7 @@ console.log(formData);
         sessionStorage.setItem('token', data.token)
       }
     }
-    console.log('Login successful:', data);
+    console.log(data);
   }
   return(
     <>
