@@ -4,13 +4,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import './Login.css'
+import './login.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
+import React from 'react'
+
 const Login = () => {
-  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,8 +25,6 @@ const Login = () => {
     })
   };
 console.log(formData);
-
-
   
   const handleSubmit = async (e) => { //handle the form submition
     e.preventDefault();
@@ -79,4 +78,5 @@ console.log(formData);
     </>
   )
 }
-export default Login;
+
+export default Login
