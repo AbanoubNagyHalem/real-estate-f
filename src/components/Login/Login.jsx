@@ -18,9 +18,10 @@ const Login = () => {
   })
 
   const handleChange = (e) => {
+    const { id, value, checked, type } = e.target;
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value
+      [id]: type === 'checkbox' ? checked : value,
     })
   };
 console.log(formData);
