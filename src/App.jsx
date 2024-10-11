@@ -22,7 +22,7 @@ function App() {
     <Fragment>
       <ThemeProvider theme={theme}>
         {/* <Home /> */}
-        <Login/>
+        {/* <Login/> */}
       </ThemeProvider>
     </Fragment>
   );
