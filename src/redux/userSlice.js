@@ -13,9 +13,12 @@ const initialState = {
         state.user = action.payload.user;
         state.token = action.payload.token;
       },
+      setLogout: () => {
+        localStorage.setItem('token', '')
+      },
     },
   });
 
-export const { setLogin } = userSlice.actions;
+export const { setLogin, setLogout } = userSlice.actions;
 
 export default userSlice.reducer;
