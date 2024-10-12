@@ -5,17 +5,19 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import './Login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 
+import React from 'react'
+
 const Login = () => {
-  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     rememberMe: false
   })
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setFormData({
@@ -24,32 +26,34 @@ const Login = () => {
     })
   };
 console.log(formData);
-
-
   
   const handleSubmit = async (e) => { //handle the form submition
     e.preventDefault();
 
-    const res = await fetch('/auth/login', {
+    const res = await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: formData.email,
-        password: formData.password,
-        rememberMe: formData.rememberMe
+        password: formData.password
+        // rememberMe: formData.rememberMe
       }),
     });
     const data = await res.json()
-    if(res.ok) {
+    console.log(data);
+    
+    if(res) {
       if (formData.rememberMe) {
         localStorage.setItem('token', data.token)
       } else {
         sessionStorage.setItem('token', data.token)
       }
+      navigate('/')
     }
     console.log('Login successful:', data);
+
   }
   return(
     <>
@@ -79,4 +83,5 @@ console.log(formData);
     </>
   )
 }
-export default Login;
+
+export default Login
