@@ -1,19 +1,4 @@
-<<<<<<< Updated upstream
-body{
-    scroll-behavior: smooth;
-    transition: all 0.5s ease;
-    }
-    
-    body.light {
-      background-color: #fff;
-      color: #111;
-    }
-    
-   body.dark {
-      background-color: #010714;
-      color: #fff;
-    }
-=======
+
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 * {
@@ -105,4 +90,3 @@ li {
   background-image: linear-gradient(#007580, #e7bc3c);
 }
 
->>>>>>> Stashed changes

@@ -1,14 +1,3 @@
-<<<<<<< Updated upstream
-import React from 'react'
-
-const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
-}
-
-export default Footer
-=======
 import { Box, Grid, Typography, Divider, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -128,4 +117,4 @@ function Footer() {
 }
 
 export default Footer;
->>>>>>> Stashed changes
+

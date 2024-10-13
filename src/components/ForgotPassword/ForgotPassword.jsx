@@ -46,7 +46,7 @@ console.log(formData);
           <Box component="section" sx={{ p: 2, borderRadius: '16px', border: '1px solid', borderColor: 'primary.main', maxWidth: '300px', margin: '100px auto'}}>
             <form onSubmit={handleSubmit} className='form'>
             <Stack spacing={3}>
-              <h1 align="center">Forgot Password</h1>
+            <h1 style={{ textAlign: 'center' }}>Forgot Password</h1>
               {/* <label htmlFor="email">Your Email:</label> */}
               <TextField id="email" type='email' value={formData.email} label="Your Email:"  variant="outlined" size="small" onChange={handleChange} required/>
               <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
