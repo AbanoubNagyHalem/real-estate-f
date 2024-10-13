@@ -33,6 +33,6 @@ const initialState = {
       },
   });
 
-export const {  } = productSlice.actions;
+// export const {  } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -1,22 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/productSlice";
 import { useEffect } from "react";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
-const Home = ({}) => {
-  const dispatch = useDispatch()
-  const {states, loading, error} = useSelector((state)=> state.products)
-  useEffect(()=> {
-    dispatch(fetchProducts())
+const Home = () => {
+  const dispatch = useDispatch();
+  const { states } = useSelector((state) => state.products);
+  useEffect(() => {
+    dispatch(fetchProducts());
     console.log(states);
-    
-  },[])
-
+  }, []);
 
   return (
     <div>
       <Typography variant="h1">Posts List</Typography>
-      
+
       {states ? (
         <ul>
           {states?.map((post) => (
@@ -30,13 +28,9 @@ const Home = ({}) => {
       )}
     </div>
   );
-
 };
 
-
 export default Home;
-
-
 
 // "_id": "6709422ee7ccb19f7793358c",
 // "title": "Cozy Villa for Sale",
