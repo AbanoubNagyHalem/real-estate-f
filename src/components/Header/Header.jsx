@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -13,21 +12,6 @@ import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'; 
 import logo from '../../assets/images/logo.png';
 import ThemeToggle from '../../components/ThemeToggle/ThemeToggle'
-=======
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import { NavLink } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
->>>>>>> Stashed changes
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,16 +25,11 @@ function Header() {
   };
 
   return (
-<<<<<<< Updated upstream
     <AppBar position="static" sx={{ backgroundColor: 'var(--Primary)' }}>
       <Container minwidth="sm">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           
-=======
-    <AppBar position="static" sx={{ backgroundColor: "var(--Primary)" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
->>>>>>> Stashed changes
+
           {/* Logo for larger screens */}
           <Typography
             component={NavLink}
