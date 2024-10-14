@@ -2,15 +2,16 @@
 import Container from "@mui/material/Container";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { Box } from "@mui/material";
 
 const Layout = (props) => {
   return (
     <>
-      <Container minwidth="sm">
-        <Header />
-        <main>{props.children}</main>
-        <Footer />
-      </Container>
+      <Header />
+        <Box>{props.children}</Box>
+      {/* <Container minwidth="sm">
+      </Container> */}
+      <Footer />
     </>
   );
 };

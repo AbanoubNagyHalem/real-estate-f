@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'; 
 import logo from '../../assets/images/logo.png';
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle'
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,7 +26,7 @@ function Header() {
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'var(--Primary)' }}>
-      <Container maxWidth="xl">
+      <Container minwidth="sm">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           
           {/* Logo for larger screens */}
@@ -189,6 +190,7 @@ function Header() {
               </MenuItem>
             </Box>
           </Menu>
+        <ThemeToggle/>
         </Toolbar>
       </Container>
     </AppBar>

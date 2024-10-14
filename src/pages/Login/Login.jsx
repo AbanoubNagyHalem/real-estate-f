@@ -8,6 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const Login = () => {
       [e.target.id]: e.target.value,
     });
   };
-  console.log(formData);
+  // console.log(formData);
 
   const handleSubmit = async (e) => {
     //handle the form submition
@@ -51,7 +52,7 @@ const Login = () => {
       }
       navigate("/");
     }
-    console.log("Login successful:", data);
+    // console.log("Login successful:", data);
   };
   return (
     <>
@@ -69,7 +70,7 @@ const Login = () => {
         >
           <form onSubmit={handleSubmit} className="form">
             <Stack spacing={3}>
-              <h1 align="center">Log In</h1>
+              <Typography variant="h5" align="center">Log In</Typography >
               {/* <label htmlFor="email">Your Email:</label> */}
               <TextField
                 id="email"

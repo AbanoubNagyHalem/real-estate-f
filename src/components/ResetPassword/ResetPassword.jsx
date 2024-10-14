@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import "./ResetPassword.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const ResetPassword = () => {
         >
           <form onSubmit={handleSubmit} className="form">
             <Stack spacing={3}>
-              <h1 align="center">Reset Password</h1>
+              <Typography variant="h5"  align="center">Reset Password</Typography >
               <TextField
                 id="email"
                 type="email"

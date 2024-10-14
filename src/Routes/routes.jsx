@@ -6,11 +6,11 @@ import ResetPassword from "../components/ResetPassword/ResetPassword";
 import Login from "../pages/Login/Login";
 import About from "../pages/AboutUs/About";
 import OurServives from "../pages/OurServices/OurServices";
-import Properites from "../pages/Properites/Properites";
-import UserDashbord from "../pages/UserDashboard/UserDashbord";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import UserDashboard from "../pages/UserDashboard/UserDashborad"
 import Contact from "../pages/ContactUs/Contact";
-
+import Properties from "../pages/Properties/Properties";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails"
 const Approutes = () => {
   return (
     <Routes>
@@ -21,9 +21,9 @@ const Approutes = () => {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/about-us" element={<About />} />
       <Route path="/our-services" element={<OurServives />} />
-      <Route path="/properites" element={<Properites />} />
-      <Route path="/properites" element={<Properites />} />
-      <Route path="/user-dashboard" element={<UserDashbord />} />
+      <Route path="/properties" element={<Properties />} />
+      <Route path="/properties/:_id" element={<PropertyDetails />} />
+      <Route path="/user-dashboard" element={<UserDashboard />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/contact-us" element={<Contact />} />
     </Routes>

@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import "./ForgotPassword.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Typography } from "@mui/material";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const ForgotPassword = () => {
         >
           <form onSubmit={handleSubmit} className="form">
             <Stack spacing={3}>
-            <h1 style={{ textAlign: 'center' }}>Forgot Password</h1>
+            <Typography variant="h5" style={{ textAlign: 'center' }}>Forgot Password</Typography>
               {/* <label htmlFor="email">Your Email:</label> */}
               <TextField
                 id="email"
@@ -82,7 +83,7 @@ const ForgotPassword = () => {
           </form>
           <Box component="section" sx={{ marginY: 1, textAlign: "center" }}>
             <Link to="/login">
-              <span>Go Back to login</span>
+              <Typography variant="body">Go Back to login</Typography>
             </Link>
           </Box>
         </Box>
