@@ -31,7 +31,6 @@ const OurServives = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 textAlign: "center",
-                gap: 7,
               }}
             >
               <CardActionArea>
@@ -62,7 +61,7 @@ const OurServives = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 7,
+                textAlign: "center",
               }}
             >
               <CardActionArea>
@@ -93,7 +92,7 @@ const OurServives = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 7,
+                textAlign: "center",
               }}
               >
               <CardActionArea>
