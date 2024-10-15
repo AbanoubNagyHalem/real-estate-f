@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Slider from "react-slick";
 import PostCard from "../PostCard/PostCard";
 import { Box, Grid, Typography } from "@mui/material";
