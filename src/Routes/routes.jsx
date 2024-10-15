@@ -10,8 +10,15 @@ import Properites from "../pages/Properites/Properites";
 import UserDashbord from "../pages/UserDashboard/UserDashbord";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import Contact from "../pages/ContactUs/Contact";
+<<<<<<< Updated upstream
 import FavoritesDashboard from "../pages/FavoritesDashboard/FavoritesDashboard";
 
+=======
+import Properties from "../pages/Properties/Properties";
+import PropertyDetails from "../pages/PropertyDetails/PropertyDetails"
+import FavoriteDashboard from "../pages/FavoriteDashboard/FavoriteDashboard";
+import ReviewDasboard from "../pages/ReviewDashboard/ReviewDasboard";
+>>>>>>> Stashed changes
 const Approutes = () => {
   return (
     <Routes>
@@ -22,10 +29,18 @@ const Approutes = () => {
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/about-us" element={<About />} />
       <Route path="/our-services" element={<OurServives />} />
+<<<<<<< Updated upstream
       <Route path="/properites" element={<Properites />} />
       <Route path="/properites" element={<Properites />} />
       <Route path="/user-dashboard" element={<UserDashbord />} />
       <Route path="/favorites-dashboard" element={<FavoritesDashboard />} />
+=======
+      <Route path="/properties" element={<Properties />} />
+      <Route path="/properties/:_id" element={<PropertyDetails />} />
+      <Route path="/user-dashboard" element={<UserDashboard />} />
+      <Route path="/favorite-dashboard" element={<FavoriteDashboard />} />
+      <Route path="/reviews" element={<ReviewDasboard />} />
+>>>>>>> Stashed changes
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/contact-us" element={<Contact />} />
     </Routes>
