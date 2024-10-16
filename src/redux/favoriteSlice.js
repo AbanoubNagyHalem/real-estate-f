@@ -8,8 +8,18 @@ const initialState = {
 export const fetchFavorites = createAsyncThunk(
   "favorites/fetchFavorites",
   async () => {
-    const res = await fetch("http://localhost:3000/posts/user/favourite");
-    const data = await res.json(); 
+    const token =
+      localStorage.getItem("token") || sessionStorage.getItem("token");
+
+    const res = await fetch("http://localhost:3000/posts/user/favourite", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        token: `${token}`,
+      },
+    });
+
+    const data = await res.json();
     return data;
   }
 );
@@ -18,7 +28,7 @@ export const fetchFavorites = createAsyncThunk(
 export const removeFavorite = createAsyncThunk(
   "favorites/removeFavorite",
   async (postId) => {
-    const res = await fetch("http://localhost:3000/user/favourite", {
+    await fetch("http://localhost:3000/user/favourite", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +36,6 @@ export const removeFavorite = createAsyncThunk(
       },
       body: JSON.stringify({ postId }),
     });
-    const data = await res.json();
     return postId; // Return the postId so we can remove it from state
   }
 );
