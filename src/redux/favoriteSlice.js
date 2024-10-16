@@ -2,15 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   states: [],
+  favorites: [],
   loading: false,
   error: null,
 };
+const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 export const fetchFavorites = createAsyncThunk(
   "favorites/fetchFavorites",
   async () => {
-    const token =
-      localStorage.getItem("token") || sessionStorage.getItem("token");
-
     const res = await fetch("http://localhost:3000/posts/user/favourite", {
       method: "GET",
       headers: {
@@ -42,17 +41,28 @@ export const removeFavorite = createAsyncThunk(
 // Add favorite post
 export const addFavorite = createAsyncThunk(
   "favorites/addFavorite",
-  async (postId) => {
-    const res = await fetch("http://localhost:3000/posts/user/favourite", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ postId }),
-    });
-    const data = await res.json();
-    return data;
+  async (postId, { rejectWithValue }) => {
+    try {
+      console.log("Adding favorite with postId:", postId);
+      const res = await fetch("http://localhost:3000/posts/user/favourite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          token: `${token}`,
+        },
+        body: JSON.stringify({ postId }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        return rejectWithValue(errorData);
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
@@ -76,7 +86,13 @@ export const favoriteSlice = createSlice({
       })
       // Add favorite
       .addCase(addFavorite.fulfilled, (state, action) => {
-        state.favorites.push(action.payload); // Add new favorite to the state
+        state.favorites.push(action.payload);
+      })
+      .addCase(addFavorite.rejected, (state, action) => {
+        console.error(
+          "Error adding favorite:",
+          action.payload || action.error.message
+        );
       })
       // Remove favorite
       .addCase(removeFavorite.fulfilled, (state, action) => {

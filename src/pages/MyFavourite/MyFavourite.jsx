@@ -13,9 +13,6 @@ import {
 const MyFavourite = () => {
   const dispatch = useDispatch();
   const { states, loading, error } = useSelector((state) => state.favorites);
-  console.log(states);
-
-  const [favorites, setFavorites] = useState();
 
   useEffect(() => {
     dispatch(fetchFavorites());
@@ -32,8 +29,8 @@ const MyFavourite = () => {
     <Grid container spacing={2} sx={{ padding: 4 }}>
       <Typography variant="h3">My Fav</Typography>
 
-      {favorites && favorites.length > 0 ? (
-        favorites.map((item) => (
+      {states && states.length > 0 ? (
+        states.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
             <Card>
               <CardContent>

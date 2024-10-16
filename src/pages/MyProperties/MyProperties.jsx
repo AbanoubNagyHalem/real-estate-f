@@ -97,16 +97,15 @@
 
 // export default MyProperties;
 
-
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/productSlice";
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, Button, Grid, Container } from "@mui/material";
-import {  Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard"; // Adjust the path
 
-const MyProperties = ({item}) => {
+const MyProperties = ({ item }) => {
   const dispatch = useDispatch();
   const { states, loading, error } = useSelector((state) => state.products);
   const [visibleItems, setVisibleItems] = useState(12); // Show 12 items
@@ -125,29 +124,28 @@ const MyProperties = ({item}) => {
 
   return (
     <Grid container spacing={3}>
-    {states && states.length > 0 ? (
-      states.slice(0, visibleItems).map((item) => (
-        <Grid item xs={12} sm={12} md={6} key={item._id}>
-          <MyPropertiesCard item={item} />
-        </Grid>
-      ))
-    ) : (
-      <Typography variant="body1" sx={{ margin: "20px auto" }}>
-        No posts found
-      </Typography>
-    )}
-  </Grid>
-);
+      {states && states.length > 0 ? (
+        states.slice(0, visibleItems).map((item) => (
+          <Grid item xs={12} sm={12} md={6} key={item._id}>
+            <MyPropertiesCard item={item} />
+          </Grid>
+        ))
+      ) : (
+        <Typography variant="body1" sx={{ margin: "20px auto" }}>
+          No posts found
+        </Typography>
+      )}
+    </Grid>
+  );
 };
 
 export default MyProperties;
 
-    // <Grid container spacing={3}>
-    //   {properties.map((property) => (
-    //     <Grid item xs={12} sm={6} md={4} key={property.id}>
-    //       {/* Pass each property to the MyPropertiesCard component */}
-    //       <MyPropertiesCard property={property} />
-    //     </Grid>
-    //   ))}
-    // </Grid>
-  
+// <Grid container spacing={3}>
+//   {properties.map((property) => (
+//     <Grid item xs={12} sm={6} md={4} key={property.id}>
+//       {/* Pass each property to the MyPropertiesCard component */}
+//       <MyPropertiesCard property={property} />
+//     </Grid>
+//   ))}
+// </Grid>

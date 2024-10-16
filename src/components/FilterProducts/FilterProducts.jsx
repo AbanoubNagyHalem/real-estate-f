@@ -206,9 +206,9 @@ function FilterProducts() {
       <Box mb={2}>
         <Typography variant="body1">Amenities</Typography>
         <FormGroup>
-          {amenitiesOptions.map((amenity) => (
+          {amenitiesOptions.map((amenity, idx) => (
             <FormControlLabel
-              key={amenity}
+              key={idx}
               control={
                 <Checkbox
                   name={amenity}

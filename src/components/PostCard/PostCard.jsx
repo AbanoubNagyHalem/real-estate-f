@@ -14,168 +14,171 @@ import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import cardImg from "../../assets/images/luxury-real-estate.jpg";
 import "./PostCard.css";
+import { addFavorite } from "../../redux/favoriteSlice";
+import { useDispatch } from "react-redux";
 
 const PostCard = ({ item }) => {
+  const dispatch = useDispatch();
 
   return (
     // <Link to={`/properties/${item?._id}`}>
-      <Card sx={{ borderRadius: 2, boxShadow: 3, margin:1 }}>
-        <CardActionArea>
-          <Grid
-            container
+    <Card sx={{ borderRadius: 2, boxShadow: 3, margin: 1 }}>
+      <CardActionArea>
+        <Grid
+          container
+          sx={{
+            position: "absolute",
+            top: "12px",
+            left: "12px",
+          }}
+        >
+          <Card
+            className="icons-hover"
             sx={{
-              position: "absolute",
-              top: "12px",
-              left: "12px",
+              background: "#21616A",
+              border: "1px solid #21616A",
+              padding: "8px 8px 4px 8px",
+              borderRadius: "8px",
+              marginRight: "8px",
             }}
           >
-            <Card
-              className="icons-hover"
-              sx={{
-                background: "#21616A",
-                border: "1px solid #21616A",
-                padding: "8px 8px 4px 8px",
-                borderRadius: "8px",
-                marginRight: "8px",
-              }}
+            <Typography
+              variant="subtitle1"
+              color="#fff"
+              sx={{ display: "flex", alignItems: "center" }}
             >
-              <Typography
-                variant="subtitle1"
-                color="#fff"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                {item.property}
-              </Typography>
-            </Card>
-
-            <Card
-              className="icons-hover"
-              sx={{
-                background: "#efa00fcc",
-                border: "1px solid #efa00fcc",
-                padding: "8px 8px 4px 8px",
-                borderRadius: "8px",
-                marginRight: "8px",
-              }}
-            >
-              {/* <Typography variant="body">{item.featured}</Typography> */}
-
-              <Typography
-                variant="subtitle1"
-                color="#fff"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                For {item.type}
-              </Typography>
-            </Card>
-          </Grid>
-
-          <Grid
-            container
-            sx={{
-              justifyContent: "end",
-              position: "absolute",
-              top: "12px",
-              right: "12px",
-            }}
-          >
-            <Card
-              className="icons-hover"
-              sx={{
-                background: "#dddddd29",
-                border: "1px solid #ddd",
-                padding: "8px 8px 4px 8px",
-                borderRadius: "8px",
-                marginRight: "8px",
-              }}
-            >
-    <Link to={`/user-dashboard/my-favorites/`}>
-
-              <FavoriteBorderIcon sx={{ color: "#fff" }} />
-              </Link>
-            </Card>
-            <Card
-              className="icons-hover"
-              sx={{
-                background: "#dddddd29",
-                border: "1px solid #ddd",
-                padding: "8px 8px 4px 8px",
-                borderRadius: "8px",
-                marginRight: "8px",
-              }}
-            >
-              <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
-            </Card>
-          </Grid>
-          <CardMedia
-            component="img"
-            height="250"
-            image={item.images[0] || cardImg}
-            alt={item.title}
-            sx={{ objectFit: "cover" }}
-          />
-
-          <CardContent sx={{ paddingTop: 2, paddingBottom: 2 }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {item.title}
+              {item.property}
             </Typography>
+          </Card>
+
+          <Card
+            className="icons-hover"
+            sx={{
+              background: "#efa00fcc",
+              border: "1px solid #efa00fcc",
+              padding: "8px 8px 4px 8px",
+              borderRadius: "8px",
+              marginRight: "8px",
+            }}
+          >
+            {/* <Typography variant="body">{item.featured}</Typography> */}
 
             <Typography
               variant="subtitle1"
+              color="#fff"
+              sx={{ display: "flex", alignItems: "center" }}
+            >
+              For {item.type}
+            </Typography>
+          </Card>
+        </Grid>
+
+        <Grid
+          container
+          sx={{
+            justifyContent: "end",
+            position: "absolute",
+            top: "12px",
+            right: "12px",
+          }}
+        >
+          <Card
+            className="icons-hover"
+            sx={{
+              background: "#dddddd29",
+              border: "1px solid #ddd",
+              padding: "8px 8px 4px 8px",
+              borderRadius: "8px",
+              marginRight: "8px",
+            }}
+          >
+            <Link onClick={() => dispatch(addFavorite(item._id))}>
+              <FavoriteBorderIcon sx={{ color: "#fff", cursor: "pointer" }} />
+            </Link>
+          </Card>
+          <Card
+            className="icons-hover"
+            sx={{
+              background: "#dddddd29",
+              border: "1px solid #ddd",
+              padding: "8px 8px 4px 8px",
+              borderRadius: "8px",
+              marginRight: "8px",
+            }}
+          >
+            <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
+          </Card>
+        </Grid>
+
+        <CardMedia
+          component="img"
+          height="250"
+          image={item.images[0] || cardImg}
+          alt={item.title}
+          sx={{ objectFit: "cover" }}
+        />
+
+        <CardContent sx={{ paddingTop: 2, paddingBottom: 2 }}>
+          <Typography gutterBottom variant="h5" component="div">
+            {item.title}
+          </Typography>
+
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <LocationOnOutlinedIcon sx={{ marginRight: "8px" }} />
+            {item.address}
+          </Typography>
+          <Grid container sx={{ justifyContent: "space-around" }}>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "20px",
+              }}
+            >
+              <BedOutlinedIcon sx={{ marginRight: "8px" }} /> {item.bedroom}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "20px",
+              }}
+            >
+              <BathtubOutlinedIcon sx={{ marginRight: "8px" }} />
+              {item.bathroom}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              color="text.secondary"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "20px",
+              }}
+            >
+              <StraightenOutlinedIcon sx={{ marginRight: "8px" }} />{" "}
+              {item.sqft || 8}
+            </Typography>
+            <Typography
+              variant="h5"
               color="text.secondary"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              <LocationOnOutlinedIcon sx={{ marginRight: "8px" }} />
-              {item.address}
+              <MonetizationOnOutlinedIcon />
+              {item.price}
             </Typography>
-            <Grid container sx={{ justifyContent: "space-around" }}>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  paddingRight: "20px",
-                }}
-              >
-                <BedOutlinedIcon sx={{ marginRight: "8px" }} /> {item.bedroom}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  paddingRight: "20px",
-                }}
-              >
-                <BathtubOutlinedIcon sx={{ marginRight: "8px" }} />
-                {item.bathroom}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  paddingRight: "20px",
-                }}
-              >
-                <StraightenOutlinedIcon sx={{ marginRight: "8px" }} />{" "}
-                {item.sqft || 8}
-              </Typography>
-              <Typography
-                variant="h5"
-                color="text.secondary"
-                sx={{ display: "flex", alignItems: "center" }}
-              >
-                <MonetizationOnOutlinedIcon />
-                {item.price}
-              </Typography>
-            </Grid>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+          </Grid>
+        </CardContent>
+      </CardActionArea>
+    </Card>
     // </Link>
   );
 };
