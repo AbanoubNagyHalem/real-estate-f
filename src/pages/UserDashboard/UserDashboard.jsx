@@ -20,7 +20,6 @@ import RateReviewIcon from "@mui/icons-material/RateReview";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from "react";
 import useLogout from "../Logout/Logout";
-
 const UserDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for toggling the sidebar visibility
   const [activeIndex, setActiveIndex] = useState(0); // State to track the currently active menu item

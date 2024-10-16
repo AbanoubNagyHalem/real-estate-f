@@ -9,7 +9,7 @@ import OurServives from "../pages/OurServices/OurServices";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import Contact from "../pages/ContactUs/Contact";
 import Properties from "../pages/Properties/Properties";
-import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+// import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import UserDashboard from "../pages/UserDashboard/UserDashboard";
 import MyProperties from "../pages/MyProperties/MyProperties";
 import MyFavourite from "../pages/MyFavourite/MyFavourite";
@@ -29,13 +29,13 @@ const Approutes = () => {
       <Route path="/about-us" element={<About />} />
       <Route path="/our-services" element={<OurServives />} />
       <Route path="/properties" element={<Properties />} />
-      <Route path="/properties/:_id" element={<PropertyDetails />} />
+      {/* <Route path="/properties/:_id" element={<PropertyDetails />} /> */}
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/contact-us" element={<Contact />} />
 
       {/* User dashboard routes  */}
       <Route path="/user-dashboard" element={<UserDashboard />}>
-        <Route path="my-properties" element={<MyProperties />} />
+      <Route path="my-properties" element={<MyProperties />} />
         <Route path="my-favorites" element={<MyFavourite />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="my-profile" element={<MyProfile />} />
