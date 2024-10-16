@@ -25,7 +25,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'var(--Primary)' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: 'var(--Primary)'}}>
       <Container minwidth="sm">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           

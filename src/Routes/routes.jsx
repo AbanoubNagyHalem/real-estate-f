@@ -12,7 +12,7 @@ import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import UserDashboard from "../pages/UserDashboard/UserDashboard";
 import MyProperties from "../pages/MyProperties/MyProperties";
-import MyFavorites from "../pages/MyFavourite/MyFavourite";
+import MyFavourite from "../pages/MyFavourite/MyFavourite";
 import Reviews from "../pages/Reviews/Reviews";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import AddProperty from "../pages/AddProperty/AddProperty";
@@ -36,7 +36,7 @@ const Approutes = () => {
       {/* User dashboard routes  */}
       <Route path="/user-dashboard" element={<UserDashboard />}>
         <Route path="my-properties" element={<MyProperties />} />
-        <Route path="my-favorites" element={<MyFavorites />} />
+        <Route path="my-favorites" element={<MyFavourite />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="add-property" element={<AddProperty />} />

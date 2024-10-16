@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/productSlice";
 import './FilterTabs.css';

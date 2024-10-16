@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import PostCard from "../PostCard/PostCard";
 import { Box, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../redux/productSlice"; // Adjust the path accordingly
+import { fetchProducts } from "../../redux/productSlice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 

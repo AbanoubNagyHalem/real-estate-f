@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable no-unused-vars */
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -45,6 +43,8 @@ const Login = () => {
       if (res.ok) {
         const storage = formData.rememberMe ? localStorage : sessionStorage;
         storage.setItem("token", data.token);
+        console.log(token);
+        
         navigate("/");
       } else {
         setError(data.error || "Login failed. Please check your credentials.");

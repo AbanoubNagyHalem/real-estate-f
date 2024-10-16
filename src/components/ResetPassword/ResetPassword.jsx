@@ -62,7 +62,9 @@ const ResetPassword = () => {
         >
           <form onSubmit={handleSubmit} className="form">
             <Stack spacing={3}>
-              <Typography variant="h5"  align="center">Reset Password</Typography >
+              <Typography variant="h5" align="center">
+                Reset Password
+              </Typography>
               <TextField
                 id="email"
                 type="email"

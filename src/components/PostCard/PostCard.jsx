@@ -18,7 +18,7 @@ import "./PostCard.css";
 const PostCard = ({ item }) => {
 
   return (
-    <Link to={`/properties/${item?._id}`}>
+    // <Link to={`/properties/${item?._id}`}>
       <Card sx={{ borderRadius: 2, boxShadow: 3, margin:1 }}>
         <CardActionArea>
           <Grid
@@ -89,7 +89,10 @@ const PostCard = ({ item }) => {
                 marginRight: "8px",
               }}
             >
+    <Link to={`/user-dashboard/my-favorites/`}>
+
               <FavoriteBorderIcon sx={{ color: "#fff" }} />
+              </Link>
             </Card>
             <Card
               className="icons-hover"
@@ -173,7 +176,7 @@ const PostCard = ({ item }) => {
           </CardContent>
         </CardActionArea>
       </Card>
-    </Link>
+    // </Link>
   );
 };
 

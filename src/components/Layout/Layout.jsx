@@ -8,7 +8,7 @@ const Layout = (props) => {
   return (
     <>
       <Header />
-        <Box>{props.children}</Box>
+        <Box sx={{marginTop:{xs:"4em", md:"5em"}}}>{props.children}</Box>
       {/* <Container minwidth="sm">
       </Container> */}
       <Footer />

@@ -149,7 +149,7 @@ const Home = () => {
 
       <Box sx={{ paddingTop: 12, paddingBottom: 12, background: "#21616A" }}>
         <Container>
-          <Box sx={{ textAlign: "left", paddingBottom: 6 }}>
+          <Box sx={{ textAlign: "left", paddingBottom: 6, color:"#fff" }}>
             <Typography variant="subtitle1">Our Services</Typography>
             <Typography variant="h3">What We Do?</Typography>
           </Box>
@@ -159,6 +159,7 @@ const Home = () => {
               display: "grid",
               gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(3, 1fr)" },
               gap: 6,
+              color:"#fff"
             }}
            >
             <Box
@@ -262,12 +263,10 @@ const Home = () => {
                 Contact US Today
               </Button>
             </Box>
-            <Box sx={{ background: "#fff", padding: 8, borderRadius: 4 }}>
+            <Box sx={{ background: "#fff", padding: { xs:"46px 36px 46px 22px;" , md:"56px 56px 56px 40px"}, borderRadius: 4 }}>
               <Box
                 component="form"
                 sx={{ "& > :not(style)": { m: 1, width: 1 } }}
-                // Validate
-                // autoComplete="off"
               >
                 <TextField
                   id="outlined-basic"
