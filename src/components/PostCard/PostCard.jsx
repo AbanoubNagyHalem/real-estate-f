@@ -14,8 +14,12 @@ import { BottomNavigation, BottomNavigationAction, Button, Grid } from "@mui/mat
 import { Link } from "react-router-dom";
 import cardImg from "../../assets/images/luxury-real-estate.jpg"
 import "./PostCard.css";
+<<<<<<< Updated upstream
 import { addFavorite } from "../../redux/favoriteSlice";
 import { useDispatch } from "react-redux";
+=======
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
+>>>>>>> Stashed changes
 
 const PostCard = ({ item }) => {
 
@@ -97,10 +101,14 @@ const PostCard = ({ item }) => {
                 marginRight: "8px",
               }}
             >
+<<<<<<< Updated upstream
               {/* <FavoriteBorderIcon sx={{ color: "#fff" }} /> */}
               <Button variant="outlined" color="primary" onClick={handleAddFavorite} to = '/favorite-dashboard'>
                 <FavoriteBorderIcon sx={{ color: "#fff" }} />
               </Button>
+=======
+              <FavoriteButton postId={item._id} />
+>>>>>>> Stashed changes
             </Card>
             <Card
               className="icons-hover"
