@@ -74,7 +74,7 @@ const UserDashboard = () => {
       <CssBaseline />
       <IconButton
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        sx={{ position: "absolute", top: 16, left: 16 }}
+        sx={{ position: "absolute", top: 20, left: 20, zIndex: 1300, color:"#f5f5f5" }}
       >
         {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
