@@ -15,6 +15,8 @@ const Login = () => {
     rememberMe: false,
   });
   const [error, setError] = useState("");
+  console.log(error);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -43,8 +45,6 @@ const Login = () => {
       if (res.ok) {
         const storage = formData.rememberMe ? localStorage : sessionStorage;
         storage.setItem("token", data.token);
-        console.log(token);
-        
         navigate("/");
       } else {
         setError(data.error || "Login failed. Please check your credentials.");
