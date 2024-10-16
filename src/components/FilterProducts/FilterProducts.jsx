@@ -32,11 +32,42 @@ function FilterProducts() {
     maxPrice: searchParams.get("maxPrice") || 10000,
   });
 
-  const amenitiesOptions = ["Pool", "Gym", "Parking", "Garden", "Elevator"];
-  const [priceRange, setPriceRange] = useState([0, 5000000]);
-  useEffect(()=>{
-    setPriceRange([+query.minPrice, +query.maxPrice])
-  },[])
+  const amenitiesOptions = [
+    "air condtion",
+    "heating",
+    "floor",
+    "elevator",
+    "garden",
+    "parking",
+    "intercom",
+    "security",
+    "wifi",
+    "window type",
+    "pool",
+    "sheard gym",
+    "sherd spa",
+    "fireplace",
+    "cable tv",
+    "air condtion",
+    "heating",
+    "floor",
+    "elevator",
+    "garden",
+    "parking",
+    "intercom",
+    "security",
+    "wifi",
+    "window type",
+    "pool",
+    "sheard gym",
+    "sherd spa",
+    "fireplace",
+    "cable tv",
+  ];
+  const [priceRange, setPriceRange] = useState([0, 100000]);
+  useEffect(() => {
+    setPriceRange([+query.minPrice, +query.maxPrice]);
+  }, []);
 
   const { filteredPosts, loading, error } = useSelector(
     (state) => state.filteredPosts
@@ -45,7 +76,7 @@ function FilterProducts() {
   const handleToggleChange = (event, newType) => {
     setQuery((prev) => ({
       ...prev,
-      type: newType || "", 
+      type: newType || "",
     }));
   };
 
@@ -75,10 +106,9 @@ function FilterProducts() {
   const handleFilter = async () => {
     setSearchParams(query);
     console.log(query);
-    
+
     const filter = await dispatch(fetchFilteredPosts(query));
     console.log(filter);
-    
   };
 
   return (
@@ -195,7 +225,8 @@ function FilterProducts() {
       <Box mb={2}>
         <Typography variant="body1">Price Range</Typography>
         <Slider
-          value={priceRange}
+          // value={priceRange}
+          value={[query.minPrice, query.maxPrice]}
           onChange={handlePriceChange}
           valueLabelDisplay="auto"
           min={100000}
