@@ -14,9 +14,21 @@ import img3 from "../../assets/images/section 3.png";
 
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { fetchPostDetails } from "../../redux/postSlice";
 
 const PropertyDetails = () => {
+
+  const { _id } = useParams()
+  const dispatch = useDispatch();
+  const { post, loading, error } = useSelector((state) => state.post);
+  useEffect(() => {
+    dispatch(fetchPostDetails({ id: _id }));
+  }, [dispatch, _id]);
+  console.log(post);
+
   const buttonStyle = {
     width: "30px",
     background: "none",
@@ -50,11 +62,11 @@ const PropertyDetails = () => {
 
   const mapContainerStyle = {
     width: "100%",
-    height: "400px", // يمكنك تعديل الطول كما تراه مناسبًا
+    height: "400px",
   };
 
   const center = {
-    lat: -3.745, // استبدل هذه القيمة بموقعك الجغرافي
+    lat: -3.745,
     lng: -73.989,
   };
 
