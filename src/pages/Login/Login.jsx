@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Login.css";
+import { Container } from "@mui/material";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -55,14 +56,15 @@ const Login = () => {
   };
 
   return (
+    <Container minwidth="sm" sx={{paddingTop:1}}>
     <Box
       component="section"
       sx={{
-        p: 2,
+        p: 6,
         borderRadius: "16px",
         border: "1px solid",
         borderColor: "primary.main",
-        maxWidth: "300px",
+        maxWidth: "600px",
         margin: "100px auto",
       }}
     >
@@ -76,7 +78,6 @@ const Login = () => {
             value={formData.email}
             label="Your Email:"
             variant="outlined"
-            size="small"
             onChange={handleChange}
             required
           />
@@ -86,7 +87,6 @@ const Login = () => {
             value={formData.password}
             label="Password:"
             variant="outlined"
-            size="small"
             onChange={handleChange}
             required
           />
@@ -120,7 +120,11 @@ const Login = () => {
           <Button
             type="submit"
             variant="contained"
-            sx={{ backgroundColor: "secondary.main" }}
+              sx={{
+                background: "#EFA00F",
+                color: "#fff",
+                padding: "14px 30px",
+            }}
           >
             Login
           </Button>
@@ -132,6 +136,7 @@ const Login = () => {
         </span>
       </Box>
     </Box>
+    </Container>
   );
 };
 
