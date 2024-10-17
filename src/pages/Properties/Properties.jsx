@@ -5,7 +5,6 @@ import { Box, CircularProgress, Button, Grid, Container } from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
 import FilterProducts from "../../components/FilterProducts/FilterProducts";
 import { fetchProducts } from "../../redux/productSlice";
-import "./Properties.css";
 import { useLocation } from "react-router-dom";
 
 const Properties = () => {
@@ -88,7 +87,11 @@ const Properties = () => {
                     <Button
                       variant="contained"
                       onClick={handleShowMore}
-                      sx={{ background: "#EFA00F" }}
+                      sx={{
+                        background: "#EFA00F",
+                        color: "#fff",
+                        padding: "16px 30px",
+                      }}
                     >
                       Show More
                     </Button>
