@@ -36,8 +36,8 @@ li {
   /* Colors */
   --Primary: #21616a;
   --Secondary-1: #efa00f;
-  --Secondary-2: #56aeb1;
-  --White: #ffffff;
+  --Secondary-2: rgb(86, 174, 177);
+  --White: #ffffff;            
   --Black: #000000;
 
   /* font-weight */

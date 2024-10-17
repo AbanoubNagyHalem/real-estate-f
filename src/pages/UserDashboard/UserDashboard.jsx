@@ -22,45 +22,23 @@ import { useState } from "react";
 import useLogout from "../Logout/Logout";
 
 const UserDashboard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false); // State for toggling the sidebar visibility
-  const [activeIndex, setActiveIndex] = useState(0); // State to track the currently active menu item
-  const navigate = useNavigate(); // Hook for programmatic navigation
-  const handleLogout = useLogout(); // Call custom hook for handling logout
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate();
+  const handleLogout = useLogout();
 
-  // Array containing the dashboard menu items
   const menuItems = [
     { text: "Dashboard", icon: <HomeIcon />, path: "/user-dashboard" },
-    {
-      text: "My Properties",
-      icon: <AddIcon />,
-      path: "/user-dashboard/my-properties",
-    },
-    {
-      text: "My Favorites",
-      icon: <FavoriteIcon />,
-      path: "/user-dashboard/my-favorites",
-    },
-    {
-      text: "Reviews",
-      icon: <RateReviewIcon />,
-      path: "/user-dashboard/reviews",
-    },
-    {
-      text: "My Profile",
-      icon: <AccountCircleIcon />,
-      path: "/user-dashboard/my-profile",
-    },
-    {
-      text: "Add Property",
-      icon: <AddIcon />,
-      path: "/user-dashboard/add-property",
-    },
+    { text: "My Properties", icon: <AddIcon />, path: "/user-dashboard/my-properties" },
+    { text: "My Favorites", icon: <FavoriteIcon />, path: "/user-dashboard/my-favorites" },
+    { text: "Reviews", icon: <RateReviewIcon />, path: "/user-dashboard/reviews" },
+    { text: "My Profile", icon: <AccountCircleIcon />, path: "/user-dashboard/my-profile" },
+    { text: "Add Property", icon: <AddIcon />, path: "/user-dashboard/add-property" },
     { text: "Log Out", icon: <LogoutIcon />, path: "/user-dashboard/logout" },
   ];
 
   const handleMenuClick = (index, path) => {
     setSidebarOpen(false);
-
     if (path === "/user-dashboard/logout") {
       handleLogout();
     } else {
@@ -74,7 +52,7 @@ const UserDashboard = () => {
       <CssBaseline />
       <IconButton
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        sx={{ position: "absolute", top: 20, left: 20, zIndex: 1300, color:"#f5f5f5" }}
+        sx={{ position: "fixed", top: 20, left: 20, zIndex: 1300, color:"#f5f5f5" }}
       >
         {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
@@ -94,8 +72,7 @@ const UserDashboard = () => {
                   key={item.text}
                   onClick={() => handleMenuClick(index, item.path)}
                   sx={{
-                    backgroundColor:
-                      activeIndex === index ? "#56AEB1" : "transparent",
+                    backgroundColor: activeIndex === index ? "#56AEB1" : "transparent",
                     color: "white",
                     cursor: "pointer",
                     "&:hover": { backgroundColor: "#56AEB1" },
@@ -111,9 +88,9 @@ const UserDashboard = () => {
           </Grid>
         )}
 
-        <Grid item xs={12} sm={8} md={9} sx={{ p: 3 }}>
-          <Toolbar /> {/* Placeholder for any toolbar items */}
-          <Outlet /> {/* Render the child routes/components here */}
+        <Grid item xs={12} sm={8} md={9} sx={{ p: 3, margin: sidebarOpen ? 'auto' : 'auto', transition: 'margin 0.3s ease' }}>
+          <Toolbar />
+          <Outlet />
         </Grid>
       </Grid>
     </Box>
