@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -6,7 +5,7 @@ import Button from "@mui/material/Button";
 import "./ForgotPassword.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -42,21 +41,23 @@ const ForgotPassword = () => {
   };
   return (
     <>
-      <div>
-        <Box
-          component="section"
-          sx={{
-            p: 2,
-            borderRadius: "16px",
-            border: "1px solid",
-            borderColor: "primary.main",
-            maxWidth: "300px",
-            margin: "100px auto",
-          }}
-        >
+    <Container minwidth="sm" sx={{ paddingTop: 1 }}>
+      <Box
+        component="section"
+        sx={{
+          p: 6,
+          borderRadius: "16px",
+          border: "1px solid",
+          borderColor: "primary.main",
+          maxWidth: "600px",
+          margin: "100px auto",
+        }}
+      >
           <form onSubmit={handleSubmit} className="form">
             <Stack spacing={3}>
-            <Typography variant="h5" style={{ textAlign: 'center' }}>Forgot Password</Typography>
+              <Typography variant="h5" style={{ textAlign: "center" }}>
+                Forgot Password
+              </Typography>
               {/* <label htmlFor="email">Your Email:</label> */}
               <TextField
                 id="email"
@@ -64,7 +65,6 @@ const ForgotPassword = () => {
                 value={formData.email}
                 label="Your Email:"
                 variant="outlined"
-                size="small"
                 onChange={handleChange}
                 required
               />
@@ -75,7 +75,11 @@ const ForgotPassword = () => {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ backgroundColor: "secondary.main" }}
+                sx={{
+                  background: "#EFA00F",
+                  color: "#fff",
+                  padding: "14px 30px",
+              }}
               >
                 Send Code
               </Button>
@@ -87,7 +91,7 @@ const ForgotPassword = () => {
             </Link>
           </Box>
         </Box>
-      </div>
+      </Container>
     </>
   );
 };

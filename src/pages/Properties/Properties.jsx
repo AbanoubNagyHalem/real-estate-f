@@ -1,15 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Box, CircularProgress, Button, Grid, Container } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Button,
+  Grid,
+  Container,
+  Drawer,
+  IconButton,
+} from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
 import FilterProducts from "../../components/FilterProducts/FilterProducts";
 import { fetchProducts } from "../../redux/productSlice";
-import "./Properties.css";
 import { useLocation } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 
 const Properties = () => {
   const [postsToDisplay, setPostsToDisplay] = useState();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const dispatch = useDispatch();
   const { filteredPosts, loading, error } = useSelector(
     (state) => state.filteredPosts
@@ -19,6 +29,7 @@ const Properties = () => {
   );
   const [visibleItems, setVisibleItems] = useState(12);
   const location = useLocation();
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -46,20 +57,74 @@ const Properties = () => {
     }
   }, [location, allPosts, filteredPosts]);
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   return (
     <>
-      <Container minwidth="sm" sx={{ padding: 12 }}>
+      <Box
+        boxShadow={2}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          paddingTop: 8,
+          paddingBottom: 8,
+        }}
+      >
+        <Typography variant="h1">Properties</Typography>
+        <Breadcrumb />
+      </Box>
+      <Container
+        minwidth="sm"
+        sx={{ paddingTop: { md: 12, sm: 4 }, paddingBottom: { md: 5, sm: 4 } }}
+      >
         <Grid container>
           <Box
             className="left-side"
-            sx={{ width: "30%", paddingRight: "60px" }}
+            sx={{
+              width: "30%",
+              display: { xs: "none", md: "block" },
+              paddingRight: "60px",
+            }}
           >
-            <Typography variant="h5">Property listing</Typography>
+            <Typography variant="h5" sx={{ marginBottom: 1 }}>
+              Property listing
+            </Typography>
             <Typography variant="h6">Search</Typography>
-
             <FilterProducts />
           </Box>
-          <Box className="right-side" sx={{ width: "70%" }}>
+
+          {/* Drawer for mobile devices */}
+          <Box
+            className="left-side"
+            sx={{
+              paddingTop: 4,
+              width: "20%",
+              display: { xs: "block", md: "none" },
+            }}
+          >
+            <IconButton onClick={handleDrawerOpen} sx={{ marginBottom: 2 }}>
+              <Typography variant="h6" sx={{ marginRight: 1 }}>
+                Filter
+              </Typography>
+              <MenuIcon />
+            </IconButton>
+            <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
+              <Box sx={{ width: 400, padding: 2 }}>
+                <Typography variant="h6">Search</Typography>
+                <FilterProducts />
+              </Box>
+            </Drawer>
+          </Box>
+
+          <Box className="right-side" sx={{ width: { md: "70%", sm: 1 } }}>
             {loading || allPostsLoading ? (
               <CircularProgress
                 sx={{ display: "block", margin: "20px auto" }}
@@ -82,13 +147,19 @@ const Properties = () => {
                   )}
                 </Grid>
                 <Box sx={{ textAlign: "center", marginTop: 6 }}>
-                  <Button
-                    variant="contained"
-                    onClick={handleShowMore}
-                    sx={{ background: "#EFA00F" }}
-                  >
-                    Show More
-                  </Button>
+                  {visibleItems < filteredPosts.length && (
+                    <Button
+                      variant="contained"
+                      onClick={handleShowMore}
+                      sx={{
+                        background: "#EFA00F",
+                        color: "#fff",
+                        padding: "16px 30px",
+                      }}
+                    >
+                      Show More
+                    </Button>
+                  )}
                 </Box>
               </Box>
             )}

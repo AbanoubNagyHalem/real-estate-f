@@ -21,7 +21,6 @@ const PostCard = ({ item }) => {
   const dispatch = useDispatch();
 
   return (
-    // <Link to={`/properties/${item?._id}`}>
     <Card sx={{ borderRadius: 2, boxShadow: 3, margin: 1 }}>
       <CardActionArea>
         <Grid
@@ -109,20 +108,22 @@ const PostCard = ({ item }) => {
             <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
           </Card>
         </Grid>
-
-        <CardMedia
-          component="img"
-          height="250"
-          image={item.images[0] || cardImg}
-          alt={item.title}
-          sx={{ objectFit: "cover" }}
-        />
-
+        <Link to={`/properties/${item?._id}`}>
+          <CardMedia
+            component="img"
+            height="250"
+            image={item.images[0] || cardImg}
+            alt={item.title}
+            sx={{ objectFit: "cover" }}
+          />
+        </Link>
         <CardContent sx={{ paddingTop: 2, paddingBottom: 2 }}>
-          <Typography gutterBottom variant="h5" component="div">
-            {item.title}
-          </Typography>
-
+          <Link to={`/properties/${item?._id}`}>
+            <Typography gutterBottom variant="h5" sx={{ color: (theme) =>
+        theme.palette.mode === "light" ? "#000" : "#fff", }}>
+              {item.title}
+            </Typography>
+          </Link>
           <Typography
             variant="subtitle1"
             color="text.secondary"
@@ -179,10 +180,7 @@ const PostCard = ({ item }) => {
         </CardContent>
       </CardActionArea>
     </Card>
-    // </Link>
   );
 };
 
 export default PostCard;
-
-// {item.latitude}   {item.longitude}

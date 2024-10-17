@@ -17,13 +17,14 @@ import "./Home.css";
 import HomeSlider from "../../components/HomeSlider/HomeSlider";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
+import Searchbar from "../../components/Searchbar/Searchbar";
 
 const Home = () => {
   const newTexts = ["Real Estate", "Perfect Home", "Dream Home"];
   const [text, setText] = useState("Faster");
   const [textIndex, setTextIndex] = useState(0);
   const [filteredResults, setFilteredResults] = useState([]);
-  const [visibleItems, setVisibleItems] = useState(6); // Show 6 items initially
+  const [visibleItems, setVisibleItems] = useState(6);
 
   const dispatch = useDispatch();
   const { states, loading, error } = useSelector((state) => state.products);
@@ -62,29 +63,54 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          component="h1"
-          className="animation"
-          sx={{ textAlign: "center", color: "#fff" }}
+        <Container
+          minwidth="sm"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
         >
-          Find Your
           <Typography
             variant="h1"
-            component="span"
-            className="fadeDownText"
-            sx={{ textAlign: "center", color: "#fff" }}
+            component="h1"
+            className="animation"
+            sx={{
+              textAlign: "center",
+              color: "#fff",
+              fontSize: { md: "60px", xs: "50px" },
+            }}
           >
-            {" " + text}
+            Find Your
+            <Typography
+              variant="h1"
+              component="span"
+              className="fadeDownText"
+              sx={{
+                textAlign: "center",
+                color: "#fff",
+                fontSize: { md: "60px", xs: "50px" },
+              }}
+            >
+              {" " + text}
+            </Typography>
           </Typography>
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{ textAlign: "center", maxWidth: "40%", color: "#fff" }}
-        >
-          We are a real estate agency that will help you find the best residence
-          you dream of. Let’s discuss your dream house?
-        </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              textAlign: "center",
+              maxWidth: { md: "40%", xs: "100%" },
+              color: "#fff",
+            }}
+          >
+            We are a real estate agency that will help you find the best
+            residence you dream of. Let’s discuss your dream house?
+          </Typography>
+          <Box>
+            <Searchbar />
+          </Box>
+        </Container>
       </Box>
 
       <Container minwidth="sm">
@@ -128,7 +154,11 @@ const Home = () => {
               <Button
                 variant="contained"
                 onClick={handleShowMore}
-                sx={{ background: "#EFA00F" }}
+                sx={{
+                  background: "#EFA00F",
+                  color: "#fff",
+                  padding: "16px 30px",
+                }}
               >
                 View All Properties
               </Button>
@@ -149,7 +179,7 @@ const Home = () => {
 
       <Box sx={{ paddingTop: 12, paddingBottom: 12, background: "#21616A" }}>
         <Container>
-          <Box sx={{ textAlign: "left", paddingBottom: 6, color:"#fff" }}>
+          <Box sx={{ textAlign: "left", paddingBottom: 6, color: "#fff" }}>
             <Typography variant="subtitle1">Our Services</Typography>
             <Typography variant="h3">What We Do?</Typography>
           </Box>
@@ -157,11 +187,14 @@ const Home = () => {
             container
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(3, 1fr)" },
+              gridTemplateColumns: {
+                xs: "repeat(1, 1fr)",
+                md: "repeat(3, 1fr)",
+              },
               gap: 6,
-              color:"#fff"
+              color: "#fff",
             }}
-           >
+          >
             <Box
               sx={{
                 display: "flex",
@@ -178,7 +211,11 @@ const Home = () => {
                 Discover your dream home effortlessly. Explore diverse
                 properties and expert guidance for a seamless buying experience.
               </Typography>
-              <Button href="/our-services" variant="text" sx={{ color: "#EFA00F", paddingLeft: 0 }}>
+              <Button
+                href="/our-services"
+                variant="text"
+                sx={{ color: "#EFA00F", paddingLeft: 0 }}
+              >
                 Learn More <EastOutlinedIcon sx={{ color: "#EFA00F" }} />{" "}
               </Button>
             </Box>
@@ -199,7 +236,11 @@ const Home = () => {
                 Discover your dream home effortlessly. Explore diverse
                 properties and expert guidance for a seamless buying experience.
               </Typography>
-              <Button href="/our-services" variant="text" sx={{ color: "#EFA00F", paddingLeft: 0 }}>
+              <Button
+                href="/our-services"
+                variant="text"
+                sx={{ color: "#EFA00F", paddingLeft: 0 }}
+              >
                 Learn More <EastOutlinedIcon sx={{ color: "#EFA00F" }} />{" "}
               </Button>
             </Box>
@@ -220,7 +261,11 @@ const Home = () => {
                 Discover your dream home effortlessly. Explore diverse
                 properties and expert guidance for a seamless buying experience.
               </Typography>
-              <Button href="/our-services" variant="text" sx={{ color: "#EFA00F", paddingLeft: 0 }}>
+              <Button
+                href="/our-services"
+                variant="text"
+                sx={{ color: "#EFA00F", paddingLeft: 0 }}
+              >
                 Learn More <EastOutlinedIcon sx={{ color: "#EFA00F" }} />{" "}
               </Button>
             </Box>
@@ -243,10 +288,13 @@ const Home = () => {
             container
             sx={{
               display: "grid",
-              gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
+              gridTemplateColumns: {
+                xs: "repeat(1, 1fr)",
+                md: "repeat(2, 1fr)",
+              },
               gap: 6,
-              justifyContent:"center",
-              alignItems:"center"
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Box>
@@ -259,11 +307,28 @@ const Home = () => {
                 Work with the best real estate platform in Mumbai to buy or sell
                 properties
               </Typography>
-              <Button variant="contained" sx={{ background: "#EFA00F" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  background: "#EFA00F",
+                  color: "#fff",
+                  padding: "16px 30px",
+                }}
+              >
                 Contact US Today
               </Button>
             </Box>
-            <Box sx={{ background: "#fff", padding: { xs:"46px 36px 46px 22px;" , md:"56px 56px 56px 40px"}, borderRadius: 4 }}>
+            <Box
+              sx={{
+                backgroundColor: (theme) =>
+                  theme.palette.mode === "light" ? "#fff" : "#000000cc",
+                padding: {
+                  xs: "46px 36px 46px 22px",
+                  md: "56px 56px 56px 40px",
+                },
+                borderRadius: 4,
+              }}
+            >
               <Box
                 component="form"
                 sx={{ "& > :not(style)": { m: 1, width: 1 } }}
@@ -292,7 +357,14 @@ const Home = () => {
                   variant="outlined"
                 />
 
-                <Button variant="contained" sx={{ background: "#EFA00F" }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "#EFA00F",
+                    color: "#fff",
+                    padding: "16px 30px",
+                  }}
+                >
                   Submit{" "}
                 </Button>
               </Box>

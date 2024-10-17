@@ -13,7 +13,7 @@ const MyPropertiesCard = ({ item }) => {
     <Link to={`/properties/${item?._id}`} style={{ textDecoration: "none" }}>
       <Card sx={{ margin: 1 }}>
         <CardActionArea>
-          <Grid container>
+          <Grid container sx={{width:1}}>
             {/* Image Section (Left Side) */}
             <Grid item xs={12} md={5}>
               <CardMedia

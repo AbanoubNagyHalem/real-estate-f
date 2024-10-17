@@ -20,3 +20,9 @@
     height: 90vh;
     width:100%;   
 }
+
+@media (max-width:660px) {
+    .hero-banner{
+        height: 90vh;
+    }
+}
