@@ -134,6 +134,19 @@ function Header() {
             >
               Contact Us
             </NavLink>
+
+            <NavLink
+              to="/user-dashboard"
+              style={({ isActive }) => ({
+                marginRight: "16px",
+                color: isActive ? "var(--Secondary-1)" : "var(--White)",
+                textDecoration: "none",
+                fontFamily: "Merriweather",
+                textTransform: "capitalize",
+              })}
+            >
+              Dashboard
+              </NavLink>
           </Box>
 
           {/* Login/Register button for large screens */}

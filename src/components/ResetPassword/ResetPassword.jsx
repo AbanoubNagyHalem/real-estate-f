@@ -3,10 +3,9 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import "./ResetPassword.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -48,15 +47,15 @@ const ResetPassword = () => {
   };
   return (
     <>
-      <div>
+      <Container minwidth="sm" sx={{ paddingTop: 1 }}>
         <Box
           component="section"
           sx={{
-            p: 2,
+            p: 6,
             borderRadius: "16px",
             border: "1px solid",
             borderColor: "primary.main",
-            maxWidth: "300px",
+            maxWidth: "600px",
             margin: "100px auto",
           }}
         >
@@ -71,7 +70,6 @@ const ResetPassword = () => {
                 value={formData.email}
                 label="Your Email:"
                 variant="outlined"
-                size="small"
                 onChange={handleChange}
                 required
               />
@@ -81,7 +79,6 @@ const ResetPassword = () => {
                 value={formData.otp}
                 label="otp:"
                 variant="outlined"
-                size="small"
                 onChange={handleChange}
                 required
               />
@@ -92,7 +89,6 @@ const ResetPassword = () => {
                 value={formData.newPassword}
                 label="new Password:"
                 variant="outlined"
-                size="small"
                 onChange={handleChange}
                 required
               />
@@ -102,7 +98,6 @@ const ResetPassword = () => {
                 value={formData.confirmPassword}
                 label="confirm Password:"
                 variant="outlined"
-                size="small"
                 onChange={handleChange}
                 required
               />
@@ -110,14 +105,18 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ backgroundColor: "secondary.main" }}
+                sx={{
+                  background: "#EFA00F",
+                  color: "#fff",
+                  padding: "14px 30px",
+                }}
               >
                 Update
               </Button>
             </Stack>
           </form>
         </Box>
-      </div>
+      </Container>
     </>
   );
 };
