@@ -109,20 +109,21 @@ const PostCard = ({ item }) => {
             <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
           </Card>
         </Grid>
-
-        <CardMedia
-          component="img"
-          height="250"
-          image={item.images[0] || cardImg}
-          alt={item.title}
-          sx={{ objectFit: "cover" }}
-        />
-
+        <Link to={`/properties/${item?._id}`}>
+          <CardMedia
+            component="img"
+            height="250"
+            image={item.images[0] || cardImg}
+            alt={item.title}
+            sx={{ objectFit: "cover" }}
+          />
+        </Link>
         <CardContent sx={{ paddingTop: 2, paddingBottom: 2 }}>
-          <Typography gutterBottom variant="h5" component="div">
-            {item.title}
-          </Typography>
-
+          <Link to={`/properties/${item?._id}`}>
+            <Typography gutterBottom variant="h5" sx={{ color: "#fff" }}>
+              {item.title}
+            </Typography>
+          </Link>
           <Typography
             variant="subtitle1"
             color="text.secondary"

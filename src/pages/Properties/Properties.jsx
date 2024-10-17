@@ -54,7 +54,9 @@ const Properties = () => {
             className="left-side"
             sx={{ width: "30%", paddingRight: "60px" }}
           >
-            <Typography variant="h5">Property listing</Typography>
+            <Typography variant="h5" sx={{ marginBottom: 1 }}>
+              Property listing
+            </Typography>
             <Typography variant="h6">Search</Typography>
 
             <FilterProducts />
@@ -82,13 +84,15 @@ const Properties = () => {
                   )}
                 </Grid>
                 <Box sx={{ textAlign: "center", marginTop: 6 }}>
-                  <Button
-                    variant="contained"
-                    onClick={handleShowMore}
-                    sx={{ background: "#EFA00F" }}
-                  >
-                    Show More
-                  </Button>
+                  {visibleItems < filteredPosts.length && (
+                    <Button
+                      variant="contained"
+                      onClick={handleShowMore}
+                      sx={{ background: "#EFA00F" }}
+                    >
+                      Show More
+                    </Button>
+                  )}
                 </Box>
               </Box>
             )}

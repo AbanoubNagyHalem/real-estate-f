@@ -14,22 +14,25 @@ import {
   Checkbox,
   ToggleButton,
   ToggleButtonGroup,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
 import { fetchFilteredPosts } from "../../redux/filterProductSlice";
 
 function FilterProducts() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [showAmenities, setShowAmenities] = useState(false);
   const dispatch = useDispatch();
 
   const [query, setQuery] = useState({
     type: searchParams.get("type") || "",
-    city: searchParams.get("city") || "",
+    city: searchParams.get("city")?.toLowerCase() || "",
     property: searchParams.get("property") || "",
     bedroom: searchParams.get("bedroom") || "",
     bathroom: searchParams.get("bathroom") || "",
     amenities: searchParams.get("amenities") || "",
     minPrice: searchParams.get("minPrice") || 0,
-    maxPrice: searchParams.get("maxPrice") || 10000,
+    maxPrice: searchParams.get("maxPrice") || 6000000,
   });
 
   const amenitiesOptions = [
@@ -82,7 +85,10 @@ function FilterProducts() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setQuery((prev) => ({ ...prev, [name]: value }));
+    setQuery((prev) => ({
+      ...prev,
+      [name]: value ? value : value,
+    }));
   };
 
   const handlePriceChange = (event, newValue) => {
@@ -104,11 +110,17 @@ function FilterProducts() {
   };
 
   const handleFilter = async () => {
-    setSearchParams(query);
-    console.log(query);
+    const updatedQuery = {
+      ...query,
+      amenities: Array.isArray(query.amenities)
+        ? query.amenities.join(",")
+        : query.amenities,
+    };
 
-    const filter = await dispatch(fetchFilteredPosts(query));
-    console.log(filter);
+    setSearchParams(updatedQuery);
+    console.log("Query parameters being sent:", updatedQuery);
+    const filter = await dispatch(fetchFilteredPosts(updatedQuery));
+    console.log("Filtered results:", filter);
   };
 
   return (
@@ -117,10 +129,10 @@ function FilterProducts() {
       p={3}
       boxShadow={3}
       borderRadius={2}
-      sx={{ maxWidth: 400, marginTop: "1em" }}
+      sx={{ maxWidth: 400, marginTop: "1em", background: "#292929" }}
     >
       <Box mb={2}>
-        <Typography variant="body1">Type</Typography>
+        {/* <Typography variant="body1">Type</Typography> */}
         <ToggleButtonGroup
           value={query.type}
           exclusive
@@ -143,41 +155,25 @@ function FilterProducts() {
           value={query.city}
         />
       </Box>
-
-      {/* <Box mb={2}>
-        <Typography variant="body1">Type</Typography>
-        <Select
-          name="type"
-          variant="outlined"
-          fullWidth
-          value={query.type}
-          onChange={handleChange}
-          displayEmpty
-        >
-          <MenuItem value="">Any</MenuItem>
-          <MenuItem value="buy">Buy</MenuItem>
-          <MenuItem value="rent">Rent</MenuItem>
-        </Select>
-      </Box> */}
-
       <Box mb={2}>
-        <Typography variant="body1">Property</Typography>
-        <Select
-          name="property"
-          fullWidth
-          value={query.property}
-          onChange={handleChange}
-          displayEmpty
-          variant="outlined"
-        >
-          <MenuItem value="">Any</MenuItem>
-          <MenuItem value="apartment">Apartment</MenuItem>
-          <MenuItem value="house">House</MenuItem>
-          <MenuItem value="villa">Villa</MenuItem>
-          <MenuItem value="studio">Studio</MenuItem>
-        </Select>
+        <FormControl fullWidth>
+          <InputLabel id="select-label">Property</InputLabel>
+          <Select
+            labelId="select-label"
+            id="select"
+            name="property"
+            label="Property"
+            value={query.property}
+            onChange={handleChange}
+          >
+            <MenuItem value="">Any</MenuItem>
+            <MenuItem value="apartment">Apartment</MenuItem>
+            <MenuItem value="house">House</MenuItem>
+            <MenuItem value="villa">Villa</MenuItem>
+            <MenuItem value="studio">Studio</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
-
       <Box mb={2}>
         <TextField
           label="Bedrooms"
@@ -203,24 +199,38 @@ function FilterProducts() {
           value={query.bathroom}
         />
       </Box>
-      <Box mb={2}>
-        <Typography variant="body1">Amenities</Typography>
-        <FormGroup>
-          {amenitiesOptions.map((amenity, idx) => (
-            <FormControlLabel
-              key={idx}
-              control={
-                <Checkbox
-                  name={amenity}
-                  onChange={handleCheckboxChange}
-                  checked={query.amenities?.includes(amenity) || false}
-                />
-              }
-              label={amenity}
-            />
-          ))}
-        </FormGroup>
-      </Box>
+
+      {/* Advanced button */}
+      <Button
+        variant="outlined"
+        onClick={() => setShowAmenities((prev) => !prev)}
+        sx={{ marginBottom: 2, width: 1 }}
+      >
+        Advanced
+      </Button>
+
+      {/* Show Amenities */}
+
+      {showAmenities && (
+        <Box mb={2}>
+          <Typography variant="body1">Amenities</Typography>
+          <FormGroup>
+            {amenitiesOptions.map((amenity, id) => (
+              <FormControlLabel
+                key={id}
+                control={
+                  <Checkbox
+                    name={amenity}
+                    onChange={handleCheckboxChange}
+                    checked={query.amenities?.includes(amenity) || false}
+                  />
+                }
+                label={amenity}
+              />
+            ))}
+          </FormGroup>
+        </Box>
+      )}
 
       <Box mb={2}>
         <Typography variant="body1">Price Range</Typography>
@@ -238,7 +248,12 @@ function FilterProducts() {
       <Button
         variant="contained"
         onClick={handleFilter}
-        sx={{ background: "#EFA00F", width: 1 }}
+        sx={{
+          background: "#EFA00F",
+          width: 1,
+          color: "#fff",
+          padding: "16px 30px",
+        }}
       >
         Filter
       </Button>
