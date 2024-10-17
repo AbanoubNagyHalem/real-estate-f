@@ -35,7 +35,7 @@ const Approutes = () => {
 
       {/* User dashboard routes  */}
       <Route path="/user-dashboard" element={<UserDashboard />}>
-      <Route path="my-properties" element={<MyProperties />} />
+        <Route path="my-properties" element={<MyProperties />} />
         <Route path="my-favorites" element={<MyFavourite />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="my-profile" element={<MyProfile />} />

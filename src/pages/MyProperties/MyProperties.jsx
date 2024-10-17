@@ -167,7 +167,7 @@ const MyProperties = () => {
                   }}
                 >
                   
-                  <TableCell sx={{ padding: '16px 24px', width: '50%' }}>
+                  <TableCell sx={{ padding: '16px 24px', width:1 }}>
                     <MyPropertiesCard item={item} />
                   </TableCell>
 

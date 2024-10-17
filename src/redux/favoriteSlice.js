@@ -26,18 +26,20 @@ export const fetchFavorites = createAsyncThunk(
 // remove Favourite post
 export const removeFavorite = createAsyncThunk(
   "favorites/removeFavorite",
-  async (postId) => {
-    await fetch("http://localhost:3000/user/favourite", {
+  async (postId, { rejectWithValue }) => {
+    await fetch("http://localhost:3000/posts/user/favourite", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        token: `${token}`,
       },
       body: JSON.stringify({ postId }),
     });
+    
     return postId; // Return the postId so we can remove it from state
   }
 );
+
 // Add favorite post
 export const addFavorite = createAsyncThunk(
   "favorites/addFavorite",

@@ -129,8 +129,10 @@ function FilterProducts() {
       p={3}
       boxShadow={3}
       borderRadius={2}
-      sx={{ maxWidth: 400, marginTop: "1em", background: "#292929" }}
+      sx={{ maxWidth: 400, marginTop: "1em", backgroundColor: (theme) =>
+        theme.palette.mode === "light" ? "#fff" : "#292929" }}
     >
+
       <Box mb={2}>
         {/* <Typography variant="body1">Type</Typography> */}
         <ToggleButtonGroup

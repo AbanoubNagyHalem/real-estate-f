@@ -63,32 +63,54 @@ const Home = () => {
           justifyContent: "center",
         }}
       >
-        <Typography
-          variant="h1"
-          component="h1"
-          className="animation"
-          sx={{ textAlign: "center", color: "#fff" }}
+        <Container
+          minwidth="sm"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
         >
-          Find Your
           <Typography
             variant="h1"
-            component="span"
-            className="fadeDownText"
-            sx={{ textAlign: "center", color: "#fff" }}
+            component="h1"
+            className="animation"
+            sx={{
+              textAlign: "center",
+              color: "#fff",
+              fontSize: { md: "60px", xs: "50px" },
+            }}
           >
-            {" " + text}
+            Find Your
+            <Typography
+              variant="h1"
+              component="span"
+              className="fadeDownText"
+              sx={{
+                textAlign: "center",
+                color: "#fff",
+                fontSize: { md: "60px", xs: "50px" },
+              }}
+            >
+              {" " + text}
+            </Typography>
           </Typography>
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          sx={{ textAlign: "center", maxWidth: "40%", color: "#fff" }}
-        >
-          We are a real estate agency that will help you find the best residence
-          you dream of. Let’s discuss your dream house?
-        </Typography>
-        <Box>
-          <Searchbar />
-        </Box>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              textAlign: "center",
+              maxWidth: { md: "40%", xs: "100%" },
+              color: "#fff",
+            }}
+          >
+            We are a real estate agency that will help you find the best
+            residence you dream of. Let’s discuss your dream house?
+          </Typography>
+          <Box>
+            <Searchbar />
+          </Box>
+        </Container>
       </Box>
 
       <Container minwidth="sm">
