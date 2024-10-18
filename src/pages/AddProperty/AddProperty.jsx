@@ -652,6 +652,7 @@ function AddProperty() {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <TextField
+                       className="custom-text-field"
                         label="Floor Name"
                         fullWidth
                         value={floor.floorName}
@@ -666,6 +667,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Floor Price (Only Digits)"
                         fullWidth
                         value={floor.floorPrice}
@@ -680,6 +682,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Floor Size (Only Digits)"
                         fullWidth
                         value={floor.floorSize}
@@ -694,6 +697,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Price Postfix"
                         fullWidth
                         value={floor.pricePostfix}
@@ -708,6 +712,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Size Postfix"
                         fullWidth
                         value={floor.sizePostfix}
@@ -722,6 +727,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Bedrooms"
                         fullWidth
                         value={floor.bedrooms}
@@ -736,6 +742,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Bathrooms"
                         fullWidth
                         value={floor.bathrooms}
@@ -751,6 +758,7 @@ function AddProperty() {
 
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Upload Floor Image"
                         fullWidth
                         onClick={(e) => {
@@ -811,6 +819,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
+                       className="custom-text-field"
                         label="Description"
                         fullWidth
                         value={floor.description}
