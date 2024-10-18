@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 .footer-span:hover{
-    color: var(--Secondary-2);
+    color: var(--Secondary-2) ;
     font-weight: var(--fw-600);
 }
 .social-icon svg {

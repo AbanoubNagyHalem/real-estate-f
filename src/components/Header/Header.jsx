@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { NavLink } from 'react-router-dom'; 
 import logo from '../../assets/images/logo.png';
-import ThemeToggle from '../../components/ThemeToggle/ThemeToggle'
+import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,11 +25,10 @@ function Header() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'var(--Primary)'}}>
-      <Container minwidth="sm">
+    <AppBar position="fixed" sx={{ backgroundColor: 'var(--Primary)' }}>
+      <Container maxWidth="lg">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           
-
           {/* Logo for larger screens */}
           <Typography
             component={NavLink}
@@ -146,7 +145,7 @@ function Header() {
               })}
             >
               Dashboard
-              </NavLink>
+            </NavLink>
           </Box>
 
           {/* Login/Register button for large screens */}
@@ -321,7 +320,7 @@ function Header() {
               </MenuItem>
             </Box>
           </Menu>
-        <ThemeToggle/>
+        <ThemeToggle />
         </Toolbar>
       </Container>
     </AppBar>
