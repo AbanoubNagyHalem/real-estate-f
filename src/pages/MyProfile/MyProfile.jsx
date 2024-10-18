@@ -34,7 +34,7 @@ const MyProfile = () => {
     <Box sx={{ padding: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
       <StyledPaper>
         {/* Account Settings Section */}
-        <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 ,color:'21616A' }}>
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 ,color:'#21616A' }}>
           Account Settings
         </Typography>
         <Box sx={{ p: 2, border: '1px solid #e0e0e0', borderRadius: '12px', mb: 4 ,color:'#21616A'  }}>

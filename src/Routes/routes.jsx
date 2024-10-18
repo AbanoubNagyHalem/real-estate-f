@@ -7,7 +7,7 @@ import Login from "../pages/Login/Login";
 import About from "../pages/AboutUs/About";
 import OurServives from "../pages/OurServices/OurServices";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
-import Contact from "../pages/ContactUs/Contact";
+// import Contact from "../pages/ContactUs/Contact";
 import Properties from "../pages/Properties/Properties";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import UserDashboard from "../pages/UserDashboard/UserDashboard";
@@ -31,7 +31,7 @@ const Approutes = () => {
       <Route path="/properties" element={<Properties />} />
       <Route path="/properties/:_id" element={<PropertyDetails />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      <Route path="/contact-us" element={<Contact />} />
+      {/* <Route path="/contact-us" element={<Contact />} /> */}
 
       {/* User dashboard routes  */}
       <Route path="/user-dashboard" element={<UserDashboard />}>
