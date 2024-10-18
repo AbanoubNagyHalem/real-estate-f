@@ -14,9 +14,22 @@ import img3 from "../../assets/images/section 3.png";
 
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPostDetails } from "../../redux/postSlice";
 
 const PropertyDetails = () => {
+  const { _id } = useParams();
+  const dispatch = useDispatch();
+  const { post } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(fetchPostDetails({ id: _id }));
+  }, [dispatch, _id]);
+
+  console.log(post);
+
   const buttonStyle = {
     width: "30px",
     background: "none",
@@ -50,11 +63,11 @@ const PropertyDetails = () => {
 
   const mapContainerStyle = {
     width: "100%",
-    height: "400px", // يمكنك تعديل الطول كما تراه مناسبًا
+    height: "400px",
   };
 
   const center = {
-    lat: -3.745, // استبدل هذه القيمة بموقعك الجغرافي
+    lat: -3.745,
     lng: -73.989,
   };
 
@@ -145,12 +158,12 @@ const PropertyDetails = () => {
                 borderRadius: "12px",
               }}
             >
-              For Rent
+              For {post.type}
             </Typography>
-            <Typography variant="h3">Lakeview Haven, Lake Tahoe</Typography>
+            <Typography variant="h3">{post.title}</Typography>
           </Box>
           <Box>
-            <Typography variant="h5">$250,00 /month</Typography>
+            <Typography variant="h5">${post.price} /month</Typography>
           </Box>
         </Box>
         <Box
@@ -168,14 +181,13 @@ const PropertyDetails = () => {
                 gap: "12px",
               }}
             >
-              <Typography>2 Bedroom</Typography>
-              <Typography>2 Bedroom</Typography>
-              <Typography>2 Bedroom</Typography>
+              <Typography>{post.bedroom} Bedroom</Typography>
+              <Typography>{post.bathroom} Bathroom</Typography>
             </Box>
           </Box>
           <Box>
             <Typography>LOCATION:</Typography>
-            <Typography>8 Broadway, Brooklyn, New York</Typography>
+            <Typography>{post.address}</Typography>
           </Box>
           <Box
             sx={{
@@ -210,14 +222,7 @@ const PropertyDetails = () => {
         >
           Description
         </Typography>
-        <Typography variant="p">
-          Located around an hour away from Paris, between the Perche and the
-          Iton valley, in a beautiful wooded park bordered by a charming stream,
-          this country property immediately seduces with its bucolic and
-          soothing environment. An ideal choice for sports and leisure
-          enthusiasts who will be able to take advantage of its swimming pool
-          (11m x 5m), tennis court, gym and sauna.
-        </Typography>
+        <Typography variant="p">{post.desc}</Typography>
       </Box>
       <Box
         sx={{
@@ -249,7 +254,7 @@ const PropertyDetails = () => {
             }}
           >
             <AcUnitIcon />
-            <ListItemText primary="ID:" />
+            <ListItemText primary={`ID: ${post._id}`} />
           </Box>
           <Box
             sx={{
@@ -259,7 +264,7 @@ const PropertyDetails = () => {
             }}
           >
             <AcUnitIcon />
-            <ListItemText primary="Type:" />
+            <ListItemText primary={`Type:${post.type}`} />
           </Box>
           <Box
             sx={{
@@ -269,7 +274,7 @@ const PropertyDetails = () => {
             }}
           >
             <AcUnitIcon />
-            <ListItemText primary="Bedrooms:" />
+            <ListItemText primary={`Bedrooms:${post.bedroom}`} />
           </Box>
           <Box
             sx={{
@@ -279,146 +284,11 @@ const PropertyDetails = () => {
             }}
           >
             <AcUnitIcon />
-            <ListItemText primary="Bathrooms:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <AcUnitIcon />
-            <ListItemText primary="Garages:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <AcUnitIcon />
-            <ListItemText primary="Size:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <AcUnitIcon />
-            <ListItemText primary="Land Size:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <AcUnitIcon />
-            <ListItemText primary="Year Built:" />
+            <ListItemText primary={`Bathrooms:${post.bathroom}`} />
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{
-          width: "1300px",
-          margin: "auto",
-          padding: "20px",
-        }}
-      >
-        <Typography
-          variant="h6"
-          sx={{
-            fontWeight: 600,
-          }}
-        >
-          Property Details
-        </Typography>
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 2,
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="ID:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Type:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Bedrooms:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Bathrooms:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Garages:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Size:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Land Size:" />
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <ListItemText primary="Year Built:" />
-          </Box>
-        </Box>
-      </Box>
+
       <Box
         sx={{
           width: "1300px",
