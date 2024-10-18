@@ -6,7 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import PhoneIcon from "@mui/icons-material/Phone";
 import HomeIcon from "@mui/icons-material/Home";
 import EmailIcon from "@mui/icons-material/Email";
-import { Link } from "react-router-dom";  // Add this for routing
+import { Link } from "react-router-dom";  
 import logo from "../../assets/images/logo.png";
 import "./Footer.css";
 
