@@ -101,17 +101,12 @@
   border: 1px solid var(--Secondary-2);
   border-radius: 20px;
   width: 100%;
-  /* تجعل العرض 100% */
   height: 300px;
-  /* ارتفاع ثابت لجميع البطاقات */
   box-sizing: border-box;
-  /* تأكد من احتساب الحواف والتباعد */
 }
 
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  /* للسماح بتغليف العناصر */
   align-items: stretch;
-  /* تجعل جميع العناصر بنفس الارتفاع */
 }
