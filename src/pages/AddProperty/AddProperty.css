@@ -22,8 +22,14 @@
 }
 
 .upload-info {
-
   color: var(--Secondary-2)
+}
+
+.add-property-container .add-property-card {
+  border: 1px solid var(--Secondary-2);
+  border-radius: 25px;
+  box-shadow: 0px 4px 10px rgba(86, 174, 177, 0.5);
+  margin-bottom: 30px;
 }
 
 /* Image Preview */
@@ -38,7 +44,7 @@
 /* Information Card Styles */
 
 .addProperty-title {
-  margin-bottom: 20px !important;
+  margin-bottom: 30px !important;
   font-weight: var(--fw-700);
 
 }
@@ -85,3 +91,27 @@
   margin-top: 30px;
 }
 
+.add-property-card .category-title {
+  font-size: 20px;
+  color: var(--Primary);
+  font-weight: var(--fw-700);
+}
+
+.add-property-card .categories-card {
+  border: 1px solid var(--Secondary-2);
+  border-radius: 20px;
+  width: 100%;
+  /* تجعل العرض 100% */
+  height: 300px;
+  /* ارتفاع ثابت لجميع البطاقات */
+  box-sizing: border-box;
+  /* تأكد من احتساب الحواف والتباعد */
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* للسماح بتغليف العناصر */
+  align-items: stretch;
+  /* تجعل جميع العناصر بنفس الارتفاع */
+}
