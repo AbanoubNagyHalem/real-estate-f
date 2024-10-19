@@ -30,6 +30,7 @@ const MyFavourite = () => {
 
   const handleRemoveFavorite = (postId) => {
     dispatch(removeFavorite(postId));
+    dispatch(fetchFavorites());
   };
 
   const handlePageChange = (event, value) => {

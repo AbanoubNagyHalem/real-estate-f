@@ -20,6 +20,7 @@ import Logout from "../pages/Logout/Logout";
 
 const Approutes = () => {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Registration />} />
@@ -43,6 +44,8 @@ const Approutes = () => {
         <Route path="logout" element={<Logout />} />
       </Route>
     </Routes>
+    </>
+
   );
 };
 

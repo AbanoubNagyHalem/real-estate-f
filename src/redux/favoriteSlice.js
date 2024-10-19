@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
   states: [],
@@ -10,7 +11,7 @@ const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 export const fetchFavorites = createAsyncThunk(
   "favorites/fetchFavorites",
   async () => {
-    const res = await fetch("http://localhost:3000/posts/favorites", {
+    const res = await fetch("http://localhost:3000/posts/user/favourite", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export const fetchFavorites = createAsyncThunk(
 export const removeFavorite = createAsyncThunk(
   "favorites/removeFavorite",
   async (postId) => {
-    await fetch(`http://localhost:3000/posts/${postId}/favorites`, {
+    await fetch(`http://localhost:3000/posts/user/favourite`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export const addFavorite = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       console.log("Adding favorite with postId:", postId);
-      const res = await fetch(`http://localhost:3000/posts/${postId}/favorites`, {
+      const res = await fetch(`http://localhost:3000/posts/user/favourite`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,6 +60,7 @@ export const addFavorite = createAsyncThunk(
 
       if (!res.ok) {
         const errorData = await res.json();
+        toast.success("Post added to favorites")
         return rejectWithValue(errorData);
       }
 

@@ -16,6 +16,9 @@ export const fetchPostDetails = createAsyncThunk(
     }
 
     const data = await response.json();
+    console.log(data);
+    console.log(id);
+
     return data;
   }
 );

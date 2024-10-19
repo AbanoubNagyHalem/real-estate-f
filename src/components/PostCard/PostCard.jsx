@@ -105,7 +105,9 @@ const PostCard = ({ item }) => {
               marginRight: "8px",
             }}
           >
-            <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
+            <Link to={`/properties/${item?._id}`}>
+              <RemoveRedEyeOutlinedIcon sx={{ color: "#fff" }} />
+            </Link>
           </Card>
         </Grid>
         <Link to={`/properties/${item?._id}`}>

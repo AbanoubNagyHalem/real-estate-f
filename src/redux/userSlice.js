@@ -24,7 +24,7 @@
 // export default userSlice.reducer;
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
+const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
 const initialState = {
   user: null,
@@ -37,14 +37,15 @@ const initialState = {
 export const fetchUserProfile = createAsyncThunk(
   'user/fetchUserProfile',
   async () => {
-    const token = localStorage.getItem('token');
-    const response = await fetch('http://localhost:3000/users', {
-      method: "PATCH",
+    // const token = localStorage.getItem('token');
+    const response = await fetch("http://localhost:3000/users/details", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         token: `${token}`
       },
     });
+    console.log(token)
     const data = await response.json();
     console.log(data)
     return data;

@@ -5,8 +5,8 @@ const useLogout = () => {
 
   const handleLogout = () => {
     // Remove session data like tokens stored in localStorage or sessionStorage
-    localStorage.removeItem("authToken");
-    sessionStorage.removeItem("authToken");
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
 
     // Redirect user to the login page
     navigate("/login");

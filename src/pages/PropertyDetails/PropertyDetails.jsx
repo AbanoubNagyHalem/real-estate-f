@@ -489,9 +489,9 @@ import {
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
-import Rating from '@mui/material/Rating';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Rating from "@mui/material/Rating";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { FavoriteBorder, Share } from "@mui/icons-material";
@@ -502,9 +502,9 @@ import {
   Bathtub as BathroomIcon,
   SquareFoot as SizeIcon,
   LocationOn as LocationIcon,
-  Home as HomeIcon,
-  Garage as GarageIcon,
-  CalendarToday as CalendarIcon,
+  // Home as HomeIcon,
+  // Garage as GarageIcon,
+  // CalendarToday as CalendarIcon,
 } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -515,8 +515,8 @@ import img1 from "../../assets/images/luxury-real-estate.jpg";
 import img2 from "../../assets/images/unsplash_XbwHrt87mQ0.png";
 import img3 from "../../assets/images/section 3.png";
 
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+// import AcUnitIcon from "@mui/icons-material/AcUnit";
+// import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -530,9 +530,10 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     dispatch(fetchPostDetails({ id: _id }));
-  }, [dispatch, _id]);
-
   console.log(post);
+
+  }, [_id]);
+
 
   const buttonStyle = {
     width: "30px",
@@ -663,17 +664,17 @@ const PropertyDetails = () => {
                     alignItems="center"
                   >
                     <Typography variant="h4" fontWeight="bold">
-                      Lakeview Haven, Lake Tahoe
+                     {post?.title}
                     </Typography>
                     <Typography variant="h5" color="primary">
-                      $250,00/month
+                    {post?.price}
                     </Typography>
                   </Box>
                   {/* Features */}
                   <Box display="flex" alignItems="center" gap={4} marginTop={2}>
                     <Box display="flex" alignItems="center" gap={1}>
                       <BedroomIcon color="primary" />
-                      <Typography variant="body1">2 Bedroom</Typography>
+                      <Typography variant="body1">$ {post?.bedroom} Bedroom </Typography>
                     </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <BathroomIcon color="primary" />
@@ -796,7 +797,7 @@ const PropertyDetails = () => {
         </Box>
         {/* Floor */}
 
-        <Box sx={{ padding:2 }}>
+        <Box sx={{ padding: 2 }}>
           <Accordion
             sx={{ p: 1 }}
             expanded={expanded === "panel1"}
@@ -823,167 +824,169 @@ const PropertyDetails = () => {
               aria-controls="panel2-content"
               id="panel2-header"
             >
-             Second Floor 
+              Second Floor
             </AccordionSummary>
             <AccordionDetails>
-            <Box component="img" src=""></Box>
+              <Box component="img" src=""></Box>
             </AccordionDetails>
           </Accordion>
         </Box>
 
+        {/* Comments */}
 
-{/* Comments */}
-
-<Box sx={{ padding: 2, marginTop:5 }}>
-      {/* Review Card */}
-      <Box
-        sx={{
-          border: "1px solid #e0e0e0",
-          borderRadius: "8px",
-          padding: 2,
-          marginBottom: 4,
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item>
-            <Avatar
-              alt="Viola Lucas"
-              src="https://via.placeholder.com/150"
-              sx={{ width: 60, height: 60 }}
-            />
-          </Grid>
-          <Grid item xs>
-            <Box>
-              <Typography variant="h6" fontWeight="bold">
-                Viola Lucas
-                <Box
-                  component="span"
-                  sx={{
-                    color: "green",
-                    fontWeight: "bold",
-                    marginLeft: "8px",
-                  }}
-                >
-                  ✔️
+        <Box sx={{ padding: 2, marginTop: 5 }}>
+          {/* Review Card */}
+          <Box
+            sx={{
+              border: "1px solid #e0e0e0",
+              borderRadius: "8px",
+              padding: 2,
+              marginBottom: 4,
+            }}
+          >
+            <Grid container spacing={2}>
+              <Grid item>
+                <Avatar
+                  alt="Viola Lucas"
+                  src="https://via.placeholder.com/150"
+                  sx={{ width: 60, height: 60 }}
+                />
+              </Grid>
+              <Grid item xs>
+                <Box>
+                  <Typography variant="h6" fontWeight="bold">
+                    Viola Lucas
+                    <Box
+                      component="span"
+                      sx={{
+                        color: "green",
+                        fontWeight: "bold",
+                        marginLeft: "8px",
+                      }}
+                    >
+                      ✔️
+                    </Box>
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    August 13, 2023
+                  </Typography>
+                  <Rating
+                    name="read-only"
+                    value={rating}
+                    readOnly
+                    sx={{ marginY: 1 }}
+                  />
+                  <Typography variant="body2">
+                    It's really easy to use and it is exactly what I am looking
+                    for. A lot of good looking templates & it's highly
+                    customizable. Live support is helpful, solved my issue in no
+                    time.
+                  </Typography>
                 </Box>
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                August 13, 2023
-              </Typography>
-              <Rating
-                name="read-only"
-                value={rating}
-                readOnly
-                sx={{ marginY: 1 }}
+                {/* Image carousel placeholder */}
+                <Box display="flex" alignItems="center" gap={1} marginTop={2}>
+                  {/* Replace with react-slick or Swiper */}
+                  <Box>
+                    <img
+                      src="https://via.placeholder.com/100"
+                      alt="gallery-img"
+                      style={{
+                        borderRadius: "8px",
+                        width: "80px",
+                        height: "80px",
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <img
+                      src="https://via.placeholder.com/100"
+                      alt="gallery-img"
+                      style={{
+                        borderRadius: "8px",
+                        width: "80px",
+                        height: "80px",
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <img
+                      src="https://via.placeholder.com/100"
+                      alt="gallery-img"
+                      style={{
+                        borderRadius: "8px",
+                        width: "80px",
+                        height: "80px",
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <img
+                      src="https://via.placeholder.com/100"
+                      alt="gallery-img"
+                      style={{
+                        borderRadius: "8px",
+                        width: "80px",
+                        height: "80px",
+                      }}
+                    />
+                  </Box>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Typography variant="body2">+12</Typography>
+                  </Box>
+                </Box>
+                <Button size="small" color="primary" sx={{ marginTop: 1 }}>
+                  See more answered questions (719)
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+
+          {/* Leave A Reply */}
+          <Box>
+            <Typography variant="h6" fontWeight="bold">
+              Leave A Reply
+            </Typography>
+            <Grid container spacing={2} marginTop={2}>
+              <Grid item xs={6}>
+                <TextField fullWidth label="Name" variant="outlined" />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField fullWidth label="Email" variant="outlined" />
+              </Grid>
+            </Grid>
+            <Box display="flex" alignItems="center" marginTop={2}>
+              <Checkbox
+                checked={checked}
+                onChange={handleCheckboxChange}
+                icon={<FavoriteBorderIcon />}
+                checkedIcon={<FavoriteIcon />}
               />
               <Typography variant="body2">
-                It's really easy to use and it is exactly what I am looking for.
-                A lot of good looking templates & it's highly customizable. Live
-                support is helpful, solved my issue in no time.
+                Save your name, email for the next time review
               </Typography>
             </Box>
-            {/* Image carousel placeholder */}
-            <Box display="flex" alignItems="center" gap={1} marginTop={2}>
-              {/* Replace with react-slick or Swiper */}
-              <Box>
-                <img
-                  src="https://via.placeholder.com/100"
-                  alt="gallery-img"
-                  style={{
-                    borderRadius: "8px",
-                    width: "80px",
-                    height: "80px",
-                  }}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="https://via.placeholder.com/100"
-                  alt="gallery-img"
-                  style={{
-                    borderRadius: "8px",
-                    width: "80px",
-                    height: "80px",
-                  }}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="https://via.placeholder.com/100"
-                  alt="gallery-img"
-                  style={{
-                    borderRadius: "8px",
-                    width: "80px",
-                    height: "80px",
-                  }}
-                />
-              </Box>
-              <Box>
-                <img
-                  src="https://via.placeholder.com/100"
-                  alt="gallery-img"
-                  style={{
-                    borderRadius: "8px",
-                    width: "80px",
-                    height: "80px",
-                  }}
-                />
-              </Box>
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <Typography variant="body2">+12</Typography>
-              </Box>
-            </Box>
-            <Button size="small" color="primary" sx={{ marginTop: 1 }}>
-              See more answered questions (719)
+            <TextField
+              fullWidth
+              label="Review"
+              multiline
+              rows={4}
+              variant="outlined"
+              margin="normal"
+            />
+            <Button
+              variant="contained"
+              color="error"
+              size="large"
+              sx={{ marginTop: 2 }}
+            >
+              Post Comment
             </Button>
-          </Grid>
-        </Grid>
-      </Box>
-
-      {/* Leave A Reply */}
-      <Box>
-        <Typography variant="h6" fontWeight="bold">
-          Leave A Reply
-        </Typography>
-        <Grid container spacing={2} marginTop={2}>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Name" variant="outlined" />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Email" variant="outlined" />
-          </Grid>
-        </Grid>
-        <Box display="flex" alignItems="center" marginTop={2}>
-          <Checkbox
-            checked={checked}
-            onChange={handleCheckboxChange}
-            icon={<FavoriteBorderIcon />}
-            checkedIcon={<FavoriteIcon />}
-          />
-          <Typography variant="body2">
-            Save your name, email for the next time review
-          </Typography>
+          </Box>
         </Box>
-        <TextField
-          fullWidth
-          label="Review"
-          multiline
-          rows={4}
-          variant="outlined"
-          margin="normal"
-        />
-        <Button
-          variant="contained"
-          color="error"
-          size="large"
-          sx={{ marginTop: 2 }}
-        >
-          Post Comment
-        </Button>
-      </Box>
-    </Box>
-
-
 
         {/* Featured slider */}
         <Box sx={{ paddingBottom: 8 }}>
