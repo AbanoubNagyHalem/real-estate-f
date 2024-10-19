@@ -2,7 +2,6 @@ import { useState } from "react";
 import { TextField, Stack, Box, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { toast } from "react-toastify";
 
 const Registration = () => {
   const [formData, setFormData] = useState({

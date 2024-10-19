@@ -9,7 +9,6 @@ import { useState } from "react";
 import "./Login.css";
 import { Container } from "@mui/material";
 import { toast } from "react-toastify";
-import { toast } from "react-toastify";
 
 const Login = () => {
   const [formData, setFormData] = useState({
