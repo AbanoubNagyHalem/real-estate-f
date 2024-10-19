@@ -10,24 +10,26 @@ const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 export const fetchFavorites = createAsyncThunk(
   "favorites/fetchFavorites",
   async () => {
-    const res = await fetch("http://localhost:3000/posts/user/favourite", {
+    const res = await fetch("http://localhost:3000/posts/favorites", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         token: `${token}`,
       },
+      
     });
+    console.log(token)
 
     const data = await res.json();
     return data;
   }
 );
 
-// remove Favourite post
+// remove favorites post
 export const removeFavorite = createAsyncThunk(
   "favorites/removeFavorite",
-  async (postId, { rejectWithValue }) => {
-    await fetch("http://localhost:3000/posts/user/favourite", {
+  async (postId) => {
+    await fetch(`http://localhost:3000/posts/${postId}/favorites`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +48,7 @@ export const addFavorite = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       console.log("Adding favorite with postId:", postId);
-      const res = await fetch("http://localhost:3000/posts/user/favourite", {
+      const res = await fetch(`http://localhost:3000/posts/${postId}/favorites`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

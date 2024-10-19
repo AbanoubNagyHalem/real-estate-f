@@ -119,8 +119,14 @@ const PostCard = ({ item }) => {
         </Link>
         <CardContent sx={{ paddingTop: 2, paddingBottom: 2 }}>
           <Link to={`/properties/${item?._id}`}>
-            <Typography gutterBottom variant="h5" sx={{ color: (theme) =>
-        theme.palette.mode === "light" ? "#000" : "#fff", }}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              sx={{
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#000" : "#fff",
+              }}
+            >
               {item.title}
             </Typography>
           </Link>

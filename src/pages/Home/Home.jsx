@@ -18,6 +18,7 @@ import HomeSlider from "../../components/HomeSlider/HomeSlider";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
 import Searchbar from "../../components/Searchbar/Searchbar";
+import CitySlider from "../../components/CitySlider/CitySlider";
 
 const Home = () => {
   const newTexts = ["Real Estate", "Perfect Home", "Dream Home"];
@@ -166,14 +167,14 @@ const Home = () => {
           </Box>
         </Box>
 
-        <Box sx={{ paddingBottom: 12 }}>
+        <Box sx={{ paddingBottom: 8 }}>
           <Box sx={{ textAlign: "center", paddingBottom: 6 }}>
             <Typography variant="subtitle1" sx={{ color: "#EFA00F" }}>
               Explore Cities
             </Typography>
             <Typography variant="h3">Our Location For You</Typography>
           </Box>
-          <HomeSlider />
+          <CitySlider/>
         </Box>
       </Container>
 
