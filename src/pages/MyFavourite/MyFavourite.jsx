@@ -38,10 +38,12 @@ const MyFavourite = () => {
   };
 
   const itemsPerPage = 3;
-  const paginatedData = Array.isArray(states) ? states.slice(
-    (visibleItems - 1) * itemsPerPage,
-    visibleItems * itemsPerPage
-  ) : []; 
+  const paginatedData = Array.isArray(states)
+    ? states.slice(
+        (visibleItems - 1) * itemsPerPage,
+        visibleItems * itemsPerPage
+      )
+    : [];
 
   if (loading) {
     return <CircularProgress sx={{ display: "block", margin: "20px auto" }} />;
@@ -69,7 +71,7 @@ const MyFavourite = () => {
         component={Paper}
         sx={{ boxShadow: 3, borderRadius: "16px", overflow: "hidden" }}
       >
-        <Table sx={{ maxWidth:1 }} aria-label="property table">
+        <Table sx={{ maxWidth: 1 }} aria-label="property table">
           <TableHead>
             <TableRow
               sx={{
@@ -96,7 +98,7 @@ const MyFavourite = () => {
                   fontSize: "16px",
                   padding: "16px 24px",
                   borderBottom: "none",
-                  textAlign:"right"
+                  textAlign: "right",
                 }}
               >
                 Action
@@ -122,7 +124,15 @@ const MyFavourite = () => {
                       aria-label="delete"
                       onClick={() => handleRemoveFavorite(item._id)}
                     >
-                      <DeleteIcon sx={{ color: "#f44336" }} />
+                      {/* <DeleteIcon sx={{ color: "#f44336"}} /> */}
+                      <DeleteIcon
+                        sx={{
+                          color: "#f44336",
+                          "&:hover": {
+                            color: "#EFA00F",
+                          },
+                        }}
+                      />
                     </IconButton>
                   </TableCell>
                 </TableRow>
@@ -138,7 +148,11 @@ const MyFavourite = () => {
         </Table>
       </TableContainer>
       <Pagination
-        count={Array.isArray(states) && states.length > 0 ? Math.ceil(states.length / itemsPerPage) : 0}
+        count={
+          Array.isArray(states) && states.length > 0
+            ? Math.ceil(states.length / itemsPerPage)
+            : 0
+        }
         page={visibleItems}
         onChange={handlePageChange}
         sx={{

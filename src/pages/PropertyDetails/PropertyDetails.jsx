@@ -485,6 +485,9 @@ import {
   Avatar,
   Container,
   Checkbox,
+  ListItemButton,
+  List,
+  ListItem,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
@@ -496,15 +499,10 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { FavoriteBorder, Share } from "@mui/icons-material";
 import {
-  // FavoriteBorder,
-  // Share,
   Hotel as BedroomIcon,
   Bathtub as BathroomIcon,
   SquareFoot as SizeIcon,
   LocationOn as LocationIcon,
-  // Home as HomeIcon,
-  // Garage as GarageIcon,
-  // CalendarToday as CalendarIcon,
 } from "@mui/icons-material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -522,6 +520,8 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostDetails } from "../../redux/postSlice";
 import HomeSlider from "../../components/HomeSlider/HomeSlider";
+import { Link } from "react-router-dom";
+import { addFavorite } from "../../redux/favoriteSlice";
 
 const PropertyDetails = () => {
   const { _id } = useParams();
@@ -530,10 +530,8 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     dispatch(fetchPostDetails({ id: _id }));
-  console.log(post);
-
+    console.log(post);
   }, [_id]);
-
 
   const buttonStyle = {
     width: "30px",
@@ -566,7 +564,7 @@ const PropertyDetails = () => {
     ),
   };
 
-  const [showMore, setShowMore] = useState(false);
+  // const [showMore, setShowMore] = useState(false);
 
   const [checked, setChecked] = useState(false);
   const [rating, setRating] = useState(4);
@@ -575,19 +573,19 @@ const PropertyDetails = () => {
     setChecked(event.target.checked);
   };
 
-  const toggleShowMore = () => {
-    setShowMore(!showMore);
-  };
+  // const toggleShowMore = () => {
+  //   setShowMore(!showMore);
+  // };
 
-  const mapContainerStyle = {
-    width: "100%",
-    height: "400px",
-  };
+  // const mapContainerStyle = {
+  //   width: "100%",
+  //   height: "400px",
+  // };
 
-  const center = {
-    lat: -3.745,
-    lng: -73.989,
-  };
+  // const center = {
+  //   lat: -3.745,
+  //   lng: -73.989,
+  // };
 
   const images = [img1, img2, img3];
 
@@ -641,7 +639,9 @@ const PropertyDetails = () => {
           <div key={index} className="each-slide">
             <div
               style={{
-                backgroundImage: `url(${img})`,
+                // backgroundImage: `url(${img})`,
+                backgroundImage: `url(${post?.images})`,
+
                 height: "500px",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -664,25 +664,29 @@ const PropertyDetails = () => {
                     alignItems="center"
                   >
                     <Typography variant="h4" fontWeight="bold">
-                     {post?.title}
+                      {post?.title}
                     </Typography>
                     <Typography variant="h5" color="primary">
-                    {post?.price}
+                      ${post?.price}
                     </Typography>
                   </Box>
                   {/* Features */}
                   <Box display="flex" alignItems="center" gap={4} marginTop={2}>
                     <Box display="flex" alignItems="center" gap={1}>
                       <BedroomIcon color="primary" />
-                      <Typography variant="body1">$ {post?.bedroom} Bedroom </Typography>
+                      <Typography variant="body1">
+                        $ {post?.bedroom} Bedroom{" "}
+                      </Typography>
                     </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <BathroomIcon color="primary" />
-                      <Typography variant="body1">2 Bathroom</Typography>
+                      <Typography variant="body1">
+                        $ {post?.bathroom}
+                      </Typography>
                     </Box>
                     <Box display="flex" alignItems="center" gap={1}>
                       <SizeIcon color="primary" />
-                      <Typography variant="body1">6,000 SqFT</Typography>
+                      <Typography variant="body1">{post?.sqft} SqFt</Typography>
                     </Box>
                   </Box>
 
@@ -690,7 +694,7 @@ const PropertyDetails = () => {
                   <Box display="flex" alignItems="center" marginTop={2} gap={1}>
                     <LocationIcon color="primary" />
                     <Typography variant="body2" color="text.secondary">
-                      8 Broadway, Brooklyn, New York
+                      {post?.location}
                     </Typography>
                   </Box>
 
@@ -699,7 +703,8 @@ const PropertyDetails = () => {
                     <IconButton>
                       <Share />
                     </IconButton>
-                    <IconButton>
+
+                    <IconButton onClick={() => dispatch(addFavorite(post._id))}>
                       <FavoriteBorder />
                     </IconButton>
                   </Box>
@@ -708,21 +713,8 @@ const PropertyDetails = () => {
                   <Box marginTop={3}>
                     <Typography variant="h6">Description</Typography>
                     <Typography variant="body2" marginTop={1}>
-                      {showMore
-                        ? `Located around an hour away from Paris, between the Perche and
-                    the Iton valley, in a beautiful wooded park bordered by a
-                    charming stream, this country property immediately seduces
-                    with its bucolic and soothing environment. An ideal choice
-                    for sports and leisure enthusiasts who will be able to take
-                    advantage of its swimming pool (1m x 5m), tennis court, gym,
-                    and sauna.`
-                        : `Located around an hour away from Paris, between the Perche and
-                    the Iton valley, in a beautiful wooded park bordered by a
-                    charming stream...`}
+                      {post?.description}
                     </Typography>
-                    <Button size="small" onClick={toggleShowMore}>
-                      {showMore ? "Show Less" : "Show More"}
-                    </Button>
                   </Box>
 
                   {/* Overview */}
@@ -730,16 +722,31 @@ const PropertyDetails = () => {
                     <Typography variant="h6">Overview</Typography>
                     <Grid container spacing={2} marginTop={2}>
                       <Grid item xs={6} sm={4}>
-                        <Typography>Type: House</Typography>
+                        <Typography>Type: {post?.type}</Typography>
                       </Grid>
                       <Grid item xs={6} sm={4}>
-                        <Typography>Bedrooms: 2 Rooms</Typography>
+                        <Typography>Bedrooms: {post?.bedroom}</Typography>
                       </Grid>
                       <Grid item xs={6} sm={4}>
-                        <Typography>Bathrooms: 2 Rooms</Typography>
+                        <Typography>Bathrooms: {post?.bathroom}</Typography>
                       </Grid>
                       <Grid item xs={6} sm={4}>
-                        <Typography>Size: 900 SqFt</Typography>
+                        <Typography>Size: {post?.sqft} SqFt</Typography>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  <Box marginTop={4}>
+                    <Typography variant="h6">Amenities</Typography>
+                    <Grid container spacing={2} marginTop={2}>
+                      <Grid item>
+                        <List>
+                          {post?.amenities?.map((amenity, index) => (
+                            <ListItem key={index}>
+                              <ListItemText primary={amenity} />
+                            </ListItem>
+                          ))}
+                        </List>
                       </Grid>
                     </Grid>
                   </Box>
@@ -868,7 +875,7 @@ const PropertyDetails = () => {
                     </Box>
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    August 13, 2023
+                    {post?.comments?.createdAt}
                   </Typography>
                   <Rating
                     name="read-only"
@@ -877,70 +884,9 @@ const PropertyDetails = () => {
                     sx={{ marginY: 1 }}
                   />
                   <Typography variant="body2">
-                    It's really easy to use and it is exactly what I am looking
-                    for. A lot of good looking templates & it's highly
-                    customizable. Live support is helpful, solved my issue in no
-                    time.
+                    {post?.comments?.text}
                   </Typography>
                 </Box>
-                {/* Image carousel placeholder */}
-                <Box display="flex" alignItems="center" gap={1} marginTop={2}>
-                  {/* Replace with react-slick or Swiper */}
-                  <Box>
-                    <img
-                      src="https://via.placeholder.com/100"
-                      alt="gallery-img"
-                      style={{
-                        borderRadius: "8px",
-                        width: "80px",
-                        height: "80px",
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <img
-                      src="https://via.placeholder.com/100"
-                      alt="gallery-img"
-                      style={{
-                        borderRadius: "8px",
-                        width: "80px",
-                        height: "80px",
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <img
-                      src="https://via.placeholder.com/100"
-                      alt="gallery-img"
-                      style={{
-                        borderRadius: "8px",
-                        width: "80px",
-                        height: "80px",
-                      }}
-                    />
-                  </Box>
-                  <Box>
-                    <img
-                      src="https://via.placeholder.com/100"
-                      alt="gallery-img"
-                      style={{
-                        borderRadius: "8px",
-                        width: "80px",
-                        height: "80px",
-                      }}
-                    />
-                  </Box>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Typography variant="body2">+12</Typography>
-                  </Box>
-                </Box>
-                <Button size="small" color="primary" sx={{ marginTop: 1 }}>
-                  See more answered questions (719)
-                </Button>
               </Grid>
             </Grid>
           </Box>

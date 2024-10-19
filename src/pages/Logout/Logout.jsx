@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const useLogout = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const useLogout = () => {
 
     // Redirect user to the login page
     navigate("/login");
+    toast.success("You are Loged Out")
   };
 
   return handleLogout;
