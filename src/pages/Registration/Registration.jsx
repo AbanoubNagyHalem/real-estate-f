@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Stack, Box, Button, Container } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ const Registration = () => {
       if (!res.ok) throw new Error(data.error || "Registration failed");
 
       sessionStorage.setItem("token", data.token);
+      toast.success("You are Registerd Now")
       navigate("/");
     } catch (err) {
       setError(err.message);

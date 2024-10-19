@@ -56,7 +56,6 @@ const UserDashboard = () => {
   const handleMenuClick = (index, path) => {
     setSidebarOpen(false);
     if (path === "/user-dashboard/logout") {
-      
       handleLogout();
     } else {
       setActiveIndex(index);

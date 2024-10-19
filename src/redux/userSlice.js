@@ -1,28 +1,3 @@
-// import { createSlice } from '@reduxjs/toolkit';
-
-// const initialState = {
-//   user: null,
-//   token: null,
-// };
-
-//   export const userSlice = createSlice({
-//     name: "user",
-//     initialState,
-//     reducers: {
-//       setLogin: (state, action) => {
-//         state.user = action.payload.user;
-//         state.token = action.payload.token;
-//       },
-//       setLogout: () => {
-//         localStorage.setItem('token', '')
-//       },
-//     },
-//   });
-
-// export const { setLogin, setLogout } = userSlice.actions;
-
-// export default userSlice.reducer;
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
@@ -37,7 +12,6 @@ const initialState = {
 export const fetchUserProfile = createAsyncThunk(
   'user/fetchUserProfile',
   async () => {
-    // const token = localStorage.getItem('token');
     const response = await fetch("http://localhost:3000/users/details", {
       method: "GET",
       headers: {

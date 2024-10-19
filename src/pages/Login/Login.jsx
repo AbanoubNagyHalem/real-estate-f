@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Login.css";
 import { Container } from "@mui/material";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -46,11 +47,13 @@ const Login = () => {
       if (res.ok) {
         const storage = formData.rememberMe ? localStorage : sessionStorage;
         storage.setItem("token", data.token);
+       toast.success("You are Logged in")
         navigate("/");
       } else {
         setError(data.error || "Login failed. Please check your credentials.");
       }
     } catch (err) {
+      toast.error("You aren't Logged out")
       setError("An error occurred. Please try again.");
     }
   };
@@ -126,6 +129,7 @@ const Login = () => {
                 padding: "14px 30px",
             }}
           >
+            
             Login
           </Button>
         </Stack>
