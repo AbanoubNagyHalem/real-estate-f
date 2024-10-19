@@ -9,6 +9,7 @@ import { useState } from "react";
 import "./Login.css";
 import { Container } from "@mui/material";
 import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -59,70 +60,72 @@ const Login = () => {
   };
 
   return (
-    <Container minwidth="sm" sx={{paddingTop:1}}>
-    <Box
-      component="section"
-      sx={{
-        p: 6,
-        borderRadius: "16px",
-        border: "1px solid",
-        borderColor: "primary.main",
-        maxWidth: "600px",
-        margin: "100px auto",
-      }}
-    >
-      <form onSubmit={handleSubmit} className="form">
-        <Stack spacing={3}>
-          <h1 align="center">Login</h1>
-          {error && <p className="error-message">{error}</p>}
-          <TextField
-            id="email"
-            type="email"
-            value={formData.email}
-            label="Your Email:"
-            variant="outlined"
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            id="password"
-            type="password"
-            value={formData.password}
-            label="Password:"
-            variant="outlined"
-            onChange={handleChange}
-            required
-          />
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ flexWrap: "nowrap" }}
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  id="rememberMe"
-                  checked={formData.rememberMe}
-                  onChange={handleChange}
-                  size="small"
-                />
-              }
-              label={<span style={{ whiteSpace: "nowrap" }}>Remember me</span>}
+    <Container minwidth="sm" sx={{ paddingTop: 1 }}>
+      <Box
+        component="section"
+        sx={{
+          p: 6,
+          borderRadius: "16px",
+          border: "1px solid",
+          borderColor: "primary.main",
+          maxWidth: "600px",
+          margin: "100px auto",
+        }}
+      >
+        <form onSubmit={handleSubmit} className="form">
+          <Stack spacing={3}>
+            <h1 align="center">Login</h1>
+            {error && <p className="error-message">{error}</p>}
+            <TextField
+              id="email"
+              type="email"
+              value={formData.email}
+              label="Your Email:"
+              variant="outlined"
+              onChange={handleChange}
+              required
             />
-            <Link to="/forgot-password">
-              <span
-                className="forgot-password"
-                style={{ whiteSpace: "nowrap" }}
-              >
-                Forgot Password?
-              </span>
-            </Link>
-          </Stack>
+            <TextField
+              id="password"
+              type="password"
+              value={formData.password}
+              label="Password:"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            />
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ flexWrap: "nowrap" }}
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    size="small"
+                  />
+                }
+                label={
+                  <span style={{ whiteSpace: "nowrap" }}>Remember me</span>
+                }
+              />
+              <Link to="/forgot-password">
+                <span
+                  className="forgot-password"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Forgot Password?
+                </span>
+              </Link>
+            </Stack>
 
-          <Button
-            type="submit"
-            variant="contained"
+            <Button
+              type="submit"
+              variant="contained"
               sx={{
                 background: "#EFA00F",
                 color: "#fff",

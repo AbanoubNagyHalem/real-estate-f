@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
-import { Box, CardMedia, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { fetchFilteredPosts } from "../../redux/filterProductSlice";
 import img1 from "../../assets/images/cairo.jpg";

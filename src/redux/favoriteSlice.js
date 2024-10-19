@@ -38,6 +38,7 @@ export const removeFavorite = createAsyncThunk(
       },
       body: JSON.stringify({ postId }),
     });
+    toast.success("Post Deleted to favorites")
     
     return postId; // Return the postId so we can remove it from state
   }
@@ -67,6 +68,8 @@ export const addFavorite = createAsyncThunk(
       const data = await res.json();
       return data;
     } catch (error) {
+      toast.error("Post doesn't added to favorites")
+
       return rejectWithValue(error.message);
     }
   }

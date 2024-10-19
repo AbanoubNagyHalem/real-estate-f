@@ -14,7 +14,6 @@ import PostCard from "../../components/PostCard/PostCard";
 import { useNavigate } from "react-router";
 import FilterTabs from "../../components/FilterTabs/FilterTabs";
 import "./Home.css";
-import HomeSlider from "../../components/HomeSlider/HomeSlider";
 import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
 import Searchbar from "../../components/Searchbar/Searchbar";
