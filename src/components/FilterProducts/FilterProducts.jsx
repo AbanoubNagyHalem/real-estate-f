@@ -51,21 +51,6 @@ function FilterProducts() {
     "sherd spa",
     "fireplace",
     "cable tv",
-    "air condtion",
-    "heating",
-    "floor",
-    "elevator",
-    "garden",
-    "parking",
-    "intercom",
-    "security",
-    "wifi",
-    "window type",
-    "pool",
-    "sheard gym",
-    "sherd spa",
-    "fireplace",
-    "cable tv",
   ];
   const [priceRange, setPriceRange] = useState([0, 100000]);
   useEffect(() => {

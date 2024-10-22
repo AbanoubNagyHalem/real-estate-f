@@ -127,6 +127,10 @@ const PostCard = ({ item }) => {
               sx={{
                 color: (theme) =>
                   theme.palette.mode === "light" ? "#000" : "#fff",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "20ch",
               }}
             >
               {item.title}
@@ -179,7 +183,14 @@ const PostCard = ({ item }) => {
             <Typography
               variant="h5"
               color="text.secondary"
-              sx={{ display: "flex", alignItems: "center" }}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "6ch",
+              }}
             >
               <MonetizationOnOutlinedIcon />
               {item.price}

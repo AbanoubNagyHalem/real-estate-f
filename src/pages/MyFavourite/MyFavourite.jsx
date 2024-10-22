@@ -110,11 +110,11 @@ const MyFavourite = () => {
               paginatedData.map((item) => (
                 <TableRow
                   key={item._id}
-                  sx={{
-                    "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" },
-                    "&:nth-of-type(even)": { backgroundColor: "#fff" },
-                    borderBottom: "1px solid #ddd",
-                  }}
+                  // sx={{
+                  //   "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" },
+                  //   "&:nth-of-type(even)": { backgroundColor: "#fff" },
+                  //   borderBottom: "1px solid #ddd",
+                  // }}
                 >
                   <TableCell sx={{ padding: "16px 24px", width: 1 }}>
                     <MyPropertiesCard item={item} />

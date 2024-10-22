@@ -27,6 +27,7 @@ import { useState } from "react";
 import useLogout from "../Logout/Logout";
 import { useTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
+import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard";
 
 const UserDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -70,23 +71,32 @@ const UserDashboard = () => {
           key={item.text}
           onClick={() => handleMenuClick(index, item.path)}
           sx={{
+            color: (theme) =>
+              theme.palette.mode === "light" ? "#21616A" : "#fff",
             backgroundColor: activeIndex === index ? "#56AEB1" : "transparent",
-            color: "white",
+            // color: "white",
             cursor: "pointer",
             "&:hover": { backgroundColor: "#56AEB1" },
+            
           }}
         >
 
-          <ListItemIcon sx={{ color: activeIndex === index ? "#fff" : "#4b9197" }}>
+          <ListItemIcon sx={{ color: activeIndex === index ? "#fff" : "#4b9197",
+            color: (theme) =>
+              theme.palette.mode === "light" ? "#21616A" : "#fff",
+           }}>
             {item.icon}
           </ListItemIcon>
-          <ListItemText primary={item.text} />
+          <ListItemText primary={item.text} sx={{
+            color: (theme) =>
+              theme.palette.mode === "light" ? "#21616A" : "#fff",
+          }}/>
         </ListItem>
       ))}
     </List>
   );  
     return (
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex" , justifyContent:"sapce-between"}}>
         <CssBaseline />
   
         {!isDesktop && (
@@ -102,9 +112,11 @@ const UserDashboard = () => {
           // Persistent drawer for desktop
           <Box
             sx={{
-              width: "240px",
+              width: "340px",
               flexShrink: 0,
-              backgroundColor: "#f5f5f5",
+              // backgroundColor: "#f5f5f5",
+              backgroundColor: (theme) =>
+                theme.palette.mode === "light" ? "#dddddd59" : "#292929",
               p: 2,
               minHeight: "100vh",
             }}
@@ -118,27 +130,33 @@ const UserDashboard = () => {
             open={sidebarOpen}
             onClose={() => setSidebarOpen(false)}
             sx={{
-              "& .MuiDrawer-paper": { width: "240px", backgroundColor: "#f5f5f5" },
+              "& .MuiDrawer-paper": { width: "300px",
+                backgroundColor: (theme) =>
+                  theme.palette.mode === "light" ? "#fff" : "#292929",
+               },
             }}
           >
             {drawerContent}
           </Drawer>
         )}
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="container" sx={{ flexGrow:1, p: 3 }}>
         <Toolbar />
 
         {location.pathname === "/user-dashboard" && (
           <>
             {/* Top Bar with buttons */}
-            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4 }}>
-              <Button variant="outlined" sx={{ color: "#21616A", borderColor: "#56AEB1" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4}}>
+              <Button variant="outlined" sx={{  color: (theme) =>
+            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
                 Your Listing {MyPropertiesCount}/17 remaining
               </Button>
-              <Button variant="outlined" sx={{ color: "#21616A", borderColor: "#56AEB1" }}>
+              <Button variant="outlined" sx={{ color: (theme) =>
+            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
                 Favorite {favoriteCount}
               </Button>
-              <Button variant="outlined" sx={{ color: "#21616A", borderColor: "#56AEB1" }}>
+              <Button variant="outlined" sx={{ color: (theme) =>
+            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
                 Reviews {reviewCount}
               </Button>
             </Box>
@@ -147,13 +165,14 @@ const UserDashboard = () => {
             <Paper sx={{ p: 3, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)" }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Typography variant="h6" sx={{ color: "#21616A" }}>
+                  <Typography variant="h6">
                     Gorgeous Apartment Building
                   </Typography>
-                  <Typography variant="body1" sx={{ color: "#56AEB1" }}>
+                  <Typography variant="body1">
                     $5050.00
                   </Typography>
                 </Grid>
+                {/* <MyPropertiesCard item={item}/> */}
               </Grid>
             </Paper>
           </>

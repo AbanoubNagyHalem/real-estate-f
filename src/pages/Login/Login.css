@@ -6,7 +6,7 @@
 
 span {
     font-size: small;
-    color: var(--primary-color);
+    /* color: var(--primary-color); */
 }
 .forgot-password {
     color: var(--secondary-color);

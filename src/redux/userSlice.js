@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+
 const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
 const initialState = {
@@ -25,6 +27,36 @@ export const fetchUserProfile = createAsyncThunk(
     return data;
   }
 );
+
+
+// remove User
+export const removeProfile = createAsyncThunk(
+  "user/removeProfile",
+  
+  async (_id, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          token: `${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the account.");
+      }
+
+      toast.success("Your Account Deleted");
+      console.log(_id);
+      return _id;
+    } catch (error) {
+      toast.error("Error deleting account");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 
 export const userSlice = createSlice({

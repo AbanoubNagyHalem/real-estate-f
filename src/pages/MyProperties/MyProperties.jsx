@@ -98,19 +98,19 @@ const MyProperties = () => {
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
-    <Box sx={{ padding: { xs: 2, md: 4 }, maxWidth: '1200px', margin: '0 auto' }}>
+    <Box sx={{ padding: { xs: 2, md: 4 }, maxWidth: '1200px', margin: '0 auto',  }}>
       <Typography
         variant="h4"
         sx={{
           mb: 3,
           fontWeight: 'bold',
-          color: '#21616A',
+          // color: '#21616A',
           textAlign: 'left',
         }}
       >
         My Properties
       </Typography>
-      <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: '16px', overflow: 'hidden' }}>
+      <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: '16px', overflow: 'hidden',  }}>
         <Table sx={{ minWidth: 650 }} aria-label="property table">
           <TableHead>
             <TableRow sx={{ backgroundColor: '#E5F4F2', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
@@ -156,15 +156,15 @@ const MyProperties = () => {
               paginatedData.map((item) => (
                 <TableRow
                   key={item._id}
-                  sx={{
-                    '&:nth-of-type(odd)': {
-                      backgroundColor: '#f9f9f9',
-                    },
-                    '&:nth-of-type(even)': {
-                      backgroundColor: '#fff',
-                    },
-                    borderBottom: '1px solid #ddd',
-                  }}
+                  // sx={{
+                  //   '&:nth-of-type(odd)': {
+                  //     backgroundColor: '#f9f9f9',
+                  //   },
+                  //   '&:nth-of-type(even)': {
+                  //     backgroundColor: '#fff',
+                  //   },
+                  //   borderBottom: '1px solid #ddd',
+                  // }}
                 >
                   
                   <TableCell sx={{ padding: '16px 24px', width:1 }}>

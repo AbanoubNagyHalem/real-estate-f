@@ -172,10 +172,21 @@ const Home = () => {
               Explore Cities
             </Typography>
             <Typography variant="h3">Our Location For You</Typography>
-          </Box>
           <CitySlider/>
+
+          </Box>
         </Box>
       </Container>
+
+      {/* <Box sx={{ paddingBottom: 8 }}>
+          <Box sx={{ textAlign: "center", paddingBottom: 6 }}>
+            <Typography variant="subtitle1" sx={{ color: "#EFA00F" }}>
+              Explore Cities
+            </Typography>
+            <Typography variant="h3">Our Location For You</Typography>
+          <CitySlider/>
+          </Box>
+        </Box> */}
 
       <Box sx={{ paddingTop: 12, paddingBottom: 12, background: "#21616A" }}>
         <Container>

@@ -17,6 +17,7 @@ import Reviews from "../pages/Reviews/Reviews";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import AddProperty from "../pages/AddProperty/AddProperty";
 import Logout from "../pages/Logout/Logout";
+import FirebaseUpload from "../components/FirebaseUpload/FirebaseUpload";
 
 const Approutes = () => {
   return (
@@ -33,6 +34,7 @@ const Approutes = () => {
       <Route path="/properties/:_id" element={<PropertyDetails />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
       <Route path="/contact-us" element={<Contact />} />
+      <Route path="/firebase-upload" element={<FirebaseUpload/>}/>
 
       {/* User dashboard routes  */}
       <Route path="/user-dashboard" element={<UserDashboard />}>

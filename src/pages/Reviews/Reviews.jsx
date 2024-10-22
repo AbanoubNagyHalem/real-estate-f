@@ -109,7 +109,7 @@ const Reviews = () => {
         sx={{
           mb: 3,
           fontWeight: "bold",
-          color: "#21616A",
+          // color: "#21616A",
           textAlign: "left",
         }}
       >
@@ -167,9 +167,9 @@ const Reviews = () => {
                           key={review._id}
                           sx={{
                             "&:nth-of-type(odd)": {
-                              backgroundColor: "#f9f9f9",
+                              // backgroundColor: "#f9f9f9",
                             },
-                            "&:nth-of-type(even)": { backgroundColor: "#fff" },
+                            // "&:nth-of-type(even)": { backgroundColor: "#fff" },
                             borderBottom: "1px solid #ddd",
                           }}
                         >
@@ -193,7 +193,7 @@ const Reviews = () => {
                               sx={{
                                 marginTop: "4px",
                                 display: "block",
-                                color: "text.secondary",
+                                // color: "text.secondary",
                               }}
                             >
                               {new Date(review.commentDate).toLocaleString()}

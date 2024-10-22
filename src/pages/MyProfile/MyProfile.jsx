@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchUserProfile } from "../../redux/userSlice";
+import { fetchUserProfile, removeProfile } from "../../redux/userSlice";
 import {
   Box,
   Grid,
@@ -34,6 +34,11 @@ const MyProfile = () => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
 
+  const handleRemoveProfile = (_id) => {
+    dispatch(removeProfile(_id));
+    dispatch(fetchUserProfile());
+  };
+
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error: {error}</Typography>;
   if (!user) return <Typography>No user data available.</Typography>;
@@ -46,17 +51,18 @@ const MyProfile = () => {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-        backgroundColor: "#f5f5f5",
+        color: (theme) => (theme.palette.mode === "light" ? "#000" : "#fff"),
       }}
     >
-      <StyledPaper>
+      <StyledPaper
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light" ? "#fff" : "#292929",
+        }}
+      >
         {/* Account Settings Section */}
-        <Typography
-          variant="h5"
-          gutterBottom
-          sx={{ fontWeight: 600, color: "#21616A" }}
-        >
-          Account Settings
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 600, mb: 3 }}>
+          My Profile
         </Typography>
         <Box
           sx={{
@@ -64,26 +70,39 @@ const MyProfile = () => {
             border: "1px solid #e0e0e0",
             borderRadius: "12px",
             mb: 4,
-            color: "#21616A",
           }}
         >
-          <Typography variant="subtitle1" sx={{ mb: 2 }}>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              mb: 2,
+              color: (theme) =>
+                theme.palette.mode === "light" ? "#000" : "#fff",
+            }}
+          >
             User Account
           </Typography>
-          <Typography variant="body2" sx={{ mb: 2, color: "#21616A" }}>
+          <Typography
+            variant="body2"
+            sx={{
+              mb: 2,
+              color: (theme) =>
+                theme.palette.mode === "light" ? "#000" : "#fff",
+            }}
+          >
             Your current account type is set to user. If you want to remove your
             user account, and return to normal account, you must click the
             button below.
           </Typography>
           <Button
             variant="contained"
-            color="secondary"
             startIcon={<DeleteIcon />}
             sx={{
               backgroundColor: "#21616A",
               color: "#ffffff",
               "&:hover": { backgroundColor: "#56AEB1" },
             }}
+            onClick={handleRemoveProfile}
           >
             Remove User Account
           </Button>
@@ -105,27 +124,29 @@ const MyProfile = () => {
                 src={user.avatar || "/default-avatar.png"}
                 sx={{ width: 100, height: 100, margin: "auto" }}
               />
-              <Typography variant="caption" display="block" gutterBottom>
+              {/* <Typography variant="caption" display="block" gutterBottom>
                 JPEG 100 x 100
-              </Typography>
+              </Typography> */}
             </Grid>
             <Grid item xs={12} md={8}>
-              <Typography variant="body2" sx={{ mb: 2, color: "#21616A" }}>
+              <Typography variant="body2" sx={{ mb: 2 }}>
                 Upload a new avatar
               </Typography>
               <label htmlFor="avatar-upload">
                 <Input accept="image/*" id="avatar-upload" type="file" />
-                <Button
-                  variant="outlined"
-                  component="span"
-                  sx={{
-                    color: "#21616A",
-                  }}
-                >
+                <Button variant="outlined" component="span" sx={{}}>
                   Choose File
                 </Button>
               </label>
-              <Typography variant="caption" display="block" sx={{ mt: 1 }}>
+              <Typography
+                variant="caption"
+                display="block"
+                sx={{
+                  mt: 1,
+                  color: (theme) =>
+                    theme.palette.mode === "light" ? "#000" : "#fff",
+                }}
+              >
                 No file chosen
               </Typography>
             </Grid>
@@ -138,8 +159,8 @@ const MyProfile = () => {
             fullWidth
             margin="normal"
             sx={{ flex: 1 }}
-            InputLabelProps={{ style: { color: "#21616A" } }} 
-            InputProps={{ style: { color: "#21616A" } }} 
+            // InputLabelProps={{ style: { color: "#21616A" } }}
+            // InputProps={{ style: { color: "#21616A" } }}
           />
           <TextField
             label="Email"
@@ -148,8 +169,8 @@ const MyProfile = () => {
             disabled
             margin="normal"
             sx={{ flex: 1 }}
-            InputLabelProps={{ style: { color: "#21616A" } }} 
-            InputProps={{ style: { color: "#21616A" } }} 
+            // InputLabelProps={{ style: { color: "#21616A" } }}
+            // InputProps={{ style: { color: "#21616A" } }}
           />
           <TextField
             label="Phone Number"
@@ -157,8 +178,8 @@ const MyProfile = () => {
             fullWidth
             margin="normal"
             sx={{ flex: 1 }}
-            InputLabelProps={{ style: { color: "#21616A" } }}
-            InputProps={{ style: { color: "#21616A" } }} 
+            // InputLabelProps={{ style: { color: "#21616A" } }}
+            // InputProps={{ style: { color: "#21616A" } }}
           />
         </Box>
         <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
