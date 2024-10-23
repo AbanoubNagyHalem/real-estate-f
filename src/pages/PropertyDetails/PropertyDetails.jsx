@@ -45,6 +45,7 @@ import HomeSlider from "../../components/HomeSlider/HomeSlider";
 import { Link } from "react-router-dom";
 import { addFavorite } from "../../redux/favoriteSlice";
 import { addReviews } from "../../redux/reviewSlice";
+import { Helmet } from "react-helmet-async";
 
 const PropertyDetails = () => {
   const { _id } = useParams();
@@ -166,6 +167,16 @@ const PropertyDetails = () => {
 
   return (
     <Box sx={{}}>
+      <Helmet>
+        <title>{post?.title ? `${post?.title} - Property Hub` : "Property Hub"}</title>
+        <meta
+          name="description"
+          content={post?.description ? post?.description.substring(0, 160) : "Property Hub"}
+        />
+        <meta property="og:title" content={post?.title ? `${post?.title} - Property Hub` : "Property Hub"} />
+        <meta property="og:description" content={post?.description} />
+        <meta property="og:image" content={post?.images?.[0]} />
+      </Helmet>
       {/* main slider */}
       <Slide {...properties}>
         {images.map((img, index) => (

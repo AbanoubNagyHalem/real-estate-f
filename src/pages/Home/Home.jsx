@@ -18,6 +18,7 @@ import EastOutlinedIcon from "@mui/icons-material/EastOutlined";
 import AddHomeWorkOutlinedIcon from "@mui/icons-material/AddHomeWorkOutlined";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import CitySlider from "../../components/CitySlider/CitySlider";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const newTexts = ["Real Estate", "Perfect Home", "Dream Home"];
@@ -53,6 +54,14 @@ const Home = () => {
 
   return (
     <>
+          <Helmet>
+        <title> Property Hub -Find Your Dream Home</title>
+        <meta
+          name="description"
+          content="Discover your dream home effortlessly. We offer a wide range of real estate properties to buy, rent, or sell. Let us help you find the perfect place."
+        />
+      </Helmet>
+
       <Box
         width={1}
         className="hero-banner"
@@ -177,16 +186,6 @@ const Home = () => {
           </Box>
         </Box>
       </Container>
-
-      {/* <Box sx={{ paddingBottom: 8 }}>
-          <Box sx={{ textAlign: "center", paddingBottom: 6 }}>
-            <Typography variant="subtitle1" sx={{ color: "#EFA00F" }}>
-              Explore Cities
-            </Typography>
-            <Typography variant="h3">Our Location For You</Typography>
-          <CitySlider/>
-          </Box>
-        </Box> */}
 
       <Box sx={{ paddingTop: 12, paddingBottom: 12, background: "#21616A" }}>
         <Container>

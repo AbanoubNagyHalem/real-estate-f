@@ -20,9 +20,27 @@ export const fetchReviews = createAsyncThunk(
     }
 
     const data = await res.json();
-    console.log(data);
-
+    
     return data;
+  })
+// Delete review async action
+export const deleteReview = createAsyncThunk(
+  "reviews/deleteReview",
+  async ({ postId, commentId }, {dispatch}) => {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    const res = await fetch(`http://localhost:3000/posts/${postId}/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        token: `${token}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to delete the comment");
+    }
+    // After successful deletion, refetch the comments
+    dispatch(fetchPostComments(postId)); // Refetch comments after deletion
+    return { postId, commentId };
   }
 );
 
@@ -53,38 +71,27 @@ export const addReviews = createAsyncThunk(
 );
 
 const reviewSlice = createSlice({
-  name: "reviews",
-  initialState: {
-    reviews: [],
-    status: "idle",
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchReviews.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchReviews.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.reviews = action.payload;
-      })
-      .addCase(fetchReviews.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      .addCase(addReviews.pending, (state) => {
-        state.status = "loading"; // You can handle loading state if needed
-      })
-      .addCase(addReviews.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.reviews.push(action.payload); // Assuming the new review is returned
-      })
-      .addCase(addReviews.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
-  },
+    name: 'reviews',
+    initialState: {
+        reviews: [],
+        status: 'idle',
+        error: null,
+    },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchReviews.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchReviews.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.reviews = action.payload;
+            })
+            .addCase(fetchReviews.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            });
+    },
 });
 
 export default reviewSlice.reducer;

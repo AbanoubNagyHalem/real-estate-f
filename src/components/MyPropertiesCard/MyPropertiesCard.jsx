@@ -11,10 +11,16 @@ import cardImg from "../../assets/images/luxury-real-estate.jpg";
 const MyPropertiesCard = ({ item }) => {
   return (
     <Link to={`/properties/${item?._id}`} style={{ textDecoration: "none" }}>
-      <Card sx={{ margin: 1 , borderRadius:3,  backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? "#fff" : "#292929",}}>
+      <Card
+        sx={{
+          margin: 1,
+          borderRadius: 3,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light" ? "#fff" : "#292929",
+        }}
+      >
         <CardActionArea>
-          <Grid container sx={{width:1}}>
+          <Grid container sx={{ width: 1 }}>
             {/* Image Section (Left Side) */}
             <Grid item xs={12} md={5}>
               <CardMedia
@@ -39,12 +45,11 @@ const MyPropertiesCard = ({ item }) => {
                   sx={{
                     fontWeight: "bold",
                     fontSize: "18px",
-                    // color: "#21616A",
                     mb: 1,
                     display: "-webkit-box",
                     overflow: "hidden",
                     WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 2, // Limit title to 2 lines
+                    WebkitLineClamp: 2,
                   }}
                 >
                   {item.title}
@@ -52,7 +57,6 @@ const MyPropertiesCard = ({ item }) => {
 
                 <Typography
                   variant="subtitle2"
-                  // color="#21616A"
                   sx={{ display: "flex", alignItems: "center", mb: 1 }}
                 >
                   {item.address}
@@ -60,7 +64,6 @@ const MyPropertiesCard = ({ item }) => {
 
                 <Typography
                   variant="h6"
-                  // color="#21616A"
                   sx={{
                     display: "flex",
                     alignItems: "center",
