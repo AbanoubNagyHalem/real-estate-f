@@ -8,7 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
-import { Helmet } from 'react-helmet-async'; // Import Helmet
+import { Helmet } from "react-helmet-async"; // Import Helmet
 
 const OurServives = () => {
   const [expanded, setExpanded] = React.useState(false);
@@ -19,7 +19,7 @@ const OurServives = () => {
 
   return (
     <>
-          <Helmet>
+      <Helmet>
         <title>Our Services - Property Hub Real Estate</title>
         <meta
           name="description"
@@ -36,7 +36,6 @@ const OurServives = () => {
           flexDirection: "column",
           paddingTop: 8,
           paddingBottom: 8,
-
         }}
       >
         <Typography variant="h1">Our Services</Typography>

@@ -35,7 +35,7 @@ const MyProperties = () => {
     setVisibleItems(value); // Set new page number
   };
 
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   const paginatedData = statesByUser.slice(
     (visibleItems - 1) * itemsPerPage,
     visibleItems * itemsPerPage

@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -380,6 +381,7 @@ function Header() {
               </MenuItem>
             </Box>
           </Menu>
+        <ThemeToggle/>
         </Toolbar>
       </Container>
     </AppBar>

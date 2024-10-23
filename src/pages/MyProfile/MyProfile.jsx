@@ -7,9 +7,7 @@ import {
 } from "../../redux/userSlice";
 import {
   Box,
-  Grid,
   Paper,
-  Avatar,
   Typography,
   Button,
   TextField,
@@ -17,7 +15,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FirebaseUpload from "../../components/FirebaseUpload/FirebaseUpload";
 import ProfileImage from "../../components/ProfileImage/ProfileImage";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
@@ -46,13 +43,6 @@ const MyProfile = () => {
     dispatch(updateProfile(user));
     dispatch(fetchUserProfile());
   };
-
-  // const handleAvatarUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     console.log(file);
-  //   }
-  // };
 
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography>Error: {error}</Typography>;

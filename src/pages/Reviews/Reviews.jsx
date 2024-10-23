@@ -14,8 +14,8 @@ import {
   Pagination,
   IconButton,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete"; // Import the delete icon
-import { fetchReviews, deleteReview } from "../../redux/reviewSlice"; // Import deleteReview action
+import DeleteIcon from "@mui/icons-material/Delete"; 
+import { fetchReviews, deleteReview } from "../../redux/reviewSlice"; 
 
 const Reviews = () => {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const Reviews = () => {
     setVisibleItems(value);
   };
 
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   const paginatedData = Array.isArray(reviews)
     ? reviews.slice((visibleItems - 1) * itemsPerPage, visibleItems * itemsPerPage)
     : [];
@@ -61,7 +61,6 @@ const Reviews = () => {
         sx={{
           mb: 3,
           fontWeight: "bold",
-          color: "#21616A",
           textAlign: "left",
         }}
       >
@@ -130,8 +129,6 @@ const Reviews = () => {
                 
                   key={index}
                   sx={{
-                    "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" },
-                    "&:nth-of-type(even)": { backgroundColor: "#fff" },
                     borderBottom: "1px solid #ddd",
                   }}
                 >
