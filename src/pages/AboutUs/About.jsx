@@ -12,10 +12,19 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SellIcon from "@mui/icons-material/Sell";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   return (
     <>
+          <Helmet>
+        <title>About Us - Property Hub</title>
+        <meta
+          name="description"
+          content="Welcome to Property Hub. Discover how we turn houses into homes with expert real estate services."
+        />
+      </Helmet>
+
       <Box
         boxShadow={2}
         sx={{

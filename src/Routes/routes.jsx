@@ -18,10 +18,12 @@ import MyProfile from "../pages/MyProfile/MyProfile";
 import AddProperty from "../pages/AddProperty/AddProperty";
 import Logout from "../pages/Logout/Logout";
 import FirebaseUpload from "../components/FirebaseUpload/FirebaseUpload";
+import { HelmetProvider } from "react-helmet-async";
 
 const Approutes = () => {
   return (
     <>
+    <HelmetProvider>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Registration />} />
@@ -46,6 +48,7 @@ const Approutes = () => {
         <Route path="logout" element={<Logout />} />
       </Route>
     </Routes>
+    </HelmetProvider>
     </>
 
   );
