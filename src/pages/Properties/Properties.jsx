@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import PostCard from "../../components/PostCard/PostCard";
 import FilterProducts from "../../components/FilterProducts/FilterProducts";
-import { fetchProductsByUser } from "../../redux/productSlice";
+import { fetchProducts } from "../../redux/productSlice";
 import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
@@ -24,14 +24,14 @@ const Properties = () => {
   const { filteredPosts, loading, error } = useSelector(
     (state) => state.filteredPosts
   );
-  const { statesByUser: allPosts, loading: allPostsLoading } = useSelector(
+  const { states: allPosts, loading: allPostsLoading } = useSelector(
     (state) => state.products
   );
   const [visibleItems, setVisibleItems] = useState(12);
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(fetchProductsByUser());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const handleShowMore = () => {
