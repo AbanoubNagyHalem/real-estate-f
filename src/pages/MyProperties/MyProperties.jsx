@@ -22,15 +22,10 @@ import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard
 
 const MyProperties = () => {
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const { states, loading, error } = useSelector((state) => state.products);
-  const [visibleItems, setVisibleItems] = useState(1); 
-=======
   const { statesByUser, loading, error } = useSelector(
     (state) => state.products
   );
   const [visibleItems, setVisibleItems] = useState(1); // Default page
->>>>>>> 8e097596af323f15ed9b76d526978f44da564352
 
   useEffect(() => {
     dispatch(fetchProductsByUser());
@@ -112,28 +107,17 @@ const MyProperties = () => {
         variant="h4"
         sx={{
           mb: 3,
-<<<<<<< HEAD
-          fontWeight: 'bold',
-          textAlign: 'left',
-=======
           fontWeight: "bold",
           // color: '#21616A',
           textAlign: "left",
->>>>>>> 8e097596af323f15ed9b76d526978f44da564352
         }}
       >
         My Properties
       </Typography>
-<<<<<<< HEAD
-
-      
-      <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: '16px', overflow: 'hidden',  }}>
-=======
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 3, borderRadius: "16px", overflow: "hidden" }}
       >
->>>>>>> 8e097596af323f15ed9b76d526978f44da564352
         <Table sx={{ minWidth: 650 }} aria-label="property table">
           <TableHead>
             <TableRow
