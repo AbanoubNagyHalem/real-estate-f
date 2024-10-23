@@ -23,7 +23,7 @@ import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard
 const MyProperties = () => {
   const dispatch = useDispatch();
   const { states, loading, error } = useSelector((state) => state.products);
-  const [visibleItems, setVisibleItems] = useState(1); // Default page
+  const [visibleItems, setVisibleItems] = useState(1); 
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -104,12 +104,13 @@ const MyProperties = () => {
         sx={{
           mb: 3,
           fontWeight: 'bold',
-          // color: '#21616A',
           textAlign: 'left',
         }}
       >
         My Properties
       </Typography>
+
+      
       <TableContainer component={Paper} sx={{ boxShadow: 3, borderRadius: '16px', overflow: 'hidden',  }}>
         <Table sx={{ minWidth: 650 }} aria-label="property table">
           <TableHead>
@@ -156,15 +157,6 @@ const MyProperties = () => {
               paginatedData.map((item) => (
                 <TableRow
                   key={item._id}
-                  // sx={{
-                  //   '&:nth-of-type(odd)': {
-                  //     backgroundColor: '#f9f9f9',
-                  //   },
-                  //   '&:nth-of-type(even)': {
-                  //     backgroundColor: '#fff',
-                  //   },
-                  //   borderBottom: '1px solid #ddd',
-                  // }}
                 >
                   
                   <TableCell sx={{ padding: '16px 24px', width:1 }}>
