@@ -1,20 +1,24 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import { NavLink } from 'react-router-dom'; 
-import logo from '../../assets/images/logo.png';
-import ThemeToggle from '../../components/ThemeToggle/ThemeToggle';
+import React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
+
+  // Check if token exists in localStorage or sessionStorage
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -24,11 +28,17 @@ function Header() {
     setAnchorElNav(null);
   };
 
+  // Handle logout action
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    navigate("/login"); // Navigate to login page after logout
+  };
+
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'var(--Primary)' }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "var(--Primary)" }}>
       <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-          
+        <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
           {/* Logo for larger screens */}
           <Typography
             component={NavLink}
@@ -148,7 +158,7 @@ function Header() {
             </NavLink>
           </Box>
 
-          {/* Login/Register button for large screens */}
+          {/* Conditionally render Login/Register or Logout */}
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
@@ -159,31 +169,47 @@ function Header() {
               borderRadius: "4px",
             }}
           >
-            <Button
-              component={NavLink}
-              to="/login"
-              sx={{
-                color: "inherit",
-                textTransform: "capitalize",
-                padding: 0,
-                minWidth: "auto",
-              }}
-            >
-              Login
-            </Button>
-            <Typography sx={{ mx: 1, color: "inherit" }}>|</Typography>
-            <Button
-              component={NavLink}
-              to="/register"
-              sx={{
-                color: "inherit",
-                textTransform: "capitalize",
-                padding: 0,
-                minWidth: "auto",
-              }}
-            >
-              Register
-            </Button>
+            {token ? (
+              <Button
+                onClick={handleLogout}
+                sx={{
+                  color: "inherit",
+                  textTransform: "capitalize",
+                  padding: 0,
+                  minWidth: "auto",
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <>
+                <Button
+                  component={NavLink}
+                  to="/login"
+                  sx={{
+                    color: "inherit",
+                    textTransform: "capitalize",
+                    padding: 0,
+                    minWidth: "auto",
+                  }}
+                >
+                  Login
+                </Button>
+                <Typography sx={{ mx: 1, color: "inherit" }}>|</Typography>
+                <Button
+                  component={NavLink}
+                  to="/register"
+                  sx={{
+                    color: "inherit",
+                    textTransform: "capitalize",
+                    padding: 0,
+                    minWidth: "auto",
+                  }}
+                >
+                  Register
+                </Button>
+              </>
+            )}
           </Box>
 
           {/* Menu for small screens */}
@@ -303,24 +329,57 @@ function Header() {
                   Contact Us
                 </Typography>
               </MenuItem>
-              {/* Login/Register button for small screens */}
               <MenuItem
                 onClick={handleCloseNavMenu}
                 sx={{ width: "100%", textAlign: "center" }}
               >
-                <Button
-                  variant="contained"
-                  color="warning"
-                  fullWidth
+                <Typography
                   component={NavLink}
-                  to="/login"
+                  to="/user-dashboard"
+                  sx={{
+                    width: "100%",
+                    color: "inherit",
+                    textDecoration: "none",
+                  }}
                 >
-                  Login / Register
-                </Button>
+                  Dashboard
+                </Typography>
+              </MenuItem>
+
+              {/* Conditionally render Login/Register or Logout for small screens */}
+              <MenuItem
+                onClick={handleCloseNavMenu}
+                sx={{ width: "100%", textAlign: "center" }}
+              >
+                {token ? (
+                  <Button
+                    onClick={handleLogout}
+                    sx={{ color: "inherit", textTransform: "capitalize" }}
+                  >
+                    Logout
+                  </Button>
+                ) : (
+                  <>
+                    <Button
+                      component={NavLink}
+                      to="/login"
+                      sx={{ color: "inherit", textTransform: "capitalize" }}
+                    >
+                      Login
+                    </Button>
+                    <Typography sx={{ mx: 1, color: "inherit" }}>|</Typography>
+                    <Button
+                      component={NavLink}
+                      to="/register"
+                      sx={{ color: "inherit", textTransform: "capitalize" }}
+                    >
+                      Register
+                    </Button>
+                  </>
+                )}
               </MenuItem>
             </Box>
           </Menu>
-        <ThemeToggle />
         </Toolbar>
       </Container>
     </AppBar>

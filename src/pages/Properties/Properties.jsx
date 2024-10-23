@@ -16,6 +16,7 @@ import { fetchProducts } from "../../redux/productSlice";
 import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet-async";
 
 const Properties = () => {
   const [postsToDisplay, setPostsToDisplay] = useState();
@@ -67,6 +68,14 @@ const Properties = () => {
 
   return (
     <>
+          <Helmet>
+        <title>Properties - Property Hub</title>
+        <meta
+          name="description"
+          content="Browse through our extensive collection of properties for sale and rent. Find your dream home effortlessly with our user-friendly platform."
+        />
+      </Helmet>
+
       <Box
         boxShadow={2}
         sx={{
