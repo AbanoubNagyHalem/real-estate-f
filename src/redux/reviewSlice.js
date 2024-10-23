@@ -13,9 +13,27 @@ export const fetchReviews = createAsyncThunk(
     });
 
     const data = await res.json();
-    console.log(data);
     
     return data;
+  })
+// Delete review async action
+export const deleteReview = createAsyncThunk(
+  "reviews/deleteReview",
+  async ({ postId, commentId }, {dispatch}) => {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    const res = await fetch(`http://localhost:3000/posts/${postId}/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        token: `${token}`,
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Failed to delete the comment");
+    }
+    // After successful deletion, refetch the comments
+    dispatch(fetchPostComments(postId)); // Refetch comments after deletion
+    return { postId, commentId };
   }
 );
 
@@ -42,8 +60,15 @@ const reviewSlice = createSlice({
             .addCase(fetchReviews.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
+            })
+            .addCase(deleteReview.fulfilled, (state, action) => {
+              const { postId, commentId } = action.payload;
+              const post = state.reviews.find((post) => post.postId === postId);
+              if (post) {
+                post.comments = post.comments.filter((comment) => comment._id !== commentId);
+              }
             });
-    },
+        }
 });
 
 export default reviewSlice.reducer;
