@@ -5,6 +5,7 @@ import filteredPostsReducer from "./filterProductSlice";
 import favoritesReducer from "./favoriteSlice";
 import reviewReducer from "./reviewSlice";
 import postSlice from "./postSlice";
+import propertyReducer from './propertySlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     favorites: favoritesReducer,
     reviews: reviewReducer,
     post: postSlice,
+    properties: propertyReducer,
   },
 });
