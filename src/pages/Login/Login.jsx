@@ -1,87 +1,149 @@
-import TextField from '@mui/material/TextField'
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import './Login.css'
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-
-
-import React from 'react'
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./Login.css";
+import { Container } from "@mui/material";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false
-  })
-  const navigate = useNavigate()
+    email: "",
+    password: "",
+    rememberMe: false,
+  });
+  const [error, setError] = useState("");
+  console.log(error);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value
-    })
+    const { id, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: type === "checkbox" ? checked : value,
+    }));
   };
-console.log(formData);
-  
-  const handleSubmit = async (e) => { //handle the form submition
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const data = await res.json();
 
-    const res = await fetch('http://localhost:3000/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password
-        // rememberMe: formData.rememberMe
-      }),
-    });
-    const data = await res.json()
-    console.log(data);
-    
-    if(res) {
-      if (formData.rememberMe) {
-        localStorage.setItem('token', data.token)
+      if (res.ok) {
+        const storage = formData.rememberMe ? localStorage : sessionStorage;
+        storage.setItem("token", data.token);
+       toast.success("You are Logged in")
+        navigate("/");
       } else {
-        sessionStorage.setItem('token', data.token)
+        setError(data.error || "Login failed. Please check your credentials.");
       }
-      navigate('/')
+    } catch (err) {
+      toast.error("You aren't Logged out")
+      setError("An error occurred. Please try again.");
     }
-    console.log('Login successful:', data);
+  };
 
-  }
-  return(
-    <>
-      <div>
-          <Box component="section" sx={{ p: 2, borderRadius: '16px', border: '1px solid', borderColor: 'primary.main', maxWidth: '300px', margin: '100px auto'}}>
-            <form onSubmit={handleSubmit} className='form'>
-            <Stack spacing={3}>
-              <h1 align="center">Log In</h1>
-              {/* <label htmlFor="email">Your Email:</label> */}
-              <TextField id="email" type='email' value={formData.email} label="Your Email:"  variant="outlined" size="small" onChange={handleChange} required/>
-              {/* <label htmlFor="password">Password:</label> */}
-              <TextField id="password" type='password' value={formData.password} label="Password:"  variant="outlined" size="small" onChange={handleChange} required/>
-              <Stack direction='row' sx={{justifyContent: 'space-between', alignItems: 'center'}}>
-                <FormControlLabel control={<Checkbox id='rememberMe' checked={formData.rememberMe} onChange={handleChange} size="small"/>} label="Remember me" />
-                <Link to="/forgot-password" color='primary.main'>
-                  <span className='forgot-password'>Forgot Password?</span>
-                </Link>
-              </Stack>
-              <Button type='submit' variant="contained" sx={{backgroundColor: 'secondary.main'}}>Login</Button>
+  return (
+    <Container minwidth="sm" sx={{ paddingTop: 1 }}>
+      <Box
+        component="section"
+        sx={{
+          p: 6,
+          borderRadius: "16px",
+          border: "1px solid",
+          borderColor: "primary.main",
+          maxWidth: "600px",
+          margin: "100px auto",
+        }}
+      >
+        <form onSubmit={handleSubmit} className="form">
+          <Stack spacing={3}>
+            <h1 align="center">Login</h1>
+            {error && <p className="error-message">{error}</p>}
+            <TextField
+              id="email"
+              type="email"
+              value={formData.email}
+              label="Your Email:"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              id="password"
+              type="password"
+              value={formData.password}
+              label="Password:"
+              variant="outlined"
+              onChange={handleChange}
+              required
+            />
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              sx={{ flexWrap: "nowrap" }}
+            >
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    id="rememberMe"
+                    checked={formData.rememberMe}
+                    onChange={handleChange}
+                    size="small"
+                  />
+                }
+                label={
+                  <span style={{ whiteSpace: "nowrap" }}>Remember me</span>
+                }
+              />
+              <Link to="/forgot-password">
+                <span
+                  className="forgot-password"
+                  style={{ whiteSpace: "nowrap" }}
+                >
+                  Forgot Password?
+                </span>
+              </Link>
             </Stack>
-            </form>
-            <Box component="section" sx={{marginY: 1, textAlign: 'center'}}>
-              <span>Not registered yet? <Link to="/register">Sign Up</Link></span>
-            </Box>
-          </Box>
-      </div>
-    </>
-  )
-}
 
-export default Login
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                background: "#EFA00F",
+                color: "#fff",
+                padding: "14px 30px",
+            }}
+          >
+            
+            Login
+          </Button>
+        </Stack>
+      </form>
+      <Box component="section" sx={{ marginY: 1, textAlign: "center" }}>
+        <span>
+          Not registered yet? <Link to="/register">Sign Up</Link>
+        </span>
+      </Box>
+    </Box>
+    </Container>
+  );
+};
+
+export default Login;

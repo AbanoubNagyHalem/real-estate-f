@@ -1,9 +1,9 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { Box } from "@mui/material";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -62,16 +62,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className="row justify-content-center align-items-center flex-nowrap">
-      <div className="col-1 toggle-style" onClick={toggleTheme}>
+      <Box className="toggle-style" onClick={toggleTheme}>
         <FormControlLabel
           control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
         />
-      </div>
-    </div>
+    </Box>
   );
 };
 
