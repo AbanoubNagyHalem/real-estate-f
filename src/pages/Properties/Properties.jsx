@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 
 const Properties = () => {
   const [postsToDisplay, setPostsToDisplay] = useState();
@@ -68,7 +69,7 @@ const Properties = () => {
 
   return (
     <>
-          <Helmet>
+      <Helmet>
         <title>Properties - Property Hub</title>
         <meta
           name="description"
@@ -126,10 +127,15 @@ const Properties = () => {
               <MenuIcon />
             </IconButton>
             <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
-              <Box sx={{ width: 400, padding: 2 }}>
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: drawerOpen ? 0 : "-100%" }}
+                transition={{ duration: 0.5 }}
+                style={{ width: 400, padding: 2 }}
+              >
                 <Typography variant="h6">Search</Typography>
                 <FilterProducts />
-              </Box>
+              </motion.div>
             </Drawer>
           </Box>
 
@@ -144,9 +150,24 @@ const Properties = () => {
               <Box>
                 <Grid container spacing={3}>
                   {postsToDisplay && postsToDisplay.length > 0 ? (
-                    postsToDisplay.slice(0, visibleItems).map((item) => (
+                    postsToDisplay.slice(0, visibleItems).map((item, index) => (
                       <Grid item xs={12} sm={12} md={6} key={item._id}>
-                        <PostCard item={item} />
+                        <motion.div
+                          initial={{
+                            opacity: 0,
+                            y: 20,
+                            rotateY: index % 2 === 0 ? 90 : -90,
+                          }}
+                          animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                          exit={{
+                            opacity: 0,
+                            y: 20,
+                            rotateY: index % 2 === 0 ? -90 : 90,
+                          }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <PostCard item={item} />
+                        </motion.div>
                       </Grid>
                     ))
                   ) : (

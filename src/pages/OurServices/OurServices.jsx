@@ -9,12 +9,35 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { Helmet } from "react-helmet-async"; // Import Helmet
+import { motion } from "framer-motion"; // Import motion
 
 const OurServives = () => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+  };
+
+  // Function to generate different animations for cards
+  const getCardAnimation = (index) => {
+    const animations = [
+      {
+        initial: { x: -100, opacity: 0 },
+        whileInView: { x: 0, opacity: 1 },
+        transition: { duration: 0.5 },
+      },
+      {
+        initial: { x: 100, opacity: 0 },
+        whileInView: { x: 0, opacity: 1 },
+        transition: { duration: 0.5 },
+      },
+      {
+        initial: { y: 100, opacity: 0 },
+        whileInView: { y: 0, opacity: 1 },
+        transition: { duration: 0.5 },
+      },
+    ];
+    return animations[index % animations.length]; // Cycle through animations
   };
 
   return (
@@ -60,101 +83,56 @@ const OurServives = () => {
               gap: 6,
             }}
           >
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                gap: 4,
-                padding: 4,
-              }}
-            >
-              <AddHomeWorkOutlinedIcon
-                sx={{ width: "80px", height: "80px", textAlign: "left" }}
-              />
-              <Typography variant="h5">Buy A New Home</Typography>
-              <Typography variant="body2" sx={{ textAlign: "center" }}>
-                Discover your dream home effortlessly. Explore diverse
-                properties and expert guidance for a seamless buying experience.
-              </Typography>
-              <Button
-                href="/properties"
-                variant="contained"
-                sx={{
-                  background: "#EFA00F",
-                  color: "#fff",
-                  padding: "12px 30px",
-                }}
-              >
-                Find a Home
-              </Button>
-            </Card>
-
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                gap: 4,
-                padding: 4,
-              }}
-            >
-              <AddHomeWorkOutlinedIcon
-                sx={{ width: "80px", height: "80px", textAlign: "left" }}
-              />
-              <Typography variant="h5">Rent a home </Typography>
-              <Typography variant="body2" sx={{ textAlign: "center" }}>
-                Discover your dream home effortlessly. Explore diverse
-                properties and expert guidance for a seamless buying experience.
-              </Typography>
-              <Button
-                href="/properties"
-                variant="contained"
-                sx={{
-                  background: "#EFA00F",
-                  color: "#fff",
-                  padding: "12px 30px",
-                }}
-              >
-                Find a Rental
-              </Button>
-            </Card>
-
-            <Card
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                gap: 4,
-                padding: 4,
-              }}
-            >
-              <AddHomeWorkOutlinedIcon
-                sx={{ width: "80px", height: "80px", textAlign: "left" }}
-              />
-              <Typography variant="h5">Sell a home </Typography>
-              <Typography variant="body2" sx={{ textAlign: "center" }}>
-                Discover your dream home effortlessly. Explore diverse
-                properties and expert guidance for a seamless buying experience.
-              </Typography>
-              <Button
-                href="/user-dashboard"
-                variant="contained"
-                sx={{
-                  background: "#EFA00F",
-                  color: "#fff",
-                  padding: "12px 30px",
-                }}
-              >
-                Submit Property
-              </Button>
-            </Card>
+            {["Buy A New Home", "Rent a home", "Sell a home"].map(
+              (title, index) => (
+                <Grid item key={index}>
+                  <motion.div {...getCardAnimation(index)}>
+                    <Card
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                        gap: 4,
+                        padding: 4,
+                      }}
+                    >
+                      <AddHomeWorkOutlinedIcon
+                        sx={{
+                          width: "80px",
+                          height: "80px",
+                          textAlign: "left",
+                        }}
+                      />
+                      <Typography variant="h5">{title}</Typography>
+                      <Typography variant="body2" sx={{ textAlign: "center" }}>
+                        Discover your dream home effortlessly. Explore diverse
+                        properties and expert guidance for a seamless buying
+                        experience.
+                      </Typography>
+                      <Button
+                        href={
+                          title === "Sell a home"
+                            ? "/user-dashboard"
+                            : "/properties"
+                        }
+                        variant="contained"
+                        sx={{
+                          background: "#EFA00F",
+                          color: "#fff",
+                          padding: "12px 30px",
+                        }}
+                      >
+                        {title === "Sell a home"
+                          ? "Submit Property"
+                          : "Find a Home"}
+                      </Button>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              )
+            )}
           </Grid>
         </Box>
 
@@ -166,106 +144,35 @@ const OurServives = () => {
         </Box>
 
         <Box sx={{ paddingBottom: 16 }}>
-          <Accordion
-            sx={{ p: 1 }}
-            expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
+          {[
+            "Why should I use your services?",
+            "How do I get started with your services?",
+            "How secure are your services",
+            "Is there customer support available?",
+            "How can I update my account information?",
+          ].map((question, index) => (
+            <Accordion
+              key={index}
+              sx={{ p: 1 }}
+              expanded={expanded === `panel${index + 1}`}
+              onChange={handleChange(`panel${index + 1}`)}
             >
-              Why should I use your services?
-            </AccordionSummary>
-            <AccordionDetails>
-              Once your account is set up and you've familiarized yourself with
-              the platform, you are ready to start using our services. Whether
-              it's accessing specific features, making transactions, or
-              utilizing our tools, you'll find everything you need at your
-              fingertips.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            sx={{ p: 1 }}
-            expanded={expanded === "panel2"}
-            onChange={handleChange("panel2")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              How do I get started with your services?
-            </AccordionSummary>
-            <AccordionDetails>
-              Once your account is set up and you've familiarized yourself with
-              the platform, you are ready to start using our services. Whether
-              it's accessing specific features, making transactions, or
-              utilizing our tools, you'll find everything you need at your
-              fingertips.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            sx={{ p: 1 }}
-            expanded={expanded === "panel3"}
-            onChange={handleChange("panel3")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3-content"
-              id="panel3-header"
-            >
-              How secure are your services
-            </AccordionSummary>
-            <AccordionDetails>
-              Once your account is set up and you've familiarized yourself with
-              the platform, you are ready to start using our services. Whether
-              it's accessing specific features, making transactions, or
-              utilizing our tools, you'll find everything you need at your
-              fingertips.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            sx={{ p: 1 }}
-            expanded={expanded === "panel4"}
-            onChange={handleChange("panel4")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              Is there customer support available?
-            </AccordionSummary>
-            <AccordionDetails>
-              Once your account is set up and you've familiarized yourself with
-              the platform, you are ready to start using our services. Whether
-              it's accessing specific features, making transactions, or
-              utilizing our tools, you'll find everything you need at your
-              fingertips.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            sx={{ p: 1 }}
-            expanded={expanded === "panel5"}
-            onChange={handleChange("panel3")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              How can I update my account information?
-            </AccordionSummary>
-            <AccordionDetails>
-              Once your account is set up and you've familiarized yourself with
-              the platform, you are ready to start using our services. Whether
-              it's accessing specific features, making transactions, or
-              utilizing our tools, you'll find everything you need at your
-              fingertips.
-            </AccordionDetails>
-          </Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls={`panel${index + 1}-content`}
+                id={`panel${index + 1}-header`}
+              >
+                {question}
+              </AccordionSummary>
+              <AccordionDetails>
+                Once your account is set up and you've familiarized yourself
+                with the platform, you are ready to start using our services.
+                Whether it's accessing specific features, making transactions,
+                or utilizing our tools, you'll find everything you need at your
+                fingertips.
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </Box>
       </Container>
     </>
