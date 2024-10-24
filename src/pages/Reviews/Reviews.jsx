@@ -28,13 +28,20 @@ const Reviews = () => {
   }, [dispatch]);
 
   const handleDelete = (postId, commentId) => {
+    console.log(postId)
+    console.log(commentId)
+    // dispatch(deleteReview(postId, commentId));
+    dispatch(deleteReview({ postId, commentId }));
+
+    dispatch(deleteReview());
     // Dispatch the deleteReview action
     if (!commentId) {
       console.error('Comment ID is undefined');
       return;
   }
     
-    dispatch(deleteReview({ postId, commentId }));
+    // dispatch(deleteReview({ postId, commentId }));
+    // dispatch(fetchReviews());
   };
 
   const handlePageChange = (event, value) => {
@@ -123,6 +130,7 @@ const Reviews = () => {
             </TableRow>
           </TableHead>
           <TableBody>
+            
             {paginatedData.length > 0 ? (
               paginatedData.map((review, index) => (
                 <TableRow
