@@ -1,4 +1,5 @@
-import { Outlet, useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { motion } from "framer-motion"; // Import framer-motion
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import {
   Toolbar,
   Grid,
@@ -27,7 +28,6 @@ import { useState } from "react";
 import useLogout from "../Logout/Logout";
 import { useTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard";
 
 const UserDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -36,23 +36,45 @@ const UserDashboard = () => {
   const handleLogout = useLogout();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
-  const location = useLocation(); // Access the current location
+  const location = useLocation();
 
-  // Access relevant data from the Redux store
-  const MyPropertiesCount = useSelector((state) => state.product?.listings?.length || 0); 
-  const favoriteCount = useSelector((state) => state.favorite?.items?.length || 0); 
-  const reviewCount = useSelector((state) => state.review?.items?.length || 0); 
-  
-   const menuItems = [
+  const MyPropertiesCount = useSelector(
+    (state) => state.product?.listings?.length || 0
+  );
+  const favoriteCount = useSelector(
+    (state) => state.favorite?.items?.length || 0
+  );
+  const reviewCount = useSelector((state) => state.review?.items?.length || 0);
+
+  const menuItems = [
     { text: "Dashboard", icon: <HomeIcon />, path: "/user-dashboard" },
-    { text: "My Properties", icon: <AddIcon />, path: "/user-dashboard/my-properties" },
-    { text: "My Favorites", icon: <FavoriteIcon />, path: "/user-dashboard/my-favorites" },
-    { text: "Reviews", icon: <RateReviewIcon />, path: "/user-dashboard/reviews" },
-    { text: "My Profile", icon: <AccountCircleIcon />, path: "/user-dashboard/my-profile" },
-    { text: "Add Property", icon: <AddIcon />, path: "/user-dashboard/add-property" },
+    {
+      text: "My Properties",
+      icon: <AddIcon />,
+      path: "/user-dashboard/my-properties",
+    },
+    {
+      text: "My Favorites",
+      icon: <FavoriteIcon />,
+      path: "/user-dashboard/my-favorites",
+    },
+    {
+      text: "Reviews",
+      icon: <RateReviewIcon />,
+      path: "/user-dashboard/reviews",
+    },
+    {
+      text: "My Profile",
+      icon: <AccountCircleIcon />,
+      path: "/user-dashboard/my-profile",
+    },
+    {
+      text: "Add Property",
+      icon: <AddIcon />,
+      path: "/user-dashboard/add-property",
+    },
     { text: "Log Out", icon: <LogoutIcon />, path: "/user-dashboard/logout" },
   ];
-
 
   const handleMenuClick = (index, path) => {
     setSidebarOpen(false);
@@ -64,114 +86,138 @@ const UserDashboard = () => {
     }
   };
 
-    const drawerContent = (
+  const drawerContent = (
     <List>
       {menuItems.map((item, index) => (
-        <ListItem
+        <motion.div
           key={item.text}
-          onClick={() => handleMenuClick(index, item.path)}
-          sx={{
-            color: (theme) =>
-              theme.palette.mode === "light" ? "#21616A" : "#fff",
-            backgroundColor: activeIndex === index ? "#56AEB1" : "transparent",
-            // color: "white",
-            cursor: "pointer",
-            "&:hover": { backgroundColor: "#56AEB1" },
-            
-          }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-
-          <ListItemIcon sx={{ color: activeIndex === index ? "#fff" : "#4b9197",
-           }}>
-            {item.icon}
-          </ListItemIcon>
-          <ListItemText primary={item.text} sx={{
-            color: (theme) =>
-              theme.palette.mode === "light" ? "#21616A" : "#fff",
-          }}/>
-        </ListItem>
+          <ListItem
+            onClick={() => handleMenuClick(index, item.path)}
+            sx={{
+              color: (theme) =>
+                theme.palette.mode === "light" ? "#21616A" : "#fff",
+              backgroundColor:
+                activeIndex === index ? "#56AEB1" : "transparent",
+              cursor: "pointer",
+              "&:hover": { backgroundColor: "#56AEB1" },
+            }}
+          >
+            <ListItemIcon
+              sx={{ color: activeIndex === index ? "#fff" : "#4b9197" }}
+            >
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText
+              primary={item.text}
+              sx={{
+                color: (theme) =>
+                  theme.palette.mode === "light" ? "#21616A" : "#fff",
+              }}
+            />
+          </ListItem>
+        </motion.div>
       ))}
     </List>
-  );  
-    return (
-      <Box sx={{ display: "flex" , justifyContent:"sapce-between"}}>
-        <CssBaseline />
-  
-        {!isDesktop && (
-          <IconButton
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            sx={{ position: "absolute", top: 20, left: 20, zIndex: 1300, color: "#f5f5f5" }}
-          >
-            {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
-        )}
-  
-        {isDesktop ? (
-          // Persistent drawer for desktop
-          <Box
-            sx={{
-              width: "340px",
-              flexShrink: 0,
-              // backgroundColor: "#f5f5f5",
-              backgroundColor: (theme) =>
-                theme.palette.mode === "light" ? "#dddddd59" : "#292929",
-              p: 2,
-              minHeight: "100vh",
-            }}
-          >
-            {drawerContent}
-          </Box>
-        ) : (
-          // Drawer for mobile
-          <Drawer
-            anchor="left"
-            open={sidebarOpen}
-            onClose={() => setSidebarOpen(false)}
-            sx={{
-              "& .MuiDrawer-paper": {
-                 width: "300px",
-                backgroundColor: (theme) =>
-                  theme.palette.mode === "light" ? "#fff" : "#292929",
-               },
-            }}
-          >
-            {drawerContent}
-          </Drawer>
-        )}
+  );
 
-      <Box sx={{ flexGrow:1, p: 3 }}>
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+
+      {!isDesktop && (
+        <IconButton
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          sx={{
+            position: "absolute",
+            top: 20,
+            left: 20,
+            zIndex: 1300,
+            color: "#f5f5f5",
+          }}
+        >
+          {sidebarOpen ? <CloseIcon /> : <MenuIcon />}
+        </IconButton>
+      )}
+
+      {isDesktop ? (
+        <Box
+          sx={{
+            width: "340px",
+            flexShrink: 0,
+            backgroundColor: (theme) =>
+              theme.palette.mode === "light" ? "#dddddd59" : "#292929",
+            p: 2,
+            minHeight: "100vh",
+          }}
+        >
+          {drawerContent}
+        </Box>
+      ) : (
+        <Drawer
+          anchor="left"
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          sx={{
+            "& .MuiDrawer-paper": {
+              width: "300px",
+              backgroundColor: (theme) =>
+                theme.palette.mode === "light" ? "#fff" : "#292929",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+
+      <Box sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
 
         {location.pathname === "/user-dashboard" && (
           <>
-            {/* Top Bar with buttons */}
-            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 4}}>
-              <Button variant="outlined" sx={{  color: (theme) =>
-            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between", mb: 4 }}
+            >
+              <Button
+                variant="outlined"
+                sx={{
+                  color: theme.palette.mode === "light" ? "#21616A" : "#fff",
+                  padding: "16px 30px",
+                }}
+              >
                 Your Listing {MyPropertiesCount}/17 remaining
               </Button>
-              <Button variant="outlined" sx={{ color: (theme) =>
-            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: theme.palette.mode === "light" ? "#21616A" : "#fff",
+                  padding: "16px 30px",
+                }}
+              >
                 Favorite {favoriteCount}
               </Button>
-              <Button variant="outlined" sx={{ color: (theme) =>
-            theme.palette.mode === "light" ? "#21616A" : "#fff", padding:"16px 30px" }}>
+              <Button
+                variant="outlined"
+                sx={{
+                  color: theme.palette.mode === "light" ? "#21616A" : "#fff",
+                  padding: "16px 30px",
+                }}
+              >
                 Reviews {reviewCount}
               </Button>
             </Box>
 
-            {/* Listings Table */}
             <Paper sx={{ p: 3, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)" }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Typography variant="h6">
                     Gorgeous Apartment Building
                   </Typography>
-                  <Typography variant="body1">
-                    $5050.00
-                  </Typography>
+                  <Typography variant="body1">$5050.00</Typography>
                 </Grid>
-                {/* <MyPropertiesCard item={item}/> */}
               </Grid>
             </Paper>
           </>

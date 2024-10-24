@@ -132,7 +132,7 @@ const initialState = {
 export const fetchUserProfile = createAsyncThunk(
   'user/fetchUserProfile',
   async () => {
-    const response = await fetch("http://localhost:3000/users/details", {
+    const response = await fetch("http://localhost:3000/users", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

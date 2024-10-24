@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addProperty } from "../../redux/propertySlice";
 import {
   Typography,
   Button,
@@ -21,19 +23,53 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import "./AddProperty.css";
 import MapComponent from "../../components/Map/Map";
 function AddProperty() {
+  const dispatch = useDispatch();
+  const { status, error } = useSelector((state) => state.properties);
   const [propertyData, setPropertyData] = useState({
     title: "",
-    description: "",
+    desc: "",
     address: "",
     country: "",
-    neighborhood: "",
-    propertyType: "",
+    location: "",
     price: "",
-    PropertyStatus: "",
-    size: "",
+    property: "",
+    type: "",
+    sqft: "",
     garages: "",
-    bedrooms: "",
-    bathrooms: "",
+    bedroom: "",
+    bathroom: "",
+    amenites: {
+      "air condtion": false,
+      heating: false,
+      floor: false,
+      elevator: false,
+      garden: true,
+      parking: true,
+      intercom: false,
+      security: false,
+      wifi: false,
+      "window type": true,
+      pool: false,
+      "sheard gym": true,
+      "sherd spa": false,
+      fireplace: true,
+      "cable tv": false,
+    },
+    floors: {
+      id: 1,
+      floorName: "",
+      floorPrice: "",
+      floorSize: "",
+      sqft: "",
+      pricePostfix: "",
+      sizePostfix: "",
+      bedroom: "",
+      bathroom: "",
+      desc: "",
+      floorImage: null,
+      floorImagePreview: null,
+      errorMessage: "",
+    },
   });
   const [setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -66,50 +102,48 @@ function AddProperty() {
 
   const [propertyTypes] = useState([
     {
-      name: "Apartment",
+      name: "apartment",
     },
     {
-      name: "Villa",
+      name: "house",
     },
     {
-      name: "Studio",
+      name: "studio",
     },
     {
-      name: "Office",
-    },
-    {
-      name: "Townhouse",
+      name: "villa",
     },
   ]);
   const [PropertyStatus] = useState([
     {
-      name: "For Rent",
+      name: "buy",
     },
     {
-      name: "For Sale",
+      name: "rent",
     },
   ]);
 
-  const [amenities, setAmenities] = useState({
-    smokeAlarm: false,
-    carbonMonoxideAlarm: false,
-    firstAidKit: false,
-    selfCheckIn: false,
-    securityCameras: true,
-    bedLinens: true,
-    hangers: false,
-    extraPillows: false,
-    iron: false,
-    tvWithCable: true,
-    refrigerator: false,
-    microwave: true,
-    dishwasher: false,
-    coffeeMaker: true,
+  const [amenites, setAmenites] = useState({
+    "air condtion": false,
+    heating: false,
+    floor: false,
+    elevator: false,
+    garden: true,
+    parking: true,
+    intercom: false,
+    security: false,
+    wifi: false,
+    "window type": true,
+    pool: false,
+    "sheard gym": true,
+    "sherd spa": false,
+    fireplace: true,
+    "cable tv": false,
   });
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    setAmenities((prev) => ({
+    setAmenites((prev) => ({
       ...prev,
       [name]: checked,
     }));
@@ -119,30 +153,31 @@ function AddProperty() {
     {
       title: "Home safety",
       items: [
-        { name: "smokeAlarm", label: "Smoke alarm" },
-        { name: "carbonMonoxideAlarm", label: "Carbon monoxide alarm" },
-        { name: "firstAidKit", label: "First aid kit" },
-        { name: "selfCheckIn", label: "Self check-in with lockbox" },
-        { name: "securityCameras", label: "Security cameras" },
+        { name: "air condtion", label: "air condtion" },
+        { name: "heating", label: "heating" },
+        { name: "floor", label: "floor" },
+        { name: "elevator", label: "elevator" },
+        { name: "garden", label: "garden" },
       ],
     },
     {
       title: "Bedroom",
       items: [
-        { name: "bedLinens", label: "Bed linens" },
-        { name: "hangers", label: "Hangers" },
-        { name: "extraPillows", label: "Extra pillows & blankets" },
-        { name: "iron", label: "Iron" },
-        { name: "tvWithCable", label: "TV with standard cable" },
+        { name: "parking", label: "parking" },
+        { name: "intercom", label: "intercom" },
+        { name: "security", label: "security" },
+        { name: "wifi", label: "wifi" },
+        { name: "window type", label: "window type" },
       ],
     },
     {
       title: "Kitchen",
       items: [
-        { name: "refrigerator", label: "Refrigerator" },
-        { name: "microwave", label: "Microwave" },
-        { name: "dishwasher", label: "Dishwasher" },
-        { name: "coffeeMaker", label: "Coffee maker" },
+        { name: "pool", label: "pool" },
+        { name: "sheard gym", label: "sheard gym" },
+        { name: "sherd spa", label: "sherd spa" },
+        { name: "fireplace", label: "fireplace" },
+        { name: "cable tv", label: "cable tv" },
       ],
     },
   ];
@@ -200,14 +235,14 @@ function AddProperty() {
   const handlePropertyTypeChange = (e) => {
     setPropertyData({
       ...propertyData,
-      propertyType: e.target.value,
+      property: e.target.value,
     });
   };
 
   const handlePropertyStatusChange = (e) => {
     setPropertyData({
       ...propertyData,
-      PropertyStatus: e.target.value,
+      type: e.target.value,
     });
   };
   const [floors, setFloors] = useState([
@@ -216,12 +251,12 @@ function AddProperty() {
       floorName: "",
       floorPrice: "",
       floorSize: "",
-      size: "",
+      sqft: "",
       pricePostfix: "",
       sizePostfix: "",
-      bedrooms: "",
-      bathrooms: "",
-      description: "",
+      bedroom: "",
+      bathroom: "",
+      desc: "",
       floorImage: null,
       floorImagePreview: null,
       errorMessage: "",
@@ -237,12 +272,12 @@ function AddProperty() {
         floorName: "",
         floorPrice: "",
         floorSize: "",
-        size: "",
+        sqft: "",
         pricePostfix: "",
         sizePostfix: "",
-        bedrooms: "",
-        bathrooms: "",
-        description: "",
+        bedroom: "",
+        bathroom: "",
+        desc: "",
         floorImage: null,
         floorImagePreview: null,
         errorMessage: "",
@@ -297,9 +332,20 @@ function AddProperty() {
     reader.readAsDataURL(file);
   };
   const handleAddProperty = () => {
+    const selectedCountry = countries.find(
+      (country) => country.name === propertyData.country
+    );
+
+    if (selectedCountry && !propertyData.location) {
+      setPropertyData((prevData) => ({
+        ...prevData,
+        location: selectedCountry.location.join(", "),
+      }));
+    }
+
+    dispatch(addProperty(propertyData));
     console.log("Property added:", propertyData);
   };
-
   return (
     <Box className="add-property-container">
       <Typography variant="h6" className="addProperty-title">
@@ -364,11 +410,11 @@ function AddProperty() {
             <Grid item xs={12}>
               <TextField
                 label="Description"
-                name="description"
+                name="desc"
                 multiline
                 rows={4}
                 fullWidth
-                value={propertyData.description}
+                value={propertyData.desc}
                 onChange={handleInputChange}
                 required
                 className="custom-text-field"
@@ -466,8 +512,8 @@ function AddProperty() {
             <Grid item xs={6}>
               <TextField
                 label="Property Type"
-                name="propertyType"
-                value={propertyData.propertyType}
+                name="property"
+                value={propertyData.property}
                 onChange={handlePropertyTypeChange}
                 select
                 fullWidth
@@ -484,8 +530,8 @@ function AddProperty() {
             <Grid item xs={6}>
               <TextField
                 label="Property Status"
-                name="PropertyStatus"
-                value={propertyData.PropertyStatus}
+                name="type"
+                value={propertyData.type}
                 onChange={handlePropertyStatusChange}
                 select
                 fullWidth
@@ -505,9 +551,9 @@ function AddProperty() {
             <Grid item xs={6}>
               <TextField
                 label="Size (SqFt)"
-                name="size"
+                name="sqft"
                 fullWidth
-                value={propertyData.size}
+                value={propertyData.sqft}
                 onChange={handleInputChange}
                 required
                 className="custom-text-field"
@@ -527,9 +573,9 @@ function AddProperty() {
             <Grid item xs={6}>
               <TextField
                 label="Bedrooms"
-                name="bedrooms"
+                name="bedroom"
                 fullWidth
-                value={propertyData.bedrooms}
+                value={propertyData.bedroom}
                 onChange={handleInputChange}
                 required
                 className="custom-text-field"
@@ -538,9 +584,9 @@ function AddProperty() {
             <Grid item xs={6}>
               <TextField
                 label="Bathrooms"
-                name="bathrooms"
+                name="bathroom"
                 fullWidth
-                value={propertyData.bathrooms}
+                value={propertyData.bathroom}
                 onChange={handleInputChange}
                 required
                 className="custom-text-field"
@@ -568,20 +614,18 @@ function AddProperty() {
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={amenities[item.name]}
+                              checked={amenites[item.name]}
                               onChange={handleCheckboxChange}
                               name={item.name}
                               sx={{
-                                color: amenities[item.name]
+                                color: amenites[item.name]
                                   ? "var(--Primary)"
                                   : "gray",
                                 "&.Mui-checked": {
                                   color: "var(--Primary)",
                                 },
                                 "& + .MuiFormControlLabel-label": {
-                                  color: amenities[item.name]
-                                    ? "black"
-                                    : "gray",
+                                  color: amenites[item.name] ? "black" : "gray",
                                 },
                               }}
                             />
@@ -652,7 +696,7 @@ function AddProperty() {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Floor Name"
                         fullWidth
                         value={floor.floorName}
@@ -667,7 +711,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Floor Price (Only Digits)"
                         fullWidth
                         value={floor.floorPrice}
@@ -682,7 +726,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Floor Size (Only Digits)"
                         fullWidth
                         value={floor.floorSize}
@@ -697,7 +741,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Price Postfix"
                         fullWidth
                         value={floor.pricePostfix}
@@ -712,7 +756,7 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Size Postfix"
                         fullWidth
                         value={floor.sizePostfix}
@@ -727,14 +771,14 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Bedrooms"
                         fullWidth
-                        value={floor.bedrooms}
+                        value={floor.bedroom}
                         onChange={(e) =>
                           handleFloorInputChange(
                             floor.id,
-                            "bedrooms",
+                            "bedroom",
                             e.target.value
                           )
                         }
@@ -742,14 +786,14 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Bathrooms"
                         fullWidth
-                        value={floor.bathrooms}
+                        value={floor.bathroom}
                         onChange={(e) =>
                           handleFloorInputChange(
                             floor.id,
-                            "bathrooms",
+                            "bathroom",
                             e.target.value
                           )
                         }
@@ -758,7 +802,7 @@ function AddProperty() {
 
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Upload Floor Image"
                         fullWidth
                         onClick={(e) => {
@@ -819,14 +863,14 @@ function AddProperty() {
                     </Grid>
                     <Grid item xs={6}>
                       <TextField
-                       className="custom-text-field"
+                        className="custom-text-field"
                         label="Description"
                         fullWidth
-                        value={floor.description}
+                        value={floor.desc}
                         onChange={(e) =>
                           handleFloorInputChange(
                             floor.id,
-                            "description",
+                            "desc",
                             e.target.value
                           )
                         }
@@ -859,6 +903,11 @@ function AddProperty() {
       >
         Add Property
       </Button>
+      {status === "loading" && <p style={{ color: "#efa00f" }}>Loading...</p>}
+      {status === "succeeded" && (
+        <p style={{ color: "green" }}>Property added successfully!</p>
+      )}
+      {status === "failed" && <p style={{ color: "red" }}>Error: {error}</p>}
     </Box>
   );
 }
