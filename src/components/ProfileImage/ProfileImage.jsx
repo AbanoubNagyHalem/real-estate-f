@@ -25,14 +25,44 @@ const ProfileImage = () => {
     }
   };
 
+  // const handleUpload = () => {
+  //   if (!image) return;
+
+  //   const storageRef = ref(storage, `images/${image.name}`);
+  //   const uploadTask = uploadBytesResumable(storageRef, image);
+
+  //   setUploading(true);
+
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       const progress = Math.round(
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //       );
+  //       setUploadProgress(progress);
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //       setUploading(false);
+  //     },
+  //     () => {
+  //       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+  //         setImageUrl(url);
+  //         setUploading(false);
+  //         setUploadProgress(0);
+  //       });
+  //     }
+  //   );
+  // };
+
   const handleUpload = () => {
     if (!image) return;
-
+  
     const storageRef = ref(storage, `images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
-
+  
     setUploading(true);
-
+  
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -45,16 +75,30 @@ const ProfileImage = () => {
         console.error(error);
         setUploading(false);
       },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          setImageUrl(url);
+      async () => {
+        try {
+          const url = await getDownloadURL(uploadTask.snapshot.ref);
+          setImageUrl(url); // Save URL to state
           setUploading(false);
           setUploadProgress(0);
-        });
+  
+          // Send image URL to backend to save in database
+          await fetch(`http://localhost:3000/users/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ imageUrl: url }), // Send image URL in the body
+          });
+  
+          alert("Profile image updated successfully!");
+        } catch (error) {
+          console.error("Failed to save profile image", error);
+        }
       }
     );
   };
-
+  
   return (
     <Container  sx={{ paddingBottom: 3 }}>
       <Box sx={{ textAlign: "center" }}>

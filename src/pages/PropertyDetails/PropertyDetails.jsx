@@ -65,6 +65,8 @@ const PropertyDetails = () => {
 
   useEffect(() => {
     dispatch(fetchPostDetails({ id: _id }));
+    dispatch(fetchPostDetails);
+
   }, [_id]);
 
   const buttonStyle = {
@@ -473,7 +475,6 @@ const PropertyDetails = () => {
             />
             <Button
               variant="contained"
-              color="error"
               size="large"
               sx={{ marginTop: 2 }}
               onClick={handlePostComment} // Attach the click handler

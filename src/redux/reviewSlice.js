@@ -26,8 +26,9 @@ export const fetchReviews = createAsyncThunk(
 // Delete review async action
 export const deleteReview = createAsyncThunk(
   "reviews/deleteReview",
-  async ({ postId, commentId }, {dispatch}) => {
+  async ({ postId, commentId }, { dispatch }) => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    
     const res = await fetch(`http://localhost:3000/posts/${postId}/comments/${commentId}`, {
       method: "DELETE",
       headers: {
@@ -35,14 +36,17 @@ export const deleteReview = createAsyncThunk(
         token: `${token}`,
       },
     });
+
     if (!res.ok) {
       throw new Error("Failed to delete the comment");
     }
-    // After successful deletion, refetch the comments
-    dispatch(fetchPostComments(postId)); // Refetch comments after deletion
+
+    // Refetch comments after successful deletion
+    dispatch(fetchPostComments(postId));
     return { postId, commentId };
   }
 );
+
 
 // Add a new review
 export const addReviews = createAsyncThunk(
@@ -90,7 +94,12 @@ const reviewSlice = createSlice({
             .addCase(fetchReviews.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            .addCase(deleteReview.rejected, (state, action) => {
+              state.status = 'failed';
+              state.error = action.error.message;
+          });
+            
     },
 });
 
