@@ -12,7 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SellIcon from "@mui/icons-material/Sell";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion"; // استيراد مكتبة framer-motion
+import { motion } from "framer-motion";
 
 const About = () => {
   return (
@@ -38,9 +38,9 @@ const About = () => {
       >
         {/* Title Section with Animation */}
         <motion.div
-          initial={{ y: -50, opacity: 0 }} // يبدأ من الأعلى
-          whileInView={{ y: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-          transition={{ duration: 0.5 }} // مدة الحركة
+          initial={{ y: -50, opacity: 0 }} 
+          whileInView={{ y: 0, opacity: 1 }} 
+          transition={{ duration: 0.5 }}
         >
           <Typography variant="h1">About Us</Typography>
         </motion.div>
@@ -61,9 +61,9 @@ const About = () => {
             >
               <Grid item xs={12} md={6}>
                 <motion.div
-                  initial={{ y: -50, opacity: 0 }} // يبدأ من الأعلى
-                  whileInView={{ y: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                  transition={{ duration: 0.5 }} // مدة الحركة
+                  initial={{ y: -50, opacity: 0 }} 
+                  whileInView={{ y: 0, opacity: 1 }}     
+                  transition={{ duration: 0.5 }} 
                 >
                   <Typography variant="h3" gutterBottom fontWeight="bold">
                     Welcome To The Homzen
@@ -72,9 +72,9 @@ const About = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <motion.div
-                  initial={{ y: -50, opacity: 0 }} // يبدأ من الأعلى
-                  whileInView={{ y: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                  transition={{ duration: 0.5 }} // مدة الحركة
+                  initial={{ y: -50, opacity: 0 }} 
+                  whileInView={{ y: 0, opacity: 1 }}  
+                  transition={{ duration: 0.5 }}  
                 >
                   <Typography variant="body1" paragraph>
                     Welcome to Homeya, where we turn houses into homes and dreams
@@ -127,9 +127,9 @@ const About = () => {
             {/* Left Section */}
             <Grid item xs={12} md={6}>
               <motion.div
-                initial={{ y: -50, opacity: 0 }} // يبدأ من الأعلى
-                whileInView={{ y: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                transition={{ duration: 0.5 }} // مدة الحركة
+                initial={{ y: -50, opacity: 0 }} 
+                whileInView={{ y: 0, opacity: 1 }} 
+                transition={{ duration: 0.5 }} 
               >
                 <Typography variant="h6" gutterBottom sx={{ color: "#f57c00" }}>
                   Why Choose Us
@@ -209,9 +209,9 @@ const About = () => {
                 {/* Buy a Home Card */}
                 <Grid item xs={12}>
                   <motion.div
-                    initial={{ x: -100, opacity: 0 }} // يبدأ من اليسار
-                    whileInView={{ x: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                    transition={{ duration: 0.5 }} // مدة الحركة
+                    initial={{ x: -100, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}    
+                    transition={{ duration: 0.5 }}  
                   >
                     <Paper
                       elevation={3}
@@ -242,9 +242,9 @@ const About = () => {
                 {/* Rent a Home Card */}
                 <Grid item xs={12}>
                   <motion.div
-                    initial={{ x: 100, opacity: 0 }} // يبدأ من اليمين
-                    whileInView={{ x: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                    transition={{ duration: 0.5 }} // مدة الحركة
+                    initial={{ x: 100, opacity: 0 }}   
+                    whileInView={{ x: 0, opacity: 1 }}    
+                    transition={{ duration: 0.5 }}  
                   >
                     <Paper
                       elevation={3}
@@ -274,9 +274,9 @@ const About = () => {
                 {/* Sell Your Home Card */}
                 <Grid item xs={12}>
                   <motion.div
-                    initial={{ y: 100, opacity: 0 }} // يبدأ من الأسفل
-                    whileInView={{ y: 0, opacity: 1 }} // يتحرك إلى موضعه الأصلي
-                    transition={{ duration: 0.5 }} // مدة الحركة
+                    initial={{ y: 100, opacity: 0 }} 
+                    whileInView={{ y: 0, opacity: 1 }} 
+                    transition={{ duration: 0.5 }}  
                   >
                     <Paper
                       elevation={3}
