@@ -13,9 +13,10 @@ import {
   Paper,
   Pagination,
   IconButton,
+  Fade,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete"; 
-import { fetchReviews, deleteReview } from "../../redux/reviewSlice"; 
+import DeleteIcon from "@mui/icons-material/Delete";
+import { fetchReviews, deleteReview } from "../../redux/reviewSlice";
 
 const Reviews = () => {
   const dispatch = useDispatch();
@@ -28,11 +29,10 @@ const Reviews = () => {
   }, [dispatch]);
 
   const handleDelete = (postId, commentId) => {
-    // Dispatch the deleteReview action
     if (!commentId) {
       console.error('Comment ID is undefined');
       return;
-  }
+    }
     
     dispatch(deleteReview({ postId, commentId }));
   };
@@ -125,31 +125,35 @@ const Reviews = () => {
           <TableBody>
             {paginatedData.length > 0 ? (
               paginatedData.map((review, index) => (
-                <TableRow
-                
-                  key={index}
-                  sx={{
-                    borderBottom: "1px solid #ddd",
-                  }}
+                <Fade
+                  in={true}
+                  key={review.commentId}
+                  timeout={(index + 1) * 200} // Timing for the fade effect
                 >
-                  <TableCell sx={{ padding: "16px 24px" }}>
-                    {review.postTitle}
-                  </TableCell>
-                  <TableCell sx={{ padding: "16px 24px" }}>
-                    {review.comment}
-                  </TableCell>
-                  <TableCell sx={{ padding: "16px 24px" }}>
-                    {new Date(review.commentDate).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell sx={{ padding: "16px 24px" }}>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => handleDelete(review.postId, review.commentId)}
-                    >
-                      <DeleteIcon color="error" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                  <TableRow
+                    sx={{
+                      borderBottom: "1px solid #ddd",
+                    }}
+                  >
+                    <TableCell sx={{ padding: "16px 24px" }}>
+                      {review.postTitle}
+                    </TableCell>
+                    <TableCell sx={{ padding: "16px 24px" }}>
+                      {review.comment}
+                    </TableCell>
+                    <TableCell sx={{ padding: "16px 24px" }}>
+                      {new Date(review.commentDate).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell sx={{ padding: "16px 24px" }}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => handleDelete(review.postId, review.commentId)}
+                      >
+                        <DeleteIcon color="error" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                </Fade>
               ))
             ) : (
               <TableRow>

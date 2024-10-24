@@ -14,6 +14,7 @@ import {
   Paper,
   Pagination,
   IconButton,
+  Fade, // Import Fade for animation
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MyPropertiesCard from "../../components/MyPropertiesCard/MyPropertiesCard";
@@ -108,39 +109,39 @@ const MyFavourite = () => {
           <TableBody>
             {paginatedData.length > 0 ? (
               paginatedData.map((item) => (
-                <TableRow
-                  key={item._id}
-                  // sx={{
-                  //   "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" },
-                  //   "&:nth-of-type(even)": { backgroundColor: "#fff" },
-                  //   borderBottom: "1px solid #ddd",
-                  // }}
-                >
-                  <TableCell sx={{ padding: "16px 24px", width: 1 }}>
-                    <MyPropertiesCard item={item} />
-                  </TableCell>
-                  <TableCell sx={{ padding: "16px", textAlign: "right" }}>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => handleRemoveFavorite(item._id)}
-                    >
-                      {/* <DeleteIcon sx={{ color: "#f44336"}} /> */}
-                      <DeleteIcon
-                        sx={{
-                          color: "#f44336",
-                          "&:hover": {
-                            color: "#EFA00F",
-                          },
-                        }}
-                      />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                <Fade in={true} timeout={500} key={item._id}>
+                  <TableRow
+                    key={item._id}
+                    sx={{
+                      transition: "background-color 0.3s ease",
+                      "&:hover": { backgroundColor: "#f5f5f5" }, // Hover effect
+                    }}
+                  >
+                    <TableCell sx={{ padding: "16px 24px", width: 1 }}>
+                      <MyPropertiesCard item={item} />
+                    </TableCell>
+                    <TableCell sx={{ padding: "16px", textAlign: "right" }}>
+                      <IconButton
+                        aria-label="delete"
+                        onClick={() => handleRemoveFavorite(item._id)}
+                      >
+                        <DeleteIcon
+                          sx={{
+                            color: "#f44336",
+                            "&:hover": {
+                              color: "#EFA00F",
+                            },
+                          }}
+                        />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                </Fade>
               ))
             ) : (
               <TableRow>
                 <TableCell colSpan={2} sx={{ textAlign: "center", py: 2 }}>
-                  <Typography variant="body1">No Fav found</Typography>
+                  <Typography variant="body1">No favorites found</Typography>
                 </TableCell>
               </TableRow>
             )}

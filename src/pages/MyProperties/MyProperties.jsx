@@ -15,6 +15,7 @@ import {
   Pagination,
   IconButton,
   Button,
+  Fade,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -108,7 +109,6 @@ const MyProperties = () => {
         sx={{
           mb: 3,
           fontWeight: "bold",
-          // color: '#21616A',
           textAlign: "left",
         }}
       >
@@ -166,27 +166,32 @@ const MyProperties = () => {
           </TableHead>
           <TableBody>
             {paginatedData && paginatedData.length > 0 ? (
-              paginatedData.map((item) => (
-                <TableRow
+              paginatedData.map((item, index) => (
+                <Fade
+                  in={true}
                   key={item._id}
+                  style={{ transformOrigin: "0 0 0" }}
+                  timeout={index * 300} // Stagger the animation for each row
                 >
-                  <TableCell sx={{ padding: "16px 24px", width: 1 }}>
-                    <MyPropertiesCard item={item} />
-                  </TableCell>
+                  <TableRow>
+                    <TableCell sx={{ padding: "16px 24px", width: 1 }}>
+                      <MyPropertiesCard item={item} />
+                    </TableCell>
 
-                  <TableCell sx={{ padding: "16px", textAlign: "center" }}>
-                    {getStatusButton(item.status)}
-                  </TableCell>
+                    <TableCell sx={{ padding: "16px", textAlign: "center" }}>
+                      {getStatusButton(item.status)}
+                    </TableCell>
 
-                  <TableCell sx={{ padding: "16px", textAlign: "center" }}>
-                    <IconButton aria-label="edit" sx={{ mr: 1 }}>
-                      <EditIcon sx={{ color: "#21616A" }} />
-                    </IconButton>
-                    <IconButton aria-label="delete">
-                      <DeleteIcon sx={{ color: "#f44336" }} />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                    <TableCell sx={{ padding: "16px", textAlign: "center" }}>
+                      <IconButton aria-label="edit" sx={{ mr: 1 }}>
+                        <EditIcon sx={{ color: "#21616A" }} />
+                      </IconButton>
+                      <IconButton aria-label="delete">
+                        <DeleteIcon sx={{ color: "#f44336" }} />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                </Fade>
               ))
             ) : (
               <TableRow>
