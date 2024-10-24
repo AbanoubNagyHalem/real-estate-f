@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -17,7 +16,7 @@ import img8 from "../../assets/images/tanta.jpg";
 import img9 from "../../assets/images/ismailia.jpg";
 import img10 from "../../assets/images/zagazig.jpg";
 import { useNavigate } from "react-router-dom";
-import "./CitySlider.css"
+import "./CitySlider.css";
 
 const cities = [
   { name: "Cairo", img: img1 },
@@ -58,7 +57,7 @@ function CitySlider() {
     <Box sx={{ width: "100%", mt: 4 }}>
       <Swiper
         modules={[Autoplay, Pagination]}
-        pagination={{ clickable: true, dynamicBullets: true, }}
+        pagination={{ clickable: true, dynamicBullets: true }}
         spaceBetween={10}
         loop={true}
         autoplay={{
@@ -77,27 +76,40 @@ function CitySlider() {
             <Box
               className="card-style"
               onClick={() => handleCitySelect(city.name)}
-              sx={{ cursor: "pointer" }} 
+              sx={{ cursor: "pointer" }}
             >
               <Box className="img-carousel-style">
                 <Box
                   component="img"
                   sx={{
-                    width: {xs: "100%", md: 1},
+                    width: { xs: "100%", md: 1 },
                     height: "600px",
                     borderRadius: "8px",
                     boxShadow: 3,
                     objectFit: "cover",
-                    marginBottom:"1em"
+                    marginBottom: "1em",
                   }}
                   alt={city.name}
                   src={city.img}
                 />
               </Box>
-              <Box >
-              <Typography variant="h5" sx={{ position: "absolute", bottom:"2em", left:"1em", zIndex:2, color:"#000", width: "100%",  background: "#fff", width: "fit-content", padding: "12px", borderRadius:2 }}>
-                {city.name}
-              </Typography>
+              <Box>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    position: "absolute",
+                    bottom: "2em",
+                    left: "1em",
+                    zIndex: 2,
+                    color: "#000",
+                    background: "#fff",
+                    width: "fit-content", 
+                    padding: "12px",
+                    borderRadius: 2,
+                  }}
+                >
+                  {city.name}
+                </Typography>
               </Box>
             </Box>
           </SwiperSlide>

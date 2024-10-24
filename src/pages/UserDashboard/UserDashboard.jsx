@@ -82,8 +82,6 @@ const UserDashboard = () => {
         >
 
           <ListItemIcon sx={{ color: activeIndex === index ? "#fff" : "#4b9197",
-            color: (theme) =>
-              theme.palette.mode === "light" ? "#21616A" : "#fff",
            }}>
             {item.icon}
           </ListItemIcon>
@@ -130,7 +128,8 @@ const UserDashboard = () => {
             open={sidebarOpen}
             onClose={() => setSidebarOpen(false)}
             sx={{
-              "& .MuiDrawer-paper": { width: "300px",
+              "& .MuiDrawer-paper": {
+                 width: "300px",
                 backgroundColor: (theme) =>
                   theme.palette.mode === "light" ? "#fff" : "#292929",
                },
@@ -140,7 +139,7 @@ const UserDashboard = () => {
           </Drawer>
         )}
 
-      <Box component="container" sx={{ flexGrow:1, p: 3 }}>
+      <Box sx={{ flexGrow:1, p: 3 }}>
         <Toolbar />
 
         {location.pathname === "/user-dashboard" && (

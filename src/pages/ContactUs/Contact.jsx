@@ -1,11 +1,20 @@
 import { Box, Container, Grid, Typography, Card, TextField, Button } from "@mui/material";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import { LocationOn, Phone, Email } from "@mui/icons-material";
+import { Helmet } from 'react-helmet-async';
 
 
 const Contact = () => {
   return (
     <>
+          <Helmet>
+        <title>Contact Us - Property Hub Real Estate</title>
+        <meta
+          name="description"
+          content="Get in touch with Property Hub Real Estate for any inquiries or assistance. Find our address, phone number, and email here, or send us a message directly."
+        />
+      </Helmet>
+
       {/* Header Section */}
       <Box
         boxShadow={2}

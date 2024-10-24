@@ -8,6 +8,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
+import { Helmet } from "react-helmet-async"; // Import Helmet
 
 const OurServives = () => {
   const [expanded, setExpanded] = React.useState(false);
@@ -18,6 +19,14 @@ const OurServives = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Our Services - Property Hub Real Estate</title>
+        <meta
+          name="description"
+          content="Discover Property Hub Real Estate services, including buying, renting, and selling homes. We offer expert guidance to help you find your dream home or list your property with ease."
+        />
+      </Helmet>
+
       <Box
         boxShadow={2}
         sx={{
@@ -27,7 +36,6 @@ const OurServives = () => {
           flexDirection: "column",
           paddingTop: 8,
           paddingBottom: 8,
-
         }}
       >
         <Typography variant="h1">Our Services</Typography>
